@@ -54,8 +54,8 @@ class Auto_Translate_Activator {
 		// because that means that the website is already using the plugin and we don't want 
 		// to force the automatic translatation of the site
 		$default_wpat_auto_detect = 'enabled';
-		if(	get_option('wpat_auto_detect') && // If the option exists then it's an existing installation
-			version_compare(get_option('wpat_auto_translate_version'), '1.5.0') < 0
+		if(	get_option('wpat_supported_languages') && // If the option exists then it's an existing installation
+			version_compare((string) get_option('wpat_auto_translate_version', '0.0.0'), '1.5.0') < 0
 		) {
 			$default_wpat_auto_detect = 'disabled';
 		}
@@ -107,6 +107,8 @@ class Auto_Translate_Activator {
 		add_option('wpat_default_location', true);
 		add_option('wpat_auto_detect', $default_wpat_auto_detect);
 		add_option('wpat_show_in_menu', '');
+		add_option('wpat_custom_css', '');
+		add_option('wpat_delete_data_on_uninstall', '');
 	}
 
 }

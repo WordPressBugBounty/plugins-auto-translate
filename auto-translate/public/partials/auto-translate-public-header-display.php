@@ -18,26 +18,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <style>
-    iframe.goog-te-banner-frame,
-    .goog-te-banner-frame.skiptranslate,
-    iframe.skiptranslate:not(.goog-te-menu-frame),
-    body > .skiptranslate,
-    #goog-gt-tt,
-    .goog-te-balloon-frame {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-    }
-    html,
-    body {
-        top: 0 !important;
-        position: static !important;
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-    }
-    .skiptranslate.goog-te-gadget + iframe {
-        display: none !important;
-    }
     .google_translate_element .goog-te-gadget-simple {
     background-image: linear-gradient(135deg, <?php echo esc_html( $wpat_color_1 )?> 0, <?php echo esc_html( $wpat_color_2 )?> 100%);
     border-radius: <?php echo absint( $wpat_border_radius )?>px !important;
@@ -54,74 +34,32 @@ if ( ! defined( 'ABSPATH' ) ) {
         display:none!important;
     }
     <?php endif; ?>
+    <?php if ( '' !== $wpat_custom_css ) : ?>
+    <?php echo esc_html( $wpat_custom_css ); ?>
+    <?php endif; ?>
 </style>
 <script>
-function wpatHideGoogleBanner() {
-    var bannerFrames = document.querySelectorAll(
-        'iframe.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate, iframe.skiptranslate:not(.goog-te-menu-frame), .goog-te-balloon-frame'
-    );
-    for (var i = 0; i < bannerFrames.length; i++) {
-        bannerFrames[i].style.setProperty('display', 'none', 'important');
-        bannerFrames[i].style.setProperty('visibility', 'hidden', 'important');
-        bannerFrames[i].style.setProperty('height', '0', 'important');
-    }
-
-    var topSkiptranslate = document.querySelector('body > .skiptranslate');
-    if (topSkiptranslate) {
-        topSkiptranslate.style.setProperty('display', 'none', 'important');
-        topSkiptranslate.style.setProperty('visibility', 'hidden', 'important');
-        topSkiptranslate.style.setProperty('height', '0', 'important');
-    }
-
-    var tooltip = document.getElementById('goog-gt-tt');
-    if (tooltip) {
-        tooltip.style.setProperty('display', 'none', 'important');
-    }
-
-    if (document.documentElement) {
-        document.documentElement.style.setProperty('top', '0', 'important');
-        document.documentElement.style.setProperty('margin-top', '0', 'important');
-        document.documentElement.style.setProperty('padding-top', '0', 'important');
-    }
-
-    if (document.body) {
-        document.body.style.setProperty('top', '0', 'important');
-        document.body.style.setProperty('position', 'static', 'important');
-        document.body.style.setProperty('margin-top', '0', 'important');
-        document.body.style.setProperty('padding-top', '0', 'important');
-    }
-}
-
-function wpatStartGoogleBannerGuard() {
-    wpatHideGoogleBanner();
-    if (typeof MutationObserver !== 'undefined') {
-        var observer = new MutationObserver(function () {
-            wpatHideGoogleBanner();
-        });
-        observer.observe(document.documentElement, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ['class', 'style']
-        });
-    }
-    setInterval(wpatHideGoogleBanner, 500);
-}
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', wpatStartGoogleBannerGuard);
-} else {
-    wpatStartGoogleBannerGuard();
-}
-window.addEventListener('load', wpatHideGoogleBanner);
-
 function googleTranslateElementInit() {
+    if (!window.google || !google.translate || !google.translate.TranslateElement) {
+        return;
+    }
+
     var googleTranslateElements = document.getElementsByClassName('google_translate_element');
-    new google.translate.TranslateElement({
-    pageLanguage: <?php echo wp_json_encode( $wpat_base_language )?>,
-    includedLanguages: <?php echo wp_json_encode( $included_languages )?>,
-    layout: google.translate.TranslateElement.InlineLayout.<?php echo  $wpat_widget_type === 'classic' ? 'SIMPLE' : 'VERTICAL' ?>,
-    autoDisplay: false}, googleTranslateElements[0].id);
+    for (var i = 0; i < googleTranslateElements.length; i++) {
+        var element = googleTranslateElements[i];
+        if (!element || !element.id || element.getAttribute('data-wpat-google-init') === '1') {
+            continue;
+        }
+
+        new google.translate.TranslateElement({
+            pageLanguage: <?php echo wp_json_encode( $wpat_base_language )?>,
+            includedLanguages: <?php echo wp_json_encode( $included_languages )?>,
+            layout: google.translate.TranslateElement.InlineLayout.<?php echo  $wpat_widget_type === 'classic' ? 'SIMPLE' : 'VERTICAL' ?>,
+            autoDisplay: false
+        }, element.id);
+
+        element.setAttribute('data-wpat-google-init', '1');
+    }
 }
 var wpatLanguagesCountries = <?php echo wp_json_encode( $languages_data )?>;
 var wpatButtonIcon = <?php echo wp_json_encode( $wpat_show_icon === 'on' ? $wpat_button_icon : '' )?>;

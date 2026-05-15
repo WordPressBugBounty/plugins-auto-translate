@@ -1,0 +1,17 @@
+{
+  "name": "pampa-dev/auto-translate",
+  "description": "Dev tooling for Automatic Translator WordPress plugin",
+  "type": "project",
+  "require-dev": {
+    "phpunit/phpunit": "^10.5",
+    "phpstan/phpstan": "^1.12",
+    "squizlabs/php_codesniffer": "^3.10",
+    "wp-coding-standards/wpcs": "^3.1",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.1"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

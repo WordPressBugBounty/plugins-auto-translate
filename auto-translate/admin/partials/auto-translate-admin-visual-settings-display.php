@@ -15,8 +15,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @package    Auto_Translate
  * @subpackage Auto_Translate/admin/partials
  */
-global $wpat_widget_types;
-global $wpat_supported_languages;
+$wpat_widget_types   = Auto_Translate_Config::get_widget_types();
+$wpat_supported_languages = Auto_Translate_Config::get_supported_languages();
 $wpat_classic       = $vars['tabs']['visual_settings']['classic'];
 $wpat_minimalist    = $vars['tabs']['visual_settings']['minimalist'];
 $wpat_columns       = $vars['tabs']['visual_settings']['columns'];
@@ -54,9 +54,29 @@ $wpat_languages_data = Auto_Translate_Languages::get_languages_data(array_keys($
                 <option value="<?php echo esc_attr( $wpat_key ); ?>" <?php selected( $wpat_widget_type, $wpat_key ); ?>><?php echo esc_html( $wpat_type ); ?></option>
             <?php endforeach;?>
             </select>
+            <div class="suggestion wpat_widget_type_classic_only">
+                <p><?php esc_html_e( "The 'Classic' widget type is deprecated and no longer fully supported. Please migrate to 'Minimalist'.", 'auto-translate' ); ?></p>
+            </div>
             </td>
             <td colspan="2">
-                <div id="wpat_dropdown_preview" class="styling-preview col-2-3" data-preload-class="styling-preview col-2-3">
+                <div id="wpat_dropdown_preview" class="styling-preview col-2-3" data-preload-class="styling-preview col-2-3"
+                    style="
+                        --wpat-preview-color-1: <?php echo esc_attr( $wpat_classic['wpat_color_1'] ); ?>;
+                        --wpat-preview-color-2: <?php echo esc_attr( $wpat_classic['wpat_color_2'] ); ?>;
+                        --wpat-preview-border-radius: <?php echo absint( $wpat_classic['wpat_border_radius'] ); ?>px;
+                        --wpat-preview-border-thickness: <?php echo absint( $wpat_classic['wpat_border_thickness'] ); ?>px;
+                        --wpat-preview-border-color: <?php echo esc_attr( $wpat_classic['wpat_border_color'] ); ?>;
+                        --wpat-preview-font-color: <?php echo esc_attr( $wpat_classic['wpat_font_color'] ); ?>;
+                        --wpat-preview-font-family: <?php echo esc_attr( $wpat_classic['wpat_font_family'] ); ?>;
+                        --wpat-preview-dropdown-border-thickness: <?php echo absint( $wpat_classic['wpat_dropdown_border_thickness'] ); ?>px;
+                        --wpat-preview-dropdown-border-color: <?php echo esc_attr( $wpat_classic['wpat_dropdown_border_color'] ); ?>;
+                        --wpat-preview-dropdown-background-color: <?php echo esc_attr( $wpat_classic['wpat_dropdown_background_color'] ); ?>;
+                        --wpat-preview-dropdown-font-color: <?php echo esc_attr( $wpat_classic['wpat_dropdown_font_color'] ); ?>;
+                        --wpat-preview-dropdown-font-family: <?php echo esc_attr( $wpat_classic['wpat_dropdown_font_family'] ); ?>;
+                        --wpat-preview-dropdown-font-selected-color: <?php echo esc_attr( $wpat_classic['wpat_dropdown_font_selected_color'] ); ?>;
+                        --wpat-preview-dropdown-hover-color: <?php echo esc_attr( $wpat_classic['wpat_dropdown_hover_color'] ); ?>;
+                        --wpat-preview-dropdown-font-hover-color: <?php echo esc_attr( $wpat_classic['wpat_dropdown_font_hover_color'] ); ?>;
+                    ">
                     <div class="wpat_widget_type_classic_only">
                         <div id="google_translate_element_<?php echo absint( wp_rand() ); ?>" class="google_translate_element <?php echo esc_attr( $wpat_classic['wpat_widget_size'] ); ?> dashicons-before">
                             <div class="skiptranslate goog-te-gadget" dir="ltr">
@@ -74,7 +94,7 @@ $wpat_languages_data = Auto_Translate_Languages::get_languages_data(array_keys($
                         </div>
                     </div>
                     <div class="wpat_widget_type_minimalist_only">
-                        <div id="auto_translate_button_wrapper">
+                        <div class="auto_translate_button_wrapper">
                             <?php 
                                 $wpat_min_style = $wpat_minimalist['wpat_min_style'];
                                 $wpat_min_icon = $wpat_minimalist['wpat_min_icon'];

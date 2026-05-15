@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                 * https://github.com/bradvin/dashicons-picker
                 */
             ?>
-            <input id="wpat_min_icon" name="wpat_min_icon" type="hidden" value="<?php echo $wpat_minimalist['wpat_min_icon']?>"/><span id="wpat_min_icon_display" class="dashicons <?php echo $wpat_minimalist['wpat_min_icon']?>"></span>
+            <input id="wpat_min_icon" name="wpat_min_icon" type="hidden" value="<?php echo esc_attr( $wpat_minimalist['wpat_min_icon'] );?>"/><span id="wpat_min_icon_display" class="dashicons <?php echo esc_attr( $wpat_minimalist['wpat_min_icon'] );?>"></span>
             <input id="wpat_min_icon_picker" class="button dashicons-picker" type="button" value="<?php esc_html_e('Choose Icon', 'auto-translate'); ?>" 
             data-target="#wpat_min_icon" data-preview="#wpat_min_icon_display" />
         </td>
@@ -58,14 +58,14 @@ if ( ! defined( 'ABSPATH' ) ) {
             <small><?php esc_html_e('Widgets\'s border thickness in pixels','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input type="number" id="wpat_min_border_thickness" name="wpat_min_border_thickness" value="<?php echo $wpat_minimalist['wpat_min_border_thickness']?>"/> px
+            <input type="number" id="wpat_min_border_thickness" name="wpat_min_border_thickness" value="<?php echo absint( $wpat_minimalist['wpat_min_border_thickness'] );?>"/> px
         </td>
         <th scope="row">
             <?php esc_html_e('Border color', 'auto-translate'); ?><br/>
             <small><?php esc_html_e('Widget\'s border color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="wpat_min_border_color" name="wpat_min_border_color" value="<?php echo $wpat_minimalist['wpat_min_border_color']?>"/>
+            <input class="color-picker" type="text" id="wpat_min_border_color" name="wpat_min_border_color" value="<?php echo esc_attr( $wpat_minimalist['wpat_min_border_color'] );?>"/>
         </td>
     </tr>
     <tr valign="top">
@@ -74,14 +74,14 @@ if ( ! defined( 'ABSPATH' ) ) {
             <small><?php esc_html_e('Widget\'s background color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="wpat_min_background_color" name="wpat_min_background_color" value="<?php echo $wpat_minimalist['wpat_min_background_color']?>"/>
+            <input class="color-picker" type="text" id="wpat_min_background_color" name="wpat_min_background_color" value="<?php echo esc_attr( $wpat_minimalist['wpat_min_background_color'] );?>"/>
         </td>
         <th scope="row">
             <?php esc_html_e('Hover color', 'auto-translate'); ?><br/>
             <small><?php esc_html_e('The hovered dropdown text background color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="wpat_min_hover_color" name="wpat_min_hover_color" value="<?php echo $wpat_minimalist['wpat_min_hover_color']?>"/>
+            <input class="color-picker" type="text" id="wpat_min_hover_color" name="wpat_min_hover_color" value="<?php echo esc_attr( $wpat_minimalist['wpat_min_hover_color'] );?>"/>
         </td>
     </tr>
     <tr valign="top">
@@ -90,7 +90,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <small><?php esc_html_e('Font color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="wpat_min_font_color" name="wpat_min_font_color" value="<?php echo $wpat_minimalist['wpat_min_font_color']?>"/>
+            <input class="color-picker" type="text" id="wpat_min_font_color" name="wpat_min_font_color" value="<?php echo esc_attr( $wpat_minimalist['wpat_min_font_color'] );?>"/>
         </td>
         <th scope="row">
             <?php esc_html_e('Font name', 'auto-translate'); ?><br/>
@@ -106,7 +106,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <small><?php esc_html_e('The hovered text color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="wpat_min_font_hover_color" name="wpat_min_font_hover_color" value="<?php echo $wpat_minimalist['wpat_min_font_hover_color']?>"/>
+            <input class="color-picker" type="text" id="wpat_min_font_hover_color" name="wpat_min_font_hover_color" value="<?php echo esc_attr( $wpat_minimalist['wpat_min_font_hover_color'] );?>"/>
         </td>
         <th scope="row">
             <?php esc_html_e('Underline text', 'auto-translate'); ?><br/>

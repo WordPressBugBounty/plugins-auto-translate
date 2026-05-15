@@ -110,6 +110,11 @@ class Auto_Translate {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-auto-translate-loader.php';
 
 		/**
+		 * Configuration accessor to avoid direct global coupling in runtime classes.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-auto-translate-config.php';
+
+		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
@@ -163,7 +168,8 @@ class Auto_Translate {
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'create_admin_menu' );
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'plugin_settings' );
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'load_widgets' );
-		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'check_version' );
+		// Keep migrations in admin flow to avoid version checks on every frontend request.
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'check_version', 1 );
 
 	}
 
@@ -183,6 +189,7 @@ class Auto_Translate {
 		$this->loader->add_action( 'wp_head', $plugin_public, 'hook_javascript_translator' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'hook_content_translator' );
 		$this->loader->add_filter('wp_nav_menu_items', $plugin_public,'hook_menu_item', 10, 2);
+		$this->loader->add_filter( 'render_block', $plugin_public, 'hook_navigation_block', 10, 2 );
 		$this->loader->add_shortcode( 'auto_translate_button', $plugin_public, 'auto_translate_button_function' );
 
 	}

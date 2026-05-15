@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="tests/php/bootstrap.php" colors="true" cacheDirectory=".phpunit.cache">
+  <testsuites>
+    <testsuite name="Auto Translate PHP Tests">
+      <directory suffix="Test.php">tests/php</directory>
+    </testsuite>
+  </testsuites>
+  <source>
+    <include>
+      <file>auto-translate/includes/class-auto-translate-loader.php</file>
+      <file>auto-translate/includes/class-auto-translate-activator.php</file>
+      <file>auto-translate/includes/class-auto-translate-config.php</file>
+      <file>auto-translate/includes/class-auto-translate-languages.php</file>
+    </include>
+  </source>
+  <coverage includeUncoveredFiles="true"/>
+</phpunit>

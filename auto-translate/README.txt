@@ -3,7 +3,7 @@ Contributors: juangirini, googletranslate
 Tags: translation, translate, google translate, multilingual, free translator
 Requires at least: 3.6.0
 Tested up to: 6.9
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://pampa.dev
@@ -164,9 +164,22 @@ No problem, you can configure this plugin to only offer the language/s that you 
 
 No, the translation happens on the fly whenever a visitor selects a language.
 
+= How can I prevent specific brand names or sections from being translated? =
+
+Use Google's `notranslate` class on wrappers you want to keep unchanged, for example:
+`<span class="notranslate">UnlockThePicture</span>`.
+
 = Does this plugin translate text within images? =
 
 No, any text that is part of an image will not be translated. This plugin only translates text.
+
+= Can I combine this plugin with Polylang for mixed manual and automatic translations? =
+
+This plugin can coexist with Polylang, but it does not manage mixed manual/automatic multilingual routing. Use Polylang for canonical language URLs/content management and treat Automatic Translator as client-side translation on top.
+
+= Does uninstall remove plugin settings? =
+
+By default, plugin settings are preserved. You can enable "Delete data on uninstall" in Advanced settings to remove all `wpat_*` options when uninstalling.
 
 == Screenshots ==
 
@@ -178,6 +191,21 @@ No, any text that is part of an image will not be translated. This plugin only t
 6. There is also an *Automatic Translation Button* in case you need to display the button in a specific place.
 
 == Changelog ==
+= 1.7.0 =
+* Added a custom CSS textarea in Advanced Options to style the translator widget
+* Added menu selection by WordPress menu or Navigation block in Advanced Options, with compatibility for older saved menu-location settings
+* Fixed menu injection on block themes by supporting the Navigation block render path
+* Fixed auto-detect defaulting to disabled on upgrades from releases older than 1.5.0
+* Fixed frontend asset output so the floating minimalist widget uses the correct CSS selectors
+* Improved Google Translate toolbar suppression for newer injected top-banner iframes
+* Restored the active translation after browser back and forward navigation
+* Prevented minimalist widget language names from being translated by Google
+* Made auto-detect language cache-safe by resolving visitor locale in client-side JavaScript
+* Added resilient minimalist initialization retries so the widget appears without requiring first interaction
+* Improved minimalist mobile dropdown placement to avoid clipping near viewport edges
+* Fixed the minimalist admin preview dropdown so it stays aligned and contained within the preview across major browsers
+* Prevented Google Translate from highlighting translated page text on hover
+
 = 1.6.0 =
 * Security hardening and Plugin Check compliance fixes (escaping, sanitization, direct access checks)
 * WordPress.org metadata/readme compliance updates

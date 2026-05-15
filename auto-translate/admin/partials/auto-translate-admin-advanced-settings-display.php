@@ -37,14 +37,41 @@ $wpat_data = $vars['tabs']['advanced_settings'];
     <tr>
     <th scope="row">
             <?php esc_html_e('Show in Menu', 'auto-translate'); ?><br/>
-            <small><?php esc_html_e('Select the menu where you want the translation button to be displayed','auto-translate'); ?></small>
+            <small><?php esc_html_e('Select the WordPress menu or Navigation block where you want the translation button to be displayed','auto-translate'); ?></small>
         </th>
         <td><select id="wpat_show_in_menu" name="wpat_show_in_menu">
-                <option value="" selected> - <?php esc_html_e('None', 'auto-translate'); ?> - </option>
-                <?php $wpat_menus = get_registered_nav_menus(); ?>
-                <?php foreach($wpat_menus as $wpat_location => $wpat_desc): ?>
-                        <option value="<?php echo esc_attr( $wpat_location ); ?>" <?php selected( $wpat_data['wpat_show_in_menu'], $wpat_location ); ?> > <?php echo esc_html( $wpat_desc ); ?></option>
-                <?php endforeach; ?>
+                <option value="" <?php selected( $wpat_data['wpat_show_in_menu'], '' ); ?>> - <?php esc_html_e('None', 'auto-translate'); ?> - </option>
+                <?php $wpat_menus = wp_get_nav_menus(); ?>
+                <?php if ( ! empty( $wpat_menus ) ) : ?>
+                    <optgroup label="<?php esc_attr_e( 'Classic Menus', 'auto-translate' ); ?>">
+                        <?php foreach ( $wpat_menus as $wpat_menu ) : ?>
+                            <?php
+                            $wpat_menu_value = 'menu:' . $wpat_menu->term_id;
+                            $wpat_selected_menu = (string) $wpat_data['wpat_show_in_menu'];
+                            ?>
+                            <option value="<?php echo esc_attr( $wpat_menu_value ); ?>" <?php selected( $wpat_selected_menu, $wpat_menu_value ); ?> <?php selected( $wpat_selected_menu, (string) $wpat_menu->term_id ); ?>><?php echo esc_html( $wpat_menu->name ); ?></option>
+                        <?php endforeach; ?>
+                    </optgroup>
+                <?php endif; ?>
+                <?php
+                $wpat_navigation_posts = get_posts(
+                    array(
+                        'post_type'      => 'wp_navigation',
+                        'post_status'    => 'publish',
+                        'numberposts'    => -1,
+                        'orderby'        => 'title',
+                        'order'          => 'ASC',
+                    )
+                );
+                ?>
+                <?php if ( ! empty( $wpat_navigation_posts ) ) : ?>
+                    <optgroup label="<?php esc_attr_e( 'Navigation Blocks', 'auto-translate' ); ?>">
+                        <?php foreach ( $wpat_navigation_posts as $wpat_navigation_post ) : ?>
+                            <?php $wpat_navigation_value = 'navigation:' . $wpat_navigation_post->ID; ?>
+                            <option value="<?php echo esc_attr( $wpat_navigation_value ); ?>" <?php selected( (string) $wpat_data['wpat_show_in_menu'], $wpat_navigation_value ); ?>><?php echo esc_html( get_the_title( $wpat_navigation_post ) ); ?></option>
+                        <?php endforeach; ?>
+                    </optgroup>
+                <?php endif; ?>
             </select></td>
     </tr>
     <tr valign="top">
@@ -73,6 +100,30 @@ $wpat_data = $vars['tabs']['advanced_settings'];
         <td colspan="<?php echo esc_attr( $wpat_data['columns'] ); ?>">
             <label for="auto-detect-on"><?php esc_html_e('On', 'auto-translate'); ?></label> <input type="radio" id="auto-detect-on" name="wpat_auto_detect" value="enabled" <?php if( $wpat_data['wpat_auto_detect'] == 'enabled' ){ echo "checked='checked'"; }; ?>/>
             <label for="auto-detect-off"><?php esc_html_e('Off', 'auto-translate'); ?></label> <input type="radio" id="auto-detect-off" name="wpat_auto_detect" value="disabled" <?php if( $wpat_data['wpat_auto_detect'] == 'disabled' ){ echo "checked='checked'"; }; ?>/>
+            <p class="description">
+                <?php esc_html_e( "Auto Translate is only supported with the 'Minimalist' widget type.", 'auto-translate' ); ?>
+            </p>
+        </td>
+    </tr>
+    <tr valign="top">
+        <th scope="row">
+            <?php esc_html_e('Custom CSS', 'auto-translate'); ?><br/>
+            <small><?php esc_html_e('Add CSS rules to customize the translator widget on your site. Google\'s language list iframe cannot be styled here.', 'auto-translate'); ?></small>
+        </th>
+        <td colspan="<?php echo esc_attr( $wpat_data['columns'] ); ?>">
+            <textarea id="wpat_custom_css" name="wpat_custom_css" rows="10" class="large-text code"><?php echo esc_textarea( $wpat_data['wpat_custom_css'] ); ?></textarea>
+        </td>
+    </tr>
+    <tr valign="top">
+        <th scope="row">
+            <?php esc_html_e('Delete data on uninstall', 'auto-translate'); ?><br/>
+            <small><?php esc_html_e('When enabled, all plugin settings are removed when uninstalling the plugin.', 'auto-translate'); ?></small>
+        </th>
+        <td colspan="<?php echo esc_attr( $wpat_data['columns'] ); ?>">
+            <div class="custom-control custom-switch">
+                <input type="checkbox" id="wpat_delete_data_on_uninstall" name="wpat_delete_data_on_uninstall" <?php checked( $wpat_data['wpat_delete_data_on_uninstall'], 'on' ); ?>/>
+                <label for="wpat_delete_data_on_uninstall"><?php esc_html_e('Delete plugin data on uninstall', 'auto-translate'); ?></label>
+            </div>
         </td>
     </tr>
 </table>

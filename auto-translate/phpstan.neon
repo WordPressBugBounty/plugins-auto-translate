@@ -1,0 +1,15 @@
+parameters:
+  level: 1
+  paths:
+    - auto-translate/includes/class-auto-translate-loader.php
+    - auto-translate/includes/class-auto-translate-activator.php
+    - auto-translate/includes/class-auto-translate-config.php
+    - auto-translate/includes/class-auto-translate-languages.php
+    - tests/php
+  bootstrapFiles:
+    - tests/php/bootstrap.php
+  scanFiles:
+    - auto-translate/includes/class-auto-translate-config.php
+    - auto-translate/includes/class-auto-translate-loader.php
+    - auto-translate/includes/class-auto-translate-activator.php
+    - auto-translate/includes/class-auto-translate-languages.php

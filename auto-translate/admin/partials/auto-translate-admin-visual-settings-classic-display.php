@@ -5,39 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
-<style>
-.goog-te-gadget-simple {
-    white-space: nowrap;
-    background-image: linear-gradient(135deg, <?php echo $wpat_classic['wpat_color_1']?> 0, <?php echo $wpat_classic['wpat_color_2']?> 100%);
-    border-radius: <?php echo $wpat_classic['wpat_border_radius']?>px;
-    border:  <?php echo $wpat_classic['wpat_border_thickness']?>px solid <?php echo $wpat_classic['wpat_border_color']?>;
-}
-.goog-te-gadget-simple .goog-te-menu-value {
-    color: <?php echo esc_html( $wpat_classic['wpat_font_color'] )?>;
-    <?php if( $wpat_classic['wpat_font_family'] != '' ): ?>
-    font-family: <?php echo esc_html( $wpat_classic['wpat_font_family'] )?>;
-    <?php endif; ?>
-}
-#translate-dropdown {
-    border:  <?php echo $wpat_classic['wpat_dropdown_border_thickness']?>px solid <?php echo $wpat_classic['wpat_dropdown_border_color']?>;
-    background-color: <?php echo $wpat_classic['wpat_dropdown_background_color']?>;
-}
-a.goog-te-menu2-item > div {
-    color: <?php echo $wpat_classic['wpat_dropdown_font_color']?>;
-}
-a.goog-te-menu2-item-selected > div {
-    color: <?php echo $wpat_classic['wpat_dropdown_font_selected_color']?>;
-}
-a[class^="goog-te-menu2-item"] > div {
-    <?php if( $wpat_classic['wpat_dropdown_font_family'] != '' ): ?>
-    font-family: <?php echo esc_html( $wpat_classic['wpat_dropdown_font_family'] )?>;
-    <?php endif; ?>
-}
-a.goog-te-menu2-item:hover > div {
-    background-color: <?php echo $wpat_classic['wpat_dropdown_hover_color']?>;
-    color: <?php echo $wpat_classic['wpat_dropdown_font_hover_color']?>;
-}
-</style>
 <table class="form-table">
     <tr valign="top">
         <th scope="row">
@@ -60,7 +27,7 @@ a.goog-te-menu2-item:hover > div {
                 * https://github.com/bradvin/dashicons-picker
                 */
             ?>
-            <input id="button_icon" name="wpat_button_icon" type="hidden" value="<?php echo $wpat_classic['wpat_button_icon']?>"/><span id="display-button-icon" class="dashicons <?php echo $wpat_classic['wpat_button_icon']?>"></span>
+            <input id="button_icon" name="wpat_button_icon" type="hidden" value="<?php echo esc_attr( $wpat_classic['wpat_button_icon'] );?>"/><span id="display-button-icon" class="dashicons <?php echo esc_attr( $wpat_classic['wpat_button_icon'] );?>"></span>
             <input id="button_icon_picker" class="button dashicons-picker" type="button" value="<?php esc_html_e('Choose Icon', 'auto-translate'); ?>" 
             data-target="#button_icon" data-preview="#display-button-icon" 
             <?php echo $wpat_classic['wpat_show_icon']==='on'?'':'disabled'?>
@@ -73,7 +40,7 @@ a.goog-te-menu2-item:hover > div {
             <small><?php esc_html_e('Button\'s font color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="font_color" name="wpat_font_color" value="<?php echo $wpat_classic['wpat_font_color']?>"/>
+            <input class="color-picker" type="text" id="font_color" name="wpat_font_color" value="<?php echo esc_attr( $wpat_classic['wpat_font_color'] );?>"/>
         </td>
         <th scope="row">
             <?php esc_html_e('Font name', 'auto-translate'); ?><br/>
@@ -89,14 +56,14 @@ a.goog-te-menu2-item:hover > div {
             <small><?php esc_html_e('Button\'s initial color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="color_1" name="wpat_color_1" value="<?php echo $wpat_classic['wpat_color_1']?>"/>
+            <input class="color-picker" type="text" id="color_1" name="wpat_color_1" value="<?php echo esc_attr( $wpat_classic['wpat_color_1'] );?>"/>
         </td>
         <th scope="row">
             <?php esc_html_e('Color 2', 'auto-translate'); ?><br/>
             <small><?php esc_html_e('Button\'s last color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="color_2" name="wpat_color_2" value="<?php echo $wpat_classic['wpat_color_2']?>"/>
+            <input class="color-picker" type="text" id="color_2" name="wpat_color_2" value="<?php echo esc_attr( $wpat_classic['wpat_color_2'] );?>"/>
         </td>
     </tr>
     <tr valign="top">
@@ -105,14 +72,14 @@ a.goog-te-menu2-item:hover > div {
             <small><?php esc_html_e('Buttons\'s border thickness in pixels','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input type="number" id="border_thickness" name="wpat_border_thickness" value="<?php echo $wpat_classic['wpat_border_thickness']?:0?>"/> px
+            <input type="number" id="border_thickness" name="wpat_border_thickness" value="<?php echo absint( $wpat_classic['wpat_border_thickness']?:0 );?>"/> px
         </td>
         <th scope="row">
             <?php esc_html_e('Border color', 'auto-translate'); ?><br/>
             <small><?php esc_html_e('Button\'s border color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="border_color" name="wpat_border_color" value="<?php echo $wpat_classic['wpat_border_color']?>"/>
+            <input class="color-picker" type="text" id="border_color" name="wpat_border_color" value="<?php echo esc_attr( $wpat_classic['wpat_border_color'] );?>"/>
         </td>
     </tr>
     <tr valign="top">
@@ -176,14 +143,14 @@ a.goog-te-menu2-item:hover > div {
             <small><?php esc_html_e('Dropdown\'s border thickness in pixels','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input type="number" id="dropdown_border_thickness" name="wpat_dropdown_border_thickness" value="<?php echo $wpat_classic['wpat_dropdown_border_thickness']?:0?>"/> px
+            <input type="number" id="dropdown_border_thickness" name="wpat_dropdown_border_thickness" value="<?php echo absint( $wpat_classic['wpat_dropdown_border_thickness']?:0 );?>"/> px
         </td>
         <th scope="row">
             <?php esc_html_e('Border color', 'auto-translate'); ?><br/>
             <small><?php esc_html_e('Dropdown\'s border color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="dropdown_border_color" name="wpat_dropdown_border_color" value="<?php echo $wpat_classic['wpat_dropdown_border_color']?>"/>
+            <input class="color-picker" type="text" id="dropdown_border_color" name="wpat_dropdown_border_color" value="<?php echo esc_attr( $wpat_classic['wpat_dropdown_border_color'] );?>"/>
         </td>
     </tr>
     <tr valign="top">
@@ -192,14 +159,14 @@ a.goog-te-menu2-item:hover > div {
             <small><?php esc_html_e('Dropdown\'s background color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="dropdown_background_color" name="wpat_dropdown_background_color" value="<?php echo $wpat_classic['wpat_dropdown_background_color']?>"/>
+            <input class="color-picker" type="text" id="dropdown_background_color" name="wpat_dropdown_background_color" value="<?php echo esc_attr( $wpat_classic['wpat_dropdown_background_color'] );?>"/>
         </td>
         <th scope="row">
             <?php esc_html_e('Hover color', 'auto-translate'); ?><br/>
             <small><?php esc_html_e('Dropdown\'s hover over color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="dropdown_hover_color" name="wpat_dropdown_hover_color" value="<?php echo $wpat_classic['wpat_dropdown_hover_color']?>"/>
+            <input class="color-picker" type="text" id="dropdown_hover_color" name="wpat_dropdown_hover_color" value="<?php echo esc_attr( $wpat_classic['wpat_dropdown_hover_color'] );?>"/>
         </td>
     </tr>
     <tr valign="top">
@@ -208,7 +175,7 @@ a.goog-te-menu2-item:hover > div {
             <small><?php esc_html_e('Dropdown\'s font color','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="dropdown_font_color" name="wpat_dropdown_font_color" value="<?php echo $wpat_classic['wpat_dropdown_font_color']?>"/>
+            <input class="color-picker" type="text" id="dropdown_font_color" name="wpat_dropdown_font_color" value="<?php echo esc_attr( $wpat_classic['wpat_dropdown_font_color'] );?>"/>
         </td>
         <th scope="row">
             <?php esc_html_e('Font name', 'auto-translate'); ?><br/>
@@ -224,14 +191,14 @@ a.goog-te-menu2-item:hover > div {
             <small><?php esc_html_e('Dropdown\'s font color when hovered over','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="dropdown_font_hover_color" name="wpat_dropdown_font_hover_color" value="<?php echo $wpat_classic['wpat_dropdown_font_hover_color']?>"/>
+            <input class="color-picker" type="text" id="dropdown_font_hover_color" name="wpat_dropdown_font_hover_color" value="<?php echo esc_attr( $wpat_classic['wpat_dropdown_font_hover_color'] );?>"/>
         </td>
         <th scope="row">
             <?php esc_html_e('Font selected color', 'auto-translate'); ?><br/>
             <small><?php esc_html_e('Dropdown\'s font color when selected','auto-translate'); ?></small>
         </th>
         <td colspan="<?php echo $wpat_columns?>">
-            <input class="color-picker" type="text" id="dropdown_font_selected_color" name="wpat_dropdown_font_selected_color" value="<?php echo $wpat_classic['wpat_dropdown_font_selected_color']?>"/>
+            <input class="color-picker" type="text" id="dropdown_font_selected_color" name="wpat_dropdown_font_selected_color" value="<?php echo esc_attr( $wpat_classic['wpat_dropdown_font_selected_color'] );?>"/>
         </td>
     </tr>
 </table>

@@ -23,7 +23,12 @@ class wpat_button_widget extends WP_Widget {
     // Creating widget front-end
       
     public function widget( $args, $instance ) {
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-provided wrapper HTML.
+        echo isset( $args['before_widget'] ) ? $args['before_widget'] : '';
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Shortcode returns plugin-generated markup.
         echo do_shortcode( '[auto_translate_button]' );
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme-provided wrapper HTML.
+        echo isset( $args['after_widget'] ) ? $args['after_widget'] : '';
     }
               
     // Widget Backend 
