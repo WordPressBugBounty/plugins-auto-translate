@@ -2,8 +2,8 @@
 Contributors: juangirini, googletranslate
 Tags: translation, translate, google translate, multilingual, free translator
 Requires at least: 3.6.0
-Tested up to: 6.9
-Stable tag: 1.7.0
+Tested up to: 7.0
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://pampa.dev
@@ -191,6 +191,9 @@ By default, plugin settings are preserved. You can enable "Delete data on uninst
 6. There is also an *Automatic Translation Button* in case you need to display the button in a specific place.
 
 == Changelog ==
+= 1.7.1 =
+* Updated WordPress compatibility metadata to 7.0
+
 = 1.7.0 =
 * Added a custom CSS textarea in Advanced Options to style the translator widget
 * Added menu selection by WordPress menu or Navigation block in Advanced Options, with compatibility for older saved menu-location settings
