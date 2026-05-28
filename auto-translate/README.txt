@@ -1,31 +1,60 @@
 === Automatic Translator with Google Translate ===
 Contributors: juangirini, googletranslate
-Tags: translation, translate, google translate, multilingual, free translator
+Tags: translate, translation, google translate, language switcher, website translator
 Requires at least: 3.6.0
 Tested up to: 7.0
-Stable tag: 1.7.1
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://pampa.dev
 
-The easiest plugin to auto translate your website for Free, go multilingual with Automatic Translator with Google. English, Spanish, Chinese and 100+
+Translate your WordPress site with a polished Google Translate language switcher for instant visitor translation.
 
 == Description ==
 
-[Automatic Translator with Google Translate](https://pampa.dev/wordpress-automatic-translator-plugin/) by [Pampa Dev](https://pampa.dev)
-This plugin simplifies translation. You are literally seconds away from having your website translated into 104 different languages.
+[Automatic Translator with Google Translate](https://auto-translate.pampa.dev/) by [Pampa Dev](https://pampa.dev) helps you translate WordPress content for visitors with a lightweight Google Translate language switcher. Add a floating selector, place it in a menu, publish it in a widget area, insert it with a shortcode, or use the selector block.
 
-= It couldn't be easier to implement =
+Version 2 makes the language switcher easier to use, easier to place, and easier to style. Visitors get a cleaner translation experience, and site owners get better controls for where the selector appears, which languages are shown, and what content should stay untranslated.
 
-* Install the plugin
-* Activate it
-* Have your website **translated automatically** for visitors from all around the globe!
+Automatic Translator is a free visitor translation plugin. It changes what visitors see in their browser after they choose a language. It does not create translated URLs, translated posts, hreflang tags, sitemap entries, translated metadata, or SEO-indexable translated pages.
 
-= Trustful and professional =
+= Features =
 
-This plugin is powered by the trusted **Google Translate** engine, don't let any dodgy translations make your website look unprofessional. Make use of the best automatic translation engine.
+* Free client-side translation powered by the Google Translate website widget
+* Custom language switcher for a polished visitor-facing selector
+* Translate posts, pages, menus, widgets, theme text, plugin text, and WooCommerce storefront text that appears in the page HTML
+* Floating language selector with configurable corner and offset controls
+* Menu, widget, shortcode, and selector block placement options
+* Language search, selection, ordering, and optional all-languages mode
+* Country flags with broad regional flag choices for languages spoken in multiple places
+* Styling controls for colors, borders, typography, shadows, icons, and dropdown appearance
+* Auto-detect option based on the visitor browser language
+* Multiple selectors on the same page with shared translation state
+* Advanced exclusion selectors for brand names, code samples, checkout fragments, or other content that should not be translated
+* Loads translation tools only when visitors need them
+* No paid SaaS account or translation API key required
+
+= Free mode and multilingual SEO =
+
+Automatic Translator is built for instant visitor translation, not multilingual SEO indexing.
+
+Free client-side translation is useful when visitors need to read your existing site in another language without creating and maintaining translated content. Search engines generally see the original page, because translated versions are not stored on separate URLs.
+
+If you need multilingual SEO, you need a server-rendered translation system with stable language URLs, canonical handling, hreflang, sitemap integration, translated metadata, and translated slugs. Automatic Translator does not claim those features in free mode.
+
+= Placement options =
+
+You can place the language switcher in several ways:
+
+1. Floating selector in the Placement tab (enabled by default).
+2. Add the selector block in the block editor.
+3. Add the selector to a classic menu or Navigation block menu.
+4. Add the Automatic Translator widget to a widget area.
+5. Insert a shortcode in content or a template.
 
 = Supported languages =
+
+Automatic Translator supports the languages available through the Google Translate website widget:
 
 * Afrikaans
 * Albanian
@@ -134,63 +163,133 @@ This plugin is powered by the trusted **Google Translate** engine, don't let any
 
 == Installation ==
 
-1. Install using the WordPress built-in Plugin installer, or Extract the zip file and drop the contents in the wp-content/plugins/ directory of your WordPress installation.
-2. Activate the plugin through the ‘Plugins’ menu in WordPress.
-3. All done, you now have the *Automatic Translator with Google Translate* installed for free.
-
-= Set up =
-
-This plugin works out of the box and does not need any configuration. But, if you want to manually define the language to translate from and select the options that appear to the visitors on the *Translate Button* you can do that on the **Automatic Translator** section
+1. Install the plugin through the WordPress plugin installer, or upload it to `/wp-content/plugins/auto-translate/`.
+2. Activate the plugin through the Plugins screen in WordPress.
+3. Open Translator in the WordPress admin menu.
+4. Choose your languages, selector style, and placement.
+5. Visit the frontend and test the language switcher.
 
 == Frequently Asked Questions ==
 
 = How much does this plugin cost? =
 
-Nothing, it is for **free**. Yes, this is a free translator plugin for WordPress.
+Automatic Translator is free. It does not require a paid SaaS account or a translation API key.
 
-= How will the visitors see my website in their languages? =
+= How does Automatic Translator translate my WordPress site? =
 
-When a visitor opens your website they will see a translation dropdown menu in the top left corner with the offered languages.
+The plugin displays a language switcher on your site. When a visitor selects a language, the plugin loads the Google Translate website widget behind the custom selector and applies client-side translation in the visitor's browser.
+
+= Does this create SEO-indexable translated pages? =
+
+No. Free mode does not create translated URLs, duplicate translated posts, hreflang tags, sitemap entries, translated metadata, translated slugs, or server-rendered translated pages.
+
+It is for instant visitor translation. If multilingual SEO is your goal, use a translation architecture that stores and serves translated content on stable, crawlable language URLs.
+
+= Does this plugin load Google Translate? =
+
+Yes. Translation is powered by the Google Translate website widget. In the v2 custom selector path, the plugin lazy-loads Google Translate when translation is needed instead of exposing the default Google widget as the main visitor interface.
+
+= What privacy considerations apply? =
+
+When a visitor uses translation, their browser loads Google's translation script and interacts with Google Translate. If your site requires consent before third-party scripts load, configure your consent tooling so visitors approve Google Translate before using the language switcher.
+
+Automatic Translator with Google Translate uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us troubleshoot problems faster and make product improvements.
+
+Appsero SDK does not gather any data by default. The SDK only starts gathering basic telemetry data when a user allows it via the admin notice.
+
+Integrating Appsero SDK does not immediately start gathering data without confirmation from users in any case.
+
+Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
+
+= What happened to the classic widget? =
+
+The legacy classic widget path has been removed. Existing classic installs are migrated to the custom selector experience on upgrade so visitors get the newer v2 language switcher.
+
+= How can I place the language switcher? =
+
+Use the Placement tab to enable a floating selector, add it to a menu, or follow the manual placement instructions. You can also use the Automatic Translator widget, the selector block, or the `[auto_translate_button]` shortcode.
 
 = Do I need any translation skills to use this plugin? =
 
-No, this plugin does all the translation work for you. So you don't need to know any of the languages your website will be translated into. Also, you don't need to hire a translator.
+No. The plugin uses automatic machine translation through Google Translate. You do not need to translate each post manually.
 
-= I only need my website translated into one language, I don't want all those 104 languages. =
+= Can I offer only a few languages? =
 
-No problem, you can configure this plugin to only offer the language/s that you want.
+Yes. You can offer all supported languages or choose a smaller language list in the settings.
+
+= Can I choose regional flags for each language? =
+
+Yes. Many languages include alternate country flags, so you can choose the flag that best matches your audience or region.
 
 = Will my posts and pages be duplicated for every new language? =
 
-No, the translation happens on the fly whenever a visitor selects a language.
+No. Translation happens on the fly in the visitor's browser. Your WordPress posts and pages are not duplicated.
 
 = How can I prevent specific brand names or sections from being translated? =
 
-Use Google's `notranslate` class on wrappers you want to keep unchanged, for example:
-`<span class="notranslate">UnlockThePicture</span>`.
+Use the Advanced settings to add CSS selectors for content that should not be translated. You can also use Google's `notranslate` class on wrappers you want to keep unchanged, for example:
+
+`<span class="notranslate">Pampa Dev</span>`.
+
+= Why is the selector visible but translation does not start? =
+
+The most common causes are JavaScript optimization, security settings, ad blockers, consent tools, or cache/minify plugins delaying or blocking Google's translation script. Exclude Google Translate and Automatic Translator scripts from aggressive delay/minify rules, then test in a private browser window.
+
+= Why does translation look different between browsers? =
+
+Google Translate controls the translated text output and some browser behavior. Automatic Translator owns the selector UI, loading state, placement, and exclusions, but the translation engine still comes from Google.
 
 = Does this plugin translate text within images? =
 
-No, any text that is part of an image will not be translated. This plugin only translates text.
+No. Text that is part of an image will not be translated. The plugin translates text that appears in the page HTML.
 
 = Can I combine this plugin with Polylang for mixed manual and automatic translations? =
 
-This plugin can coexist with Polylang, but it does not manage mixed manual/automatic multilingual routing. Use Polylang for canonical language URLs/content management and treat Automatic Translator as client-side translation on top.
+This plugin can coexist with Polylang, but it does not manage mixed manual/automatic multilingual routing. Use Polylang for canonical language URLs and manual content management, and treat Automatic Translator as client-side visitor translation on top.
 
 = Does uninstall remove plugin settings? =
 
-By default, plugin settings are preserved. You can enable "Delete data on uninstall" in Advanced settings to remove all `wpat_*` options when uninstalling.
+By default, plugin settings are preserved. You can enable Delete data on uninstall in Advanced settings to remove all `wpat_*` options when uninstalling.
+
+== Privacy Policy ==
+
+Automatic Translator with Google Translate uses [Appsero](https://appsero.com) SDK to collect some telemetry data upon user's confirmation. This helps us troubleshoot problems faster and make product improvements.
+
+Appsero SDK does not gather any data by default. The SDK only starts gathering basic telemetry data when a user allows it via the admin notice.
+
+Integrating Appsero SDK does not immediately start gathering data without confirmation from users in any case.
+
+Learn more about how [Appsero collects and uses this data](https://appsero.com/privacy-policy/).
 
 == Screenshots ==
 
-1. The *Automatic Translation Button* the visitors will see on your WordPress website, where they can select their own language.
-2. The multilingual dropdown for the *Automatic Translation Button*, with all the languages you have set this free translator to automatically translate your website into.
-3. Settings screen, where you can change the language you want to translate the plugin from (default is your WP installation language). You can also select the languages you want to translate into (default is 'all').
-4. The Styling options where you can make the *Automatic Translation Button* match your website theme.
-5. In the Advanced Options tab you can choose the best way to display the *Automatic Translation Button*.
-6. There is also an *Automatic Translation Button* in case you need to display the button in a specific place.
+1. Floating language switcher on a WordPress page.
+2. Open language selector showing available visitor translation options.
+3. Language settings for base language, supported languages, ordering, and regional flag choices.
+4. Visual settings for styling the custom selector.
+5. Placement settings for floating and menu alternatives.
+6. Advanced placement with CSS and manual methods: block, widget and shortcodes.
+7. Block placement example.
+8. Advanced settings: auto translate toggle and manual translation exclusions with CSS selectors.
+9. Advanced custom CSS and uninstall cleanup.
 
 == Changelog ==
+
+= 2.0.0 =
+* Changed the default Language label style to Native names for new installs and unsaved settings
+* Rebuilt the frontend translator around a custom selector-first visitor experience
+* Added lazy Google Translate loading, shared selector state, and centralized translation restore behavior
+* Fixed multiple selector instances on the same page so each language switcher renders and works consistently
+* Improved language switching with plugin-owned loading states that keep Google loading UI hidden
+* Improved keyboard navigation, screen-reader semantics, language ordering, and alternate flag selection
+* Removed the legacy classic widget path and migrated old classic installs to the custom selector on upgrade
+* Added a Placement tab with floating position controls, menu insertion order, manual placement instructions, and a dynamic selector block
+* Redesigned the admin settings interface with clearer language, visual, placement, and advanced controls
+* Added advanced translation exclusions by CSS selector so site owners can keep selected content untranslated
+* Added clearer WordPress.org-facing copy, screenshots, FAQ language and free-mode SEO limits
+* Added Appsero SDK initialization with explicit opt-in admin notice flow for telemetry collection
+* Added Appsero privacy-policy disclosure text for WordPress.org compliance
+
 = 1.7.1 =
 * Updated WordPress compatibility metadata to 7.0
 

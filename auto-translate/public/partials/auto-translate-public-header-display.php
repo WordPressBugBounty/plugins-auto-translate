@@ -29,53 +29,54 @@ if ( ! defined( 'ABSPATH' ) ) {
         font-family: <?php echo esc_html( $wpat_font_family )?> !important;
         <?php endif; ?>
     }
-    <?php if( $wpat_widget_type !== 'classic' ): ?>
     .google_translate_element{
         display:none!important;
     }
-    <?php endif; ?>
     <?php if ( '' !== $wpat_custom_css ) : ?>
     <?php echo esc_html( $wpat_custom_css ); ?>
     <?php endif; ?>
 </style>
 <script>
-function googleTranslateElementInit() {
-    if (!window.google || !google.translate || !google.translate.TranslateElement) {
-        return;
-    }
-
-    var googleTranslateElements = document.getElementsByClassName('google_translate_element');
-    for (var i = 0; i < googleTranslateElements.length; i++) {
-        var element = googleTranslateElements[i];
-        if (!element || !element.id || element.getAttribute('data-wpat-google-init') === '1') {
-            continue;
-        }
-
-        new google.translate.TranslateElement({
-            pageLanguage: <?php echo wp_json_encode( $wpat_base_language )?>,
-            includedLanguages: <?php echo wp_json_encode( $included_languages )?>,
-            layout: google.translate.TranslateElement.InlineLayout.<?php echo  $wpat_widget_type === 'classic' ? 'SIMPLE' : 'VERTICAL' ?>,
-            autoDisplay: false
-        }, element.id);
-
-        element.setAttribute('data-wpat-google-init', '1');
-    }
-}
-var wpatLanguagesCountries = <?php echo wp_json_encode( $languages_data )?>;
-var wpatButtonIcon = <?php echo wp_json_encode( $wpat_show_icon === 'on' ? $wpat_button_icon : '' )?>;
-var wpatDropdownBorderThickness = <?php echo absint( $wpat_dropdown_border_thickness )?>;
-var wpatDropdownBorderColor = <?php echo wp_json_encode( $wpat_dropdown_border_color )?>;
-var wpatDropdownBackgroundColor = <?php echo wp_json_encode( $wpat_dropdown_background_color )?>;
-var wpatDropdownHoverColor = <?php echo wp_json_encode( $wpat_dropdown_hover_color )?>;
-var wpatDropdownFontHoverColor = <?php echo wp_json_encode( $wpat_dropdown_font_hover_color )?>;
-var wpatDropdownFontSelectedColor = <?php echo wp_json_encode( $wpat_dropdown_font_selected_color )?>;
-var wpatDropdownFontColor = <?php echo wp_json_encode( $wpat_dropdown_font_color )?>;
-var wpatDropdownFontFamily = <?php echo wp_json_encode( $wpat_dropdown_font_family )?>;
-var wpatWidgetType = <?php echo wp_json_encode( $wpat_widget_type )?>;
-var wpatBaseLanguage = <?php echo wp_json_encode( $wpat_base_language )?>;
-
-/* dropdown styling */
-var wpatDropdownShadow = <?php echo $wpat_dropdown_shadow==='on'?'true':'false'; ?>;
-var wpatAutoDetect = <?php echo wp_json_encode( $wpat_auto_detect )?>;
-var wpatHostLanguage = <?php echo wp_json_encode( $wpat_host_language )?>;
+window.wpatConfig = <?php echo wp_json_encode(
+	array(
+		'languages'                => $languages_data,
+		'buttonIcon'               => 'on' === $wpat_show_icon ? $wpat_button_icon : '',
+		'dropdownBorderThickness'  => absint( $wpat_dropdown_border_thickness ),
+		'dropdownBorderColor'      => $wpat_dropdown_border_color,
+		'dropdownBackgroundColor'  => $wpat_dropdown_background_color,
+		'dropdownHoverColor'       => $wpat_dropdown_hover_color,
+		'dropdownFontHoverColor'   => $wpat_dropdown_font_hover_color,
+		'dropdownFontSelectedColor'=> $wpat_dropdown_font_selected_color,
+		'dropdownFontColor'        => $wpat_dropdown_font_color,
+		'dropdownFontFamily'       => $wpat_dropdown_font_family,
+		'widgetType'               => $wpat_widget_type,
+		'baseLanguage'             => $wpat_base_language,
+		'dropdownShadow'           => 'on' === $wpat_dropdown_shadow,
+		'autoDetect'               => $wpat_auto_detect,
+		'hostLanguage'             => $wpat_host_language,
+		'wrapperSelector'          => (string) get_option( 'wpat_wrapper_selector', '' ),
+		'excludedSelectors'        => array_values( array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) get_option( 'wpat_excluded_selectors', '' ) ) ) ) ),
+		'googleMountId'            => $wpat_google_mount_id,
+		'googleScriptUrl'          => $wpat_google_script_url,
+		'messages'                 => array(
+			'loading' => __( 'Switching language.', 'auto-translate' ),
+			'error'   => __( 'Translation unavailable. Please try again.', 'auto-translate' ),
+		),
+	)
+); ?>;
+var wpatLanguagesCountries = window.wpatConfig.languages;
+var wpatButtonIcon = window.wpatConfig.buttonIcon;
+var wpatDropdownBorderThickness = window.wpatConfig.dropdownBorderThickness;
+var wpatDropdownBorderColor = window.wpatConfig.dropdownBorderColor;
+var wpatDropdownBackgroundColor = window.wpatConfig.dropdownBackgroundColor;
+var wpatDropdownHoverColor = window.wpatConfig.dropdownHoverColor;
+var wpatDropdownFontHoverColor = window.wpatConfig.dropdownFontHoverColor;
+var wpatDropdownFontSelectedColor = window.wpatConfig.dropdownFontSelectedColor;
+var wpatDropdownFontColor = window.wpatConfig.dropdownFontColor;
+var wpatDropdownFontFamily = window.wpatConfig.dropdownFontFamily;
+var wpatWidgetType = window.wpatConfig.widgetType;
+var wpatBaseLanguage = window.wpatConfig.baseLanguage;
+var wpatDropdownShadow = window.wpatConfig.dropdownShadow;
+var wpatAutoDetect = window.wpatConfig.autoDetect;
+var wpatHostLanguage = window.wpatConfig.hostLanguage;
 </script>

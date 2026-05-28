@@ -16,6 +16,10 @@ class Auto_Translate_Config {
 		return is_array( $wpat_widget_types ) ? $wpat_widget_types : array();
 	}
 
+	public static function normalize_widget_type( $widget_type ) {
+		return 'minimalist';
+	}
+
 	public static function get_languages_countries() {
 		global $wpat_languages_countries;
 		return is_array( $wpat_languages_countries ) ? $wpat_languages_countries : array();

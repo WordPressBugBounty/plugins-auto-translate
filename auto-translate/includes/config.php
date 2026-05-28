@@ -111,8 +111,7 @@ $wpat_supported_languages = [
 ];
 
 $wpat_widget_types = [
-    'classic' => __('Classic','auto-translate'),
-    'minimalist' => __('Minimalist','auto-translate'),
+    'minimalist' => __('Custom selector','auto-translate'),
 ];
 
 $wpat_languages_countries = [

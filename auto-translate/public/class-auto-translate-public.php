@@ -71,6 +71,11 @@ class Auto_Translate_Public
             return;
         }
 
+        $this->enqueue_public_styles();
+    }
+
+    private function enqueue_public_styles() {
+
         /**
          * This function is provided for demonstration purposes only.
          *
@@ -98,7 +103,6 @@ class Auto_Translate_Public
             'all'
         );
         wp_enqueue_style( 'dashicons' );
-
     }
 
     /**
@@ -111,6 +115,11 @@ class Auto_Translate_Public
         if ( ! $this->should_boot_translator() ) {
             return;
         }
+
+        $this->enqueue_public_scripts();
+    }
+
+    private function enqueue_public_scripts() {
 
         /**
          * This function is provided for demonstration purposes only.
@@ -129,16 +138,15 @@ class Auto_Translate_Public
             plugin_dir_url(__FILE__) . 'js/auto-translate-public.min.js',
             array('jquery'),
             $this->get_asset_version( 'public/js/auto-translate-public.min.js' ),
-            false
+            true
         );
 		wp_enqueue_script(
             $this->plugin_name . '-global',
             plugin_dir_url( dirname(__FILE__) ) . 'global/js/auto-translate-global.min.js',
             array(),
             $this->get_asset_version( 'global/js/auto-translate-global.min.js' ),
-            false
+            true
         );
-
     }
 
     /**
@@ -162,20 +170,24 @@ class Auto_Translate_Public
             return;
         }
 
-        wp_enqueue_script(
-            'wpat-google-translate',
-            'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit',
-            array(),
-            $this->version,
-            false
-        );
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns plugin-generated config/style markup.
+        echo $this->get_translator_bootstrap_markup();
+    }
+
+    private function get_translator_bootstrap_markup() {
+        ob_start();
 
         /* Language settings */
         $included_languages = implode(',', array_keys($this->get_included_languages()));
-        $languages_data = Auto_Translate_Languages::get_languages_data(explode(',',$included_languages));
+        $wpat_language_flags = get_option( 'wpat_language_flags', array() );
+        $languages_data = Auto_Translate_Languages::get_languages_data(
+            explode(',', $included_languages),
+            (string) get_option( 'wpat_language_name_display', 'native' ),
+            is_array( $wpat_language_flags ) ? $wpat_language_flags : array()
+        );
 
         /* Styling settings */
-        $wpat_widget_type = get_option('wpat_widget_type');
+        $wpat_widget_type = Auto_Translate_Config::normalize_widget_type( get_option('wpat_widget_type') );
         // Classic settings
         $wpat_button_icon = get_option('wpat_button_icon');
         $wpat_show_icon = get_option('wpat_show_icon');
@@ -200,7 +212,38 @@ class Auto_Translate_Public
         $wpat_custom_css            = get_option('wpat_custom_css', '');
         // Keep host language cache-safe; visitor detection now runs client-side.
         $wpat_host_language         = $wpat_base_language;
+        $wpat_google_mount_id       = 'wpat-google-translate-element';
+        $wpat_google_script_url     = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
         include 'partials/auto-translate-public-header-display.php';
+
+        return ob_get_clean();
+    }
+
+    public function register_selector_block() {
+        if ( ! function_exists( 'register_block_type' ) ) {
+            return;
+        }
+
+        $editor_asset_path = plugin_dir_path( dirname( __FILE__ ) ) . 'admin/js/auto-translate-block-editor.min.js';
+        if ( file_exists( $editor_asset_path ) ) {
+            wp_register_script(
+                $this->plugin_name . '-block-editor',
+                plugin_dir_url( dirname( __FILE__ ) ) . 'admin/js/auto-translate-block-editor.min.js',
+                array( 'wp-blocks', 'wp-element', 'wp-i18n', 'wp-block-editor', 'wp-components' ),
+                $this->get_asset_version( 'admin/js/auto-translate-block-editor.min.js' ),
+                true
+            );
+        }
+
+        $block_args = array(
+            'api_version'     => 2,
+            'render_callback' => array( $this, 'render_selector_block' ),
+        );
+        if ( wp_script_is( $this->plugin_name . '-block-editor', 'registered' ) ) {
+            $block_args['editor_script'] = $this->plugin_name . '-block-editor';
+        }
+
+        register_block_type( 'auto-translate/selector', $block_args );
     }
 
     /**
@@ -241,12 +284,16 @@ class Auto_Translate_Public
 
         if ( is_singular() ) {
             $post = get_post();
-            if ( $post instanceof WP_Post && has_shortcode( (string) $post->post_content, 'auto_translate_button' ) ) {
+            if ( $post instanceof WP_Post && ( has_shortcode( (string) $post->post_content, 'auto_translate_button' ) || ( function_exists( 'has_block' ) && has_block( 'auto-translate/selector', $post ) ) ) ) {
                 return true;
             }
         }
 
         if ( is_active_widget( false, false, 'wpat_button_widget', true ) ) {
+            return true;
+        }
+
+        if ( '' !== trim( (string) get_option( 'wpat_wrapper_selector', '' ) ) ) {
             return true;
         }
 
@@ -257,6 +304,7 @@ class Auto_Translate_Public
         $wpat_supported_languages = Auto_Translate_Config::get_supported_languages();
         $wpat_base_language = get_option('wpat_base_language');
         $wpat_selected_languages = get_option('wpat_supported_languages');
+        $wpat_language_order = get_option( 'wpat_language_order', '' );
 
         if (is_array($wpat_selected_languages) && !in_array('all', $wpat_selected_languages, true)) {
             $included_languages = array();
@@ -271,7 +319,39 @@ class Auto_Translate_Public
             $included_languages = $wpat_supported_languages;
         }
 
-        return $included_languages;
+        return $this->apply_language_order( $included_languages, $wpat_language_order, $wpat_base_language );
+    }
+
+    private function apply_language_order( $included_languages, $order_csv, $base_language ) {
+        if ( ! is_array( $included_languages ) ) {
+            return array();
+        }
+
+        if ( ! is_string( $order_csv ) || '' === trim( $order_csv ) ) {
+            return $included_languages;
+        }
+
+        $ordered = array();
+        $order = array_filter( array_map( 'trim', explode( ',', $order_csv ) ) );
+        foreach ( $order as $code ) {
+            if ( isset( $included_languages[ $code ] ) ) {
+                $ordered[ $code ] = $included_languages[ $code ];
+            }
+        }
+
+        foreach ( $included_languages as $code => $label ) {
+            if ( ! isset( $ordered[ $code ] ) ) {
+                $ordered[ $code ] = $label;
+            }
+        }
+
+        if ( isset( $ordered[ $base_language ] ) ) {
+            $base_label = $ordered[ $base_language ];
+            unset( $ordered[ $base_language ] );
+            $ordered = array( $base_language => $base_label ) + $ordered;
+        }
+
+        return $ordered;
     }
 
     /**
@@ -282,10 +362,19 @@ class Auto_Translate_Public
      * @return string
      */
     function hook_menu_item($items, $args){
+        $menu_markup = '';
         if ( $this->should_render_in_menu( $args ) ) {
-            $items .= $this->content_translator( true, true );
+            $menu_markup = $this->content_translator( false, true );
         }
-        return $items;
+        if ( '' === $menu_markup ) {
+            return $items;
+        }
+
+        if ( 'start' === get_option( 'wpat_menu_position', 'end' ) ) {
+            return $menu_markup . $items;
+        }
+
+        return $items . $menu_markup;
       //  var_dump($args);
     }
 
@@ -329,7 +418,11 @@ class Auto_Translate_Public
             return $block_content;
         }
 
-        $updated_content = preg_replace( '/<\/ul>/', $menu_markup . '</ul>', $block_content, 1 ) ?: $block_content;
+        if ( 'start' === get_option( 'wpat_menu_position', 'end' ) ) {
+            $updated_content = preg_replace( '/(<ul\b[^>]*>)/', '$1' . $menu_markup, $block_content, 1 ) ?: $block_content;
+        } else {
+            $updated_content = preg_replace( '/<\/ul>/', $menu_markup . '</ul>', $block_content, 1 ) ?: $block_content;
+        }
         $wpat_navigation_block_injected = true;
 
         return $updated_content;
@@ -343,6 +436,8 @@ class Auto_Translate_Public
     function hook_content_translator()
     {
         $wpat_default_location = get_option('wpat_default_location', true);
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe static container used by the JS adapter.
+        echo '<div id="wpat-google-translate-element" class="google_translate_element wpat-google-translate-root" aria-hidden="true"></div>';
         if ( $wpat_default_location ) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe generated markup from plugin templates.
             echo $this->content_translator(true);
@@ -354,11 +449,58 @@ class Auto_Translate_Public
         return $this->content_translator(false);
     }
 
+    public function auto_translate_link_function( $atts = array(), $content = null ) {
+        $atts = shortcode_atts(
+            array(
+                'lang'  => '',
+                'label' => '',
+            ),
+            $atts,
+            'auto_translate_link'
+        );
+
+        $lang = Auto_Translate_Config::normalize_lang_code( $atts['lang'] );
+        $languages_data = Auto_Translate_Languages::get_languages_data(
+            array_keys( $this->get_included_languages() ),
+            (string) get_option( 'wpat_language_name_display', 'native' )
+        );
+        if ( ! isset( $languages_data[ $lang ] ) ) {
+            return '';
+        }
+
+        $label = is_string( $atts['label'] ) && '' !== trim( $atts['label'] )
+            ? sanitize_text_field( $atts['label'] )
+            : $languages_data[ $lang ]['lang_name'];
+
+        return '<a href="#" class="wpat-language-link notranslate skiptranslate" data-wpat-lang="' . esc_attr( $lang ) . '">' . esc_html( $label ) . '</a>';
+    }
+
+    public function render_selector_block( $attributes = array(), $content = '' ) {
+        static $wpat_block_runtime_rendered = false;
+
+        if ( ! $this->should_boot_translator() ) {
+            $this->enqueue_public_styles();
+            $this->enqueue_public_scripts();
+        }
+
+        $markup = $this->content_translator( false );
+        if ( $this->should_boot_translator() || $wpat_block_runtime_rendered ) {
+            return $markup;
+        }
+
+        $wpat_block_runtime_rendered = true;
+
+        return $this->get_translator_bootstrap_markup()
+            . '<div id="wpat-google-translate-element" class="google_translate_element wpat-google-translate-root" aria-hidden="true"></div>'
+            . $markup;
+    }
+
     private function content_translator($default_location,$menu = false, $menu_item_classes = '')
     {
         ob_start();
-        $wpat_widget_type           = get_option('wpat_widget_type');
+        $wpat_widget_type           = Auto_Translate_Config::normalize_widget_type( get_option('wpat_widget_type') );
         $wpat_min_style             = get_option('wpat_min_style');
+        $wpat_min_layout            = get_option('wpat_min_layout', 'dropdown');
         $wpat_min_icon              = get_option('wpat_min_icon');
         $wpat_min_txt_display       = get_option('wpat_min_txt_display');
         $wpat_min_chevron           = get_option('wpat_min_chevron');
@@ -374,9 +516,19 @@ class Auto_Translate_Public
         $wpat_base_language         = get_option('wpat_base_language');
         $wpat_auto_detect           = get_option('wpat_auto_detect');
         $wpat_menu_item_classes     = $menu_item_classes;
+        $wpat_floating_position     = sanitize_key( (string) get_option('wpat_floating_position', 'top_left') );
+        $wpat_floating_offset_x     = absint( get_option('wpat_floating_offset_x', 16) );
+        $wpat_floating_offset_y     = absint( get_option('wpat_floating_offset_y', 16) );
+        $wpat_floating_classes      = $this->get_floating_classes( $default_location, $wpat_floating_position );
+        $wpat_floating_style        = sprintf( '--wpat-float-offset-x:%dpx;--wpat-float-offset-y:%dpx;', $wpat_floating_offset_x, $wpat_floating_offset_y );
 
         $included_languages     = $this->get_included_languages();
-        $wpat_languages_data    = Auto_Translate_Languages::get_languages_data(array_keys($included_languages));
+        $wpat_language_flags    = get_option( 'wpat_language_flags', array() );
+        $wpat_languages_data    = Auto_Translate_Languages::get_languages_data(
+            array_keys($included_languages),
+            (string) get_option( 'wpat_language_name_display', 'native' ),
+            is_array( $wpat_language_flags ) ? $wpat_language_flags : array()
+        );
 
         if(!$menu){
             include 'partials/auto-translate-public-display.php';
@@ -387,6 +539,16 @@ class Auto_Translate_Public
         $contents = ob_get_contents();
         ob_end_clean();
         return $contents;
+    }
+
+    private function get_floating_classes( $enabled, $position ) {
+        if ( ! $enabled ) {
+            return '';
+        }
+
+        $position = in_array( $position, array( 'top_left', 'top_right', 'bottom_left', 'bottom_right' ), true ) ? $position : 'top_left';
+
+        return 'wpat_float wpat_float_' . $position;
     }
 
     

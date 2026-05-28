@@ -8,8 +8,8 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Automatic Translator with Google Translate
- * Description:       Automatically translate you WordPress site. Easily. This is the easiest plugin to auto translate your website for Free, go multilingual with Automatic Translator with Google. English, Spanish, Chinese and 100+
- * Version:           1.7.1
+ * Description:       Translate your WordPress site with a polished Google Translate language switcher for instant visitor translation.
+ * Version:           2.0.0
  * Requires at least: 3.6.0
  * Requires PHP:      7.4
  * Author:            Pampa Dev
@@ -28,7 +28,30 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'AUTO_TRANSLATE_VERSION', '1.7.1' );
+define( 'AUTO_TRANSLATE_VERSION', '2.0.0' );
+
+/**
+ * Initialize the plugin tracker.
+ *
+ * @return void
+ */
+function appsero_init_tracker_auto_translate() {
+
+	if ( ! class_exists( 'Appsero\\Client' ) ) {
+		require_once __DIR__ . '/appsero/src/Client.php';
+	}
+
+	$client = new Appsero\Client(
+		'f2a83449-c6d2-49f9-8e57-8dbc99eaa136',
+		'Automatic Translator with Google Translate',
+		__FILE__
+	);
+
+	// Active insights.
+	$client->insights()->init();
+}
+
+appsero_init_tracker_auto_translate();
 
 /**
  * The code that runs during plugin activation.

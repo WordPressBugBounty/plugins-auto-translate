@@ -170,6 +170,8 @@ class Auto_Translate {
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'load_widgets' );
 		// Keep migrations in admin flow to avoid version checks on every frontend request.
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'check_version', 1 );
+		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) . '/auto-translate.php' ), $plugin_admin, 'add_plugin_action_links' );
+		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_plugin_row_meta', 10, 2 );
 
 	}
 
@@ -186,11 +188,13 @@ class Auto_Translate {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'init', $plugin_public, 'register_selector_block' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'hook_javascript_translator' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'hook_content_translator' );
 		$this->loader->add_filter('wp_nav_menu_items', $plugin_public,'hook_menu_item', 10, 2);
 		$this->loader->add_filter( 'render_block', $plugin_public, 'hook_navigation_block', 10, 2 );
 		$this->loader->add_shortcode( 'auto_translate_button', $plugin_public, 'auto_translate_button_function' );
+		$this->loader->add_shortcode( 'auto_translate_link', $plugin_public, 'auto_translate_link_function' );
 
 	}
 

@@ -38,23 +38,16 @@ class Auto_Translate_Activator {
 	}
 
 	public static function add_options() {
-		// The default value for wpat_widget_type depends on the plugin version we come from.
-		// If we come from a version before 1.4.0, we set the default value to 'classic'
-		// because that means that the website is already using that style and we don't want 
-		// to break it, otherwise we set it to 'minimalist'
 		$default_wpat_widget_type = 'minimalist';
-		if(	get_option('wpat_supported_languages') && // If the option exists then it's an existing installation
-			version_compare(get_option('wpat_auto_translate_version'), '1.4.0') < 0
-		) {
-			$default_wpat_widget_type = 'classic';
-		}
+		$is_existing_installation = (bool) get_option('wpat_supported_languages');
+		$default_wpat_floating_position = 'top_left';
 
 		// The default value for wpat_auto_detect depends on the plugin version we come from.
 		// If we come from a version before 1.4.4, we set the default value to 'disabled'
 		// because that means that the website is already using the plugin and we don't want 
 		// to force the automatic translatation of the site
 		$default_wpat_auto_detect = 'enabled';
-		if(	get_option('wpat_supported_languages') && // If the option exists then it's an existing installation
+		if(	$is_existing_installation && // If the option exists then it's an existing installation
 			version_compare((string) get_option('wpat_auto_translate_version', '0.0.0'), '1.5.0') < 0
 		) {
 			$default_wpat_auto_detect = 'disabled';
@@ -72,6 +65,8 @@ class Auto_Translate_Activator {
 		add_option('wpat_button_icon', 'dashicons-translation');
 		add_option('wpat_show_icon', 'on');
 		add_option('wpat_supported_languages', array('ar', 'bn', 'de', 'en', 'fr', 'hi', 'id', 'pt', 'ru', 'es'));
+		add_option('wpat_language_order', '');
+		add_option('wpat_language_name_display', 'native');
 		add_option('wpat_color_1', '#000');
 		add_option('wpat_color_2', '#000');
 		add_option('wpat_widget_size', get_option('wpat_size', 'smaller')==='smaller'?'small':'large');
@@ -91,6 +86,7 @@ class Auto_Translate_Activator {
 		add_option('wpat_dropdown_font_family', '');
 		// Minimalist settings
 		add_option('wpat_min_style', 'flags');
+		add_option('wpat_min_layout', 'dropdown');
 		add_option('wpat_min_icon', 'dashicons-admin-site-alt3');
 		add_option('wpat_min_txt_display', 'name');
 		add_option('wpat_min_chevron', 'dashicons-arrow-down-alt2');
@@ -102,13 +98,31 @@ class Auto_Translate_Activator {
 		add_option('wpat_min_font_family', '');
 		add_option('wpat_min_hover_color', '#fff');
 		add_option('wpat_min_font_hover_color', '#000');
+		add_option( 'wpat_language_flags', array() );
 
 		/* Advanced settings */
 		add_option('wpat_default_location', true);
+		add_option('wpat_floating_position', $default_wpat_floating_position);
+		add_option('wpat_floating_offset_x', 16);
+		add_option('wpat_floating_offset_y', 16);
 		add_option('wpat_auto_detect', $default_wpat_auto_detect);
 		add_option('wpat_show_in_menu', '');
+		add_option('wpat_menu_position', 'end');
+		add_option('wpat_wrapper_selector', '');
 		add_option('wpat_custom_css', '');
+		add_option( 'wpat_excluded_selectors', '' );
 		add_option('wpat_delete_data_on_uninstall', '');
+
+		self::migrate_widget_type();
+	}
+
+	public static function migrate_widget_type() {
+		$current_widget_type = get_option( 'wpat_widget_type', 'minimalist' );
+
+		if ( 'classic' === $current_widget_type ) {
+			update_option( 'wpat_widget_type', 'minimalist' );
+			update_option( 'wpat_classic_widget_migrated_notice', AUTO_TRANSLATE_VERSION );
+		}
 	}
 
 }
