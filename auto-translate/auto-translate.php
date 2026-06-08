@@ -9,8 +9,8 @@
  * @wordpress-plugin
  * Plugin Name:       Automatic Translator with Google Translate
  * Description:       Translate your WordPress site with a polished Google Translate language switcher for instant visitor translation.
- * Version:           2.0.0
- * Requires at least: 3.6.0
+ * Version:           2.1.0
+ * Requires at least: 5.0
  * Requires PHP:      7.4
  * Author:            Pampa Dev
  * Author URI:        https://pampa.dev
@@ -28,20 +28,20 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'AUTO_TRANSLATE_VERSION', '2.0.0' );
+define( 'AUTO_TRANSLATE_VERSION', '2.1.0' );
 
 /**
  * Initialize the plugin tracker.
  *
  * @return void
  */
-function appsero_init_tracker_auto_translate() {
+function wpat_appsero_init_tracker_auto_translate() {
 
-	if ( ! class_exists( 'Appsero\\Client' ) ) {
+	if ( ! class_exists( 'WpatAppsero\\Client' ) ) {
 		require_once __DIR__ . '/appsero/src/Client.php';
 	}
 
-	$client = new Appsero\Client(
+	$client = new WpatAppsero\Client(
 		'f2a83449-c6d2-49f9-8e57-8dbc99eaa136',
 		'Automatic Translator with Google Translate',
 		__FILE__
@@ -51,7 +51,7 @@ function appsero_init_tracker_auto_translate() {
 	$client->insights()->init();
 }
 
-appsero_init_tracker_auto_translate();
+wpat_appsero_init_tracker_auto_translate();
 
 /**
  * The code that runs during plugin activation.

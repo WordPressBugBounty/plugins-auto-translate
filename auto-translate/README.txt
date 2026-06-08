@@ -1,9 +1,9 @@
 === Automatic Translator with Google Translate ===
 Contributors: juangirini, googletranslate
 Tags: translate, translation, google translate, language switcher, website translator
-Requires at least: 3.6.0
+Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://pampa.dev
@@ -18,6 +18,8 @@ Version 2 makes the language switcher easier to use, easier to place, and easier
 
 Automatic Translator is a free visitor translation plugin. It changes what visitors see in their browser after they choose a language. It does not create translated URLs, translated posts, hreflang tags, sitemap entries, translated metadata, or SEO-indexable translated pages.
 
+Plugin interface translations are included for Spanish, German, French, Italian, Portuguese (Brazil), Japanese and English (UK).
+
 = Features =
 
 * Free client-side translation powered by the Google Translate website widget
@@ -31,7 +33,11 @@ Automatic Translator is a free visitor translation plugin. It changes what visit
 * Auto-detect option based on the visitor browser language
 * Multiple selectors on the same page with shared translation state
 * Advanced exclusion selectors for brand names, code samples, checkout fragments, or other content that should not be translated
+* Dedicated shadow-scoped CSS for the isolated minimalist selector and detached dropdown overlay
 * Loads translation tools only when visitors need them
+* Hardens translated content and selector styling against aggressive theme CSS
+* Uses a more isolated custom selector shell so theme CSS is less likely to break translated labels or icon alignment
+* Renders the open language list in a detached shadow-isolated overlay layer so theme stacking, local containers, and theme CSS are less likely to break or block it
 * No paid SaaS account or translation API key required
 
 = Free mode and multilingual SEO =
@@ -274,6 +280,25 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 9. Advanced custom CSS and uninstall cleanup.
 
 == Changelog ==
+
+= 2.1.0 =
+* Added bundled plugin translations for French (France), German, Japanese, Spanish (Spain), Portuguese (Brazil), English (UK), and Italian
+* Changed minimum supported WordPress version to 5.0 to match the plugin's selector block and modern core API usage
+* Changed frontend translator scripts to load with `defer`
+* Changed base translation language handling so new installs derive it from WordPress Site Language, with an optional source-language override in Advanced settings
+* Moved Language label style to Advanced settings
+* Fixed bundled plugin translations so files in `auto-translate/languages` are registered by the i18n loader
+* Fixed regional WordPress locales so they fall back to bundled same-language plugin translations when an exact locale file is unavailable, such as `es_AR` using `es_ES`
+* Fixed English (US) sites so they keep the plugin's source English strings instead of falling back to the bundled English (UK) localization
+* Fixed bundled translations to follow official WordPress locale glossary terms for plugin, shortcode, widget, code-like tokens, CSS examples, and related UI copy
+* Fixed bundled translations to preserve the Automatic Translator product name and derived admin labels across locales
+* Improved contextual admin UI wording in bundled translations and fixed the source typo `Poupup with search`
+* Renamed the language label style copy from `English names` to `Localized names` to match the translated language names shown in the current WordPress locale
+* Hardened the custom selector against theme CSS by moving instance state into plugin-owned config and isolating the minimalist selector shell, reducing translated-label overlap with the chevron
+* Moved the open minimalist dropdown into a body-level overlay layer so theme stacking and local layout containers are less likely to make language rows unclickable
+* Improved custom selector keyboard behavior and detached-dropdown coverage so menu and floating placements keep their active option state, escape/tab closing, and portal rendering behavior aligned
+* Fixed Divi Theme Builder header, body, and footer layouts so `[auto_translate_button]` boots frontend translator assets even when the current page content does not include the shortcode
+* Removed the manual textdomain loader hook so WordPress.org translation loading follows current core behavior while bundled locale fallback handling remains in place
 
 = 2.0.0 =
 * Changed the default Language label style to Native names for new installs and unsaved settings

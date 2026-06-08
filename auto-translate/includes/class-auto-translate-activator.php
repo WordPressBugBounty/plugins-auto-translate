@@ -56,8 +56,7 @@ class Auto_Translate_Activator {
 		update_option('wpat_auto_translate_version', AUTO_TRANSLATE_VERSION);
 
 		/* Language settings */
-		$wp_default_lang = explode("-",get_bloginfo("language"))[0];
-		add_option('wpat_base_language', $wp_default_lang);
+		add_option('wpat_base_language', '');
 
 		/* Styling settings */
 		add_option('wpat_widget_type', $default_wpat_widget_type);
@@ -110,10 +109,12 @@ class Auto_Translate_Activator {
 		add_option('wpat_menu_position', 'end');
 		add_option('wpat_wrapper_selector', '');
 		add_option('wpat_custom_css', '');
+		add_option('wpat_min_custom_css', '');
 		add_option( 'wpat_excluded_selectors', '' );
 		add_option('wpat_delete_data_on_uninstall', '');
 
 		self::migrate_widget_type();
+		self::migrate_min_custom_css();
 	}
 
 	public static function migrate_widget_type() {
@@ -122,6 +123,22 @@ class Auto_Translate_Activator {
 		if ( 'classic' === $current_widget_type ) {
 			update_option( 'wpat_widget_type', 'minimalist' );
 			update_option( 'wpat_classic_widget_migrated_notice', AUTO_TRANSLATE_VERSION );
+		}
+	}
+
+	public static function migrate_min_custom_css() {
+		$legacy_custom_css = get_option( 'wpat_custom_css', '' );
+		$minimalist_custom_css = get_option( 'wpat_min_custom_css', '' );
+
+		if ( ! is_scalar( $legacy_custom_css ) || ! is_scalar( $minimalist_custom_css ) ) {
+			return;
+		}
+
+		$legacy_custom_css = trim( (string) $legacy_custom_css );
+		$minimalist_custom_css = trim( (string) $minimalist_custom_css );
+
+		if ( '' === $minimalist_custom_css && '' !== $legacy_custom_css ) {
+			update_option( 'wpat_min_custom_css', $legacy_custom_css );
 		}
 	}
 

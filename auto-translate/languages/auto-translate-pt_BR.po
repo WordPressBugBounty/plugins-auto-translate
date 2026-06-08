@@ -1,457 +1,458 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Pampa Dev
+# Translation of Automatic Translator with Google Translate in Portuguese (Brazil).
+# Copyright (C) 2026 Pampa Dev
 # This file is distributed under the same license as the Automatic Translator with Google Translate package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Automatic Translator with Google Translate 2.0.0\n"
 "Report-Msgid-Bugs-To: https://github.com/pampa-dev/auto-translate/issues\n"
 "POT-Creation-Date: 2026-06-03 11:51+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2026-06-02 13:24+0200\n"
+"Last-Translator: Pampa Dev <support@pampa.dev>\n"
+"Language-Team: Portuguese (Brazil)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Codex gettext workflow\n"
+""
 
 #: auto-translate/includes/config.php:7 auto-translate/includes/config.php:118
 msgid "Afrikaans"
-msgstr ""
+msgstr "Africâner"
 
 #: auto-translate/includes/config.php:8 auto-translate/includes/config.php:119
 msgid "Albanian"
-msgstr ""
+msgstr "Albanês"
 
 #: auto-translate/includes/config.php:9 auto-translate/includes/config.php:120
 msgid "Amharic"
-msgstr ""
+msgstr "amárico"
 
 #: auto-translate/includes/config.php:10 auto-translate/includes/config.php:121
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:232
 msgid "Arabic"
-msgstr ""
+msgstr "Árabe"
 
 #: auto-translate/includes/config.php:11 auto-translate/includes/config.php:122
 msgid "Armenian"
-msgstr ""
+msgstr "Armênio"
 
 #: auto-translate/includes/config.php:12 auto-translate/includes/config.php:123
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbaijano"
 
 #: auto-translate/includes/config.php:13 auto-translate/includes/config.php:124
 msgid "Basque"
-msgstr ""
+msgstr "Basco"
 
 #: auto-translate/includes/config.php:14 auto-translate/includes/config.php:125
 msgid "Belarusian"
-msgstr ""
+msgstr "Bielorrusso"
 
 #: auto-translate/includes/config.php:15 auto-translate/includes/config.php:126
 msgid "Bengali"
-msgstr ""
+msgstr "bengali"
 
 #: auto-translate/includes/config.php:16 auto-translate/includes/config.php:127
 msgid "Bosnian"
-msgstr ""
+msgstr "Bósnio"
 
 #: auto-translate/includes/config.php:17 auto-translate/includes/config.php:128
 msgid "Bulgarian"
-msgstr ""
+msgstr "Búlgaro"
 
 #: auto-translate/includes/config.php:18 auto-translate/includes/config.php:129
 msgid "Catalan"
-msgstr ""
+msgstr "Catalão"
 
 #: auto-translate/includes/config.php:19 auto-translate/includes/config.php:130
 msgid "Cebuano"
-msgstr ""
+msgstr "Cebuano"
 
 #: auto-translate/includes/config.php:20 auto-translate/includes/config.php:131
 msgid "Chichewa"
-msgstr ""
+msgstr "Chichewa"
 
 #: auto-translate/includes/config.php:21 auto-translate/includes/config.php:132
 msgid "Chinese (Simplified)"
-msgstr ""
+msgstr "Chinês (simplificado)"
 
 #: auto-translate/includes/config.php:22 auto-translate/includes/config.php:133
 msgid "Chinese (Traditional)"
-msgstr ""
+msgstr "Chinês (tradicional)"
 
 #: auto-translate/includes/config.php:23 auto-translate/includes/config.php:134
 msgid "Corsican"
-msgstr ""
+msgstr "Córsega"
 
 #: auto-translate/includes/config.php:24 auto-translate/includes/config.php:135
 msgid "Croatian"
-msgstr ""
+msgstr "Croata"
 
 #: auto-translate/includes/config.php:25 auto-translate/includes/config.php:136
 msgid "Czech"
-msgstr ""
+msgstr "Tcheco"
 
 #: auto-translate/includes/config.php:26 auto-translate/includes/config.php:137
 msgid "Danish"
-msgstr ""
+msgstr "Dinamarquês"
 
 #: auto-translate/includes/config.php:27
 msgid "Dutch "
-msgstr ""
+msgstr "Holandês"
 
 #: auto-translate/includes/config.php:28 auto-translate/includes/config.php:139
 msgid "English"
-msgstr ""
+msgstr "Inglês"
 
 #: auto-translate/includes/config.php:29 auto-translate/includes/config.php:140
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 #: auto-translate/includes/config.php:30 auto-translate/includes/config.php:141
 msgid "Estonian"
-msgstr ""
+msgstr "Estónio"
 
 #: auto-translate/includes/config.php:31 auto-translate/includes/config.php:142
 msgid "Filipino"
-msgstr ""
+msgstr "filipino"
 
 #: auto-translate/includes/config.php:32 auto-translate/includes/config.php:143
 msgid "Finnish"
-msgstr ""
+msgstr "Finlandês"
 
 #: auto-translate/includes/config.php:33 auto-translate/includes/config.php:144
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:233
 msgid "French"
-msgstr ""
+msgstr "Francês"
 
 #: auto-translate/includes/config.php:34 auto-translate/includes/config.php:145
 msgid "Frisian"
-msgstr ""
+msgstr "Frísio"
 
 #: auto-translate/includes/config.php:35 auto-translate/includes/config.php:146
 msgid "Galician"
-msgstr ""
+msgstr "Galego"
 
 #: auto-translate/includes/config.php:36 auto-translate/includes/config.php:147
 msgid "Georgian"
-msgstr ""
+msgstr "Georgiano"
 
 #: auto-translate/includes/config.php:37 auto-translate/includes/config.php:148
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:235
 msgid "German"
-msgstr ""
+msgstr "Alemão"
 
 #: auto-translate/includes/config.php:38 auto-translate/includes/config.php:149
 msgid "Greek"
-msgstr ""
+msgstr "Grego"
 
 #: auto-translate/includes/config.php:39 auto-translate/includes/config.php:150
 msgid "Gujarati"
-msgstr ""
+msgstr "Guzerate"
 
 #: auto-translate/includes/config.php:40 auto-translate/includes/config.php:151
 msgid "Haitian Creole"
-msgstr ""
+msgstr "crioulo haitiano"
 
 #: auto-translate/includes/config.php:41 auto-translate/includes/config.php:152
 msgid "Hausa"
-msgstr ""
+msgstr "Hauçá"
 
 #: auto-translate/includes/config.php:42 auto-translate/includes/config.php:153
 msgid "Hawaiian"
-msgstr ""
+msgstr "Havaiano"
 
 #: auto-translate/includes/config.php:43 auto-translate/includes/config.php:154
 msgid "Hebrew"
-msgstr ""
+msgstr "Hebraico"
 
 #: auto-translate/includes/config.php:44 auto-translate/includes/config.php:155
 msgid "Hindi"
-msgstr ""
+msgstr "Hindi"
 
 #: auto-translate/includes/config.php:45 auto-translate/includes/config.php:156
 msgid "Hmong"
-msgstr ""
+msgstr "Hmong"
 
 #: auto-translate/includes/config.php:46 auto-translate/includes/config.php:157
 msgid "Hungarian"
-msgstr ""
+msgstr "Húngaro"
 
 #: auto-translate/includes/config.php:47 auto-translate/includes/config.php:158
 msgid "Icelandic"
-msgstr ""
+msgstr "islandês"
 
 #: auto-translate/includes/config.php:48 auto-translate/includes/config.php:159
 msgid "Igbo"
-msgstr ""
+msgstr "Ibo"
 
 #: auto-translate/includes/config.php:49 auto-translate/includes/config.php:160
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonésio"
 
 #: auto-translate/includes/config.php:50 auto-translate/includes/config.php:161
 msgid "Irish"
-msgstr ""
+msgstr "irlandês"
 
 #: auto-translate/includes/config.php:51 auto-translate/includes/config.php:162
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 #: auto-translate/includes/config.php:52 auto-translate/includes/config.php:163
 msgid "Japanese"
-msgstr ""
+msgstr "Japonês"
 
 #: auto-translate/includes/config.php:53 auto-translate/includes/config.php:164
 msgid "Javanese"
-msgstr ""
+msgstr "javanês"
 
 #: auto-translate/includes/config.php:54 auto-translate/includes/config.php:165
 msgid "Kannada"
-msgstr ""
+msgstr "Kannada"
 
 #: auto-translate/includes/config.php:55 auto-translate/includes/config.php:166
 msgid "Kazakh"
-msgstr ""
+msgstr "Cazaque"
 
 #: auto-translate/includes/config.php:56 auto-translate/includes/config.php:167
 msgid "Khmer"
-msgstr ""
+msgstr "Khmer"
 
 #: auto-translate/includes/config.php:57 auto-translate/includes/config.php:168
 msgid "Korean"
-msgstr ""
+msgstr "Coreano"
 
 #: auto-translate/includes/config.php:58 auto-translate/includes/config.php:169
 msgid "Kurdish (Kurmanji)"
-msgstr ""
+msgstr "Curdo (Kurmanji)"
 
 #: auto-translate/includes/config.php:59 auto-translate/includes/config.php:170
 msgid "Kyrgyz"
-msgstr ""
+msgstr "Quirguistão"
 
 #: auto-translate/includes/config.php:60 auto-translate/includes/config.php:171
 msgid "Lao"
-msgstr ""
+msgstr "Laos"
 
 #: auto-translate/includes/config.php:61 auto-translate/includes/config.php:172
 msgid "Latin"
-msgstr ""
+msgstr "Latim"
 
 #: auto-translate/includes/config.php:62 auto-translate/includes/config.php:173
 msgid "Latvian"
-msgstr ""
+msgstr "Letão"
 
 #: auto-translate/includes/config.php:63 auto-translate/includes/config.php:174
 msgid "Lithuanian"
-msgstr ""
+msgstr "Lituano"
 
 #: auto-translate/includes/config.php:64 auto-translate/includes/config.php:175
 msgid "Luxembourgish"
-msgstr ""
+msgstr "Luxemburguês"
 
 #: auto-translate/includes/config.php:65 auto-translate/includes/config.php:176
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedônio"
 
 #: auto-translate/includes/config.php:66 auto-translate/includes/config.php:177
 msgid "Malagasy"
-msgstr ""
+msgstr "Malgaxe"
 
 #: auto-translate/includes/config.php:67 auto-translate/includes/config.php:178
 msgid "Malay"
-msgstr ""
+msgstr "Malaio"
 
 #: auto-translate/includes/config.php:68 auto-translate/includes/config.php:179
 msgid "Malayalam"
-msgstr ""
+msgstr "Malaiala"
 
 #: auto-translate/includes/config.php:69 auto-translate/includes/config.php:180
 msgid "Maltese"
-msgstr ""
+msgstr "maltês"
 
 #: auto-translate/includes/config.php:70 auto-translate/includes/config.php:181
 msgid "Maori"
-msgstr ""
+msgstr "Maori"
 
 #: auto-translate/includes/config.php:71 auto-translate/includes/config.php:182
 msgid "Marathi"
-msgstr ""
+msgstr "Marathi"
 
 #: auto-translate/includes/config.php:72 auto-translate/includes/config.php:183
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongol"
 
 #: auto-translate/includes/config.php:73 auto-translate/includes/config.php:184
 msgid "Myanmar (Burmese)"
-msgstr ""
+msgstr "Mianmar (birmanês)"
 
 #: auto-translate/includes/config.php:74 auto-translate/includes/config.php:185
 msgid "Nepali"
-msgstr ""
+msgstr "nepalês"
 
 #: auto-translate/includes/config.php:75 auto-translate/includes/config.php:186
 msgid "Norwegian"
-msgstr ""
+msgstr "Norueguês"
 
 #: auto-translate/includes/config.php:76 auto-translate/includes/config.php:187
 msgid "Pashto"
-msgstr ""
+msgstr "pashto"
 
 #: auto-translate/includes/config.php:77 auto-translate/includes/config.php:188
 msgid "Persian"
-msgstr ""
+msgstr "Persa"
 
 #: auto-translate/includes/config.php:78 auto-translate/includes/config.php:189
 msgid "Polish"
-msgstr ""
+msgstr "Polonês"
 
 #: auto-translate/includes/config.php:79 auto-translate/includes/config.php:190
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:236
 msgid "Portuguese"
-msgstr ""
+msgstr "Português"
 
 #: auto-translate/includes/config.php:80 auto-translate/includes/config.php:191
 msgid "Punjabi"
-msgstr ""
+msgstr "punjabi"
 
 #: auto-translate/includes/config.php:81 auto-translate/includes/config.php:192
 msgid "Romanian"
-msgstr ""
+msgstr "Romeno"
 
 #: auto-translate/includes/config.php:82 auto-translate/includes/config.php:193
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:234
 msgid "Russian"
-msgstr ""
+msgstr "Russo"
 
 #: auto-translate/includes/config.php:83 auto-translate/includes/config.php:194
 msgid "Samoan"
-msgstr ""
+msgstr "samoano"
 
 #: auto-translate/includes/config.php:84 auto-translate/includes/config.php:195
 msgid "Scots Gaelic"
-msgstr ""
+msgstr "Gaélico Escocês"
 
 #: auto-translate/includes/config.php:85 auto-translate/includes/config.php:196
 msgid "Serbian"
-msgstr ""
+msgstr "Sérvio"
 
 #: auto-translate/includes/config.php:86 auto-translate/includes/config.php:197
 msgid "Sesotho"
-msgstr ""
+msgstr "Sesoto"
 
 #: auto-translate/includes/config.php:87 auto-translate/includes/config.php:198
 msgid "Shona"
-msgstr ""
+msgstr "Shona"
 
 #: auto-translate/includes/config.php:88 auto-translate/includes/config.php:199
 msgid "Sindhi"
-msgstr ""
+msgstr "Sindi"
 
 #: auto-translate/includes/config.php:89 auto-translate/includes/config.php:200
 msgid "Sinhala"
-msgstr ""
+msgstr "Cingalês"
 
 #: auto-translate/includes/config.php:90 auto-translate/includes/config.php:201
 msgid "Slovak"
-msgstr ""
+msgstr "Eslovaco"
 
 #: auto-translate/includes/config.php:91 auto-translate/includes/config.php:202
 msgid "Slovenian"
-msgstr ""
+msgstr "Esloveno"
 
 #: auto-translate/includes/config.php:92 auto-translate/includes/config.php:203
 msgid "Somali"
-msgstr ""
+msgstr "somali"
 
 #: auto-translate/includes/config.php:93 auto-translate/includes/config.php:204
 msgid "Spanish"
-msgstr ""
+msgstr "Espanhol"
 
 #: auto-translate/includes/config.php:94 auto-translate/includes/config.php:205
 msgid "Sundanese"
-msgstr ""
+msgstr "Sudanês"
 
 #: auto-translate/includes/config.php:95 auto-translate/includes/config.php:206
 msgid "Swahili"
-msgstr ""
+msgstr "suaíli"
 
 #: auto-translate/includes/config.php:96 auto-translate/includes/config.php:207
 msgid "Swedish"
-msgstr ""
+msgstr "Sueco"
 
 #: auto-translate/includes/config.php:97 auto-translate/includes/config.php:208
 msgid "Tajik"
-msgstr ""
+msgstr "tadjique"
 
 #: auto-translate/includes/config.php:98 auto-translate/includes/config.php:209
 msgid "Tamil"
-msgstr ""
+msgstr "Tâmil"
 
 #: auto-translate/includes/config.php:99 auto-translate/includes/config.php:210
 msgid "Telugu"
-msgstr ""
+msgstr "Telugu"
 
 #: auto-translate/includes/config.php:100
 #: auto-translate/includes/config.php:211
 msgid "Thai"
-msgstr ""
+msgstr "Tailandês"
 
 #: auto-translate/includes/config.php:101
 #: auto-translate/includes/config.php:212
 msgid "Turkish"
-msgstr ""
+msgstr "Turco"
 
 #: auto-translate/includes/config.php:102
 #: auto-translate/includes/config.php:213
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ucraniano"
 
 #: auto-translate/includes/config.php:103
 #: auto-translate/includes/config.php:214
 msgid "Urdu"
-msgstr ""
+msgstr "Urdu"
 
 #: auto-translate/includes/config.php:104
 #: auto-translate/includes/config.php:215
 msgid "Uzbek"
-msgstr ""
+msgstr "Usbeque"
 
 #: auto-translate/includes/config.php:105
 #: auto-translate/includes/config.php:216
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamita"
 
 #: auto-translate/includes/config.php:106
 #: auto-translate/includes/config.php:217
 msgid "Welsh"
-msgstr ""
+msgstr "Galês"
 
 #: auto-translate/includes/config.php:107
 #: auto-translate/includes/config.php:218
 msgid "Xhosa"
-msgstr ""
+msgstr "Xhosa"
 
 #: auto-translate/includes/config.php:108
 #: auto-translate/includes/config.php:219
 msgid "Yiddish"
-msgstr ""
+msgstr "iídiche"
 
 #: auto-translate/includes/config.php:109
 #: auto-translate/includes/config.php:220
 msgid "Yoruba"
-msgstr ""
+msgstr "Iorubá"
 
 #: auto-translate/includes/config.php:110
 #: auto-translate/includes/config.php:221
 msgid "Zulu"
-msgstr ""
+msgstr "Zulu"
 
 #: auto-translate/includes/config.php:114
 msgid "Custom selector"
-msgstr ""
+msgstr "Seletor personalizado"
 
 #: auto-translate/includes/config.php:118
 #: auto-translate/includes/config.php:139
@@ -459,395 +460,395 @@ msgstr ""
 #: auto-translate/includes/config.php:218
 #: auto-translate/includes/config.php:221
 msgid "South Africa"
-msgstr ""
+msgstr "África do Sul"
 
 #: auto-translate/includes/config.php:118
 msgid "Botswana"
-msgstr ""
+msgstr "Botsuana"
 
 #: auto-translate/includes/config.php:118
 msgid "Namibia"
-msgstr ""
+msgstr "Namíbia"
 
 #: auto-translate/includes/config.php:119
 msgid "Albania"
-msgstr ""
+msgstr "Albânia"
 
 #: auto-translate/includes/config.php:119
 msgid "Kosovo"
-msgstr ""
+msgstr "Kosovo"
 
 #: auto-translate/includes/config.php:119
 #: auto-translate/includes/config.php:176
 msgid "North Macedonia"
-msgstr ""
+msgstr "Macedônia do Norte"
 
 #: auto-translate/includes/config.php:120
 #: auto-translate/includes/config.php:203
 msgid "Ethiopia"
-msgstr ""
+msgstr "Etiópia"
 
 #: auto-translate/includes/config.php:121
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Arábia Saudita"
 
 #: auto-translate/includes/config.php:121
 msgid "Algeria"
-msgstr ""
+msgstr "Argélia"
 
 #: auto-translate/includes/config.php:121
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrein"
 
 #: auto-translate/includes/config.php:121
 msgid "Chad"
-msgstr ""
+msgstr "Chade"
 
 #: auto-translate/includes/config.php:121
 msgid "Comoros"
-msgstr ""
+msgstr "Comores"
 
 #: auto-translate/includes/config.php:121
 #: auto-translate/includes/config.php:203
 msgid "Djibouti"
-msgstr ""
+msgstr "Djibuti"
 
 #: auto-translate/includes/config.php:121
 msgid "Egypt"
-msgstr ""
+msgstr "Egito"
 
 #: auto-translate/includes/config.php:121
 msgid "Iraq"
-msgstr ""
+msgstr "Iraque"
 
 #: auto-translate/includes/config.php:121
 msgid "Jordan"
-msgstr ""
+msgstr "Jordânia"
 
 #: auto-translate/includes/config.php:121
 msgid "Kuwait"
-msgstr ""
+msgstr "Kuwait"
 
 #: auto-translate/includes/config.php:121
 msgid "Lebanon"
-msgstr ""
+msgstr "Líbano"
 
 #: auto-translate/includes/config.php:121
 msgid "Libya"
-msgstr ""
+msgstr "Líbia"
 
 #: auto-translate/includes/config.php:121
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritânia"
 
 #: auto-translate/includes/config.php:121
 msgid "Morocco"
-msgstr ""
+msgstr "Marrocos"
 
 #: auto-translate/includes/config.php:121
 msgid "Oman"
-msgstr ""
+msgstr "Omã"
 
 #: auto-translate/includes/config.php:121
 msgid "Palestine"
-msgstr ""
+msgstr "Palestina"
 
 #: auto-translate/includes/config.php:121
 msgid "Qatar"
-msgstr ""
+msgstr "Catar"
 
 #: auto-translate/includes/config.php:121
 #: auto-translate/includes/config.php:203
 msgid "Somalia"
-msgstr ""
+msgstr "Somália"
 
 #: auto-translate/includes/config.php:121
 msgid "Sudan"
-msgstr ""
+msgstr "Sudão"
 
 #: auto-translate/includes/config.php:121
 msgid "Syria"
-msgstr ""
+msgstr "Síria"
 
 #: auto-translate/includes/config.php:121
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunísia"
 
 #: auto-translate/includes/config.php:121
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "Emirados Árabes Unidos"
 
 #: auto-translate/includes/config.php:121
 msgid "Yemen"
-msgstr ""
+msgstr "Iêmen"
 
 #: auto-translate/includes/config.php:122
 msgid "Armenia"
-msgstr ""
+msgstr "Armênia"
 
 #: auto-translate/includes/config.php:123
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Azerbaijão"
 
 #: auto-translate/includes/config.php:124
 msgid "Basque Country"
-msgstr ""
+msgstr "País Basco"
 
 #: auto-translate/includes/config.php:125
 #: auto-translate/includes/config.php:193
 msgid "Belarus"
-msgstr ""
+msgstr "Bielorrússia"
 
 #: auto-translate/includes/config.php:126
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladeche"
 
 #: auto-translate/includes/config.php:127
 #: auto-translate/includes/config.php:135
 #: auto-translate/includes/config.php:196
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bósnia e Herzegovina"
 
 #: auto-translate/includes/config.php:128
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgária"
 
 #: auto-translate/includes/config.php:129
 msgid "Catalonia"
-msgstr ""
+msgstr "Catalunha"
 
 #: auto-translate/includes/config.php:129
 msgid "Andorra"
-msgstr ""
+msgstr "Andorra"
 
 #: auto-translate/includes/config.php:130
 #: auto-translate/includes/config.php:142
 msgid "Philippines"
-msgstr ""
+msgstr "Filipinas"
 
 #: auto-translate/includes/config.php:131
 msgid "Malawi"
-msgstr ""
+msgstr "Maláui"
 
 #: auto-translate/includes/config.php:131
 #: auto-translate/includes/config.php:197
 #: auto-translate/includes/config.php:198
 #: auto-translate/includes/config.php:218
 msgid "Zimbabwe"
-msgstr ""
+msgstr "Zimbábue"
 
 #: auto-translate/includes/config.php:132
 #: auto-translate/includes/config.php:156
 msgid "China"
-msgstr ""
+msgstr "China"
 
 #: auto-translate/includes/config.php:132
 #: auto-translate/includes/config.php:178
 msgid "Malaysia"
-msgstr ""
+msgstr "Malásia"
 
 #: auto-translate/includes/config.php:132
 #: auto-translate/includes/config.php:139
 #: auto-translate/includes/config.php:178
 #: auto-translate/includes/config.php:209
 msgid "Singapore"
-msgstr ""
+msgstr "Singapura"
 
 #: auto-translate/includes/config.php:133
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #: auto-translate/includes/config.php:133
 msgid "Hong Kong"
-msgstr ""
+msgstr "Hong Kong"
 
 #: auto-translate/includes/config.php:133
 msgid "Macau"
-msgstr ""
+msgstr "Macau"
 
 #: auto-translate/includes/config.php:134
 msgid "Corsica"
-msgstr ""
+msgstr "Córsega"
 
 #: auto-translate/includes/config.php:135
 msgid "Croatia"
-msgstr ""
+msgstr "Croácia"
 
 #: auto-translate/includes/config.php:136
 #: auto-translate/includes/config.php:201
 msgid "Czech Republic"
-msgstr ""
+msgstr "República Tcheca"
 
 #: auto-translate/includes/config.php:137
 msgid "Denmark"
-msgstr ""
+msgstr "Dinamarca"
 
 #: auto-translate/includes/config.php:138
 msgid "Dutch"
-msgstr ""
+msgstr "Holandês"
 
 #: auto-translate/includes/config.php:138
 msgid "Netherlands"
-msgstr ""
+msgstr "Holanda"
 
 #: auto-translate/includes/config.php:138
 #: auto-translate/includes/config.php:144
 msgid "Belgium"
-msgstr ""
+msgstr "Bélgica"
 
 #: auto-translate/includes/config.php:138
 msgid "Suriname"
-msgstr ""
+msgstr "Suriname"
 
 #: auto-translate/includes/config.php:139
 msgid "United Kingdom"
-msgstr ""
+msgstr "Reino Unido"
 
 #: auto-translate/includes/config.php:139
 msgid "United States"
-msgstr ""
+msgstr "Estados Unidos"
 
 #: auto-translate/includes/config.php:139
 msgid "Australia"
-msgstr ""
+msgstr "Austrália"
 
 #: auto-translate/includes/config.php:139
 msgid "Canada"
-msgstr ""
+msgstr "Canadá"
 
 #: auto-translate/includes/config.php:139
 #: auto-translate/includes/config.php:161
 msgid "Ireland"
-msgstr ""
+msgstr "Irlanda"
 
 #: auto-translate/includes/config.php:139
 #: auto-translate/includes/config.php:181
 msgid "New Zealand"
-msgstr ""
+msgstr "Nova Zelândia"
 
 #: auto-translate/includes/config.php:139
 #: auto-translate/includes/config.php:152
 #: auto-translate/includes/config.php:159
 #: auto-translate/includes/config.php:220
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigéria"
 
 #: auto-translate/includes/config.php:139
 #: auto-translate/includes/config.php:206
 msgid "Kenya"
-msgstr ""
+msgstr "Quênia"
 
 #: auto-translate/includes/config.php:139
 msgid "Ghana"
-msgstr ""
+msgstr "Gana"
 
 #: auto-translate/includes/config.php:139
 msgid "South Sudan"
-msgstr ""
+msgstr "Sudão do Sul"
 
 #: auto-translate/includes/config.php:139
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Serra Leoa"
 
 #: auto-translate/includes/config.php:139
 msgid "Liberia"
-msgstr ""
+msgstr "Libéria"
 
 #: auto-translate/includes/config.php:139
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaica"
 
 #: auto-translate/includes/config.php:141
 msgid "Estonia"
-msgstr ""
+msgstr "Estônia"
 
 #: auto-translate/includes/config.php:143
 #: auto-translate/includes/config.php:207
 msgid "Finland"
-msgstr ""
+msgstr "Finlândia"
 
 #: auto-translate/includes/config.php:144
 msgid "France"
-msgstr ""
+msgstr "França"
 
 #: auto-translate/includes/config.php:144
 msgid "Quebec"
-msgstr ""
+msgstr "Quebeque"
 
 #: auto-translate/includes/config.php:144
 #: auto-translate/includes/config.php:148
 msgid "Switzerland"
-msgstr ""
+msgstr "Suíça"
 
 #: auto-translate/includes/config.php:144
 msgid "DR Congo"
-msgstr ""
+msgstr "RD Congo"
 
 #: auto-translate/includes/config.php:144
 msgid "Congo"
-msgstr ""
+msgstr "Congo"
 
 #: auto-translate/includes/config.php:144
 msgid "Cameroon"
-msgstr ""
+msgstr "Camarões"
 
 #: auto-translate/includes/config.php:144
 msgid "Ivory Coast"
-msgstr ""
+msgstr "Costa do Marfim"
 
 #: auto-translate/includes/config.php:145
 msgid "Friesland"
-msgstr ""
+msgstr "Frísia"
 
 #: auto-translate/includes/config.php:146
 msgid "Galicia"
-msgstr ""
+msgstr "Galiza"
 
 #: auto-translate/includes/config.php:147
 msgid "Georgia"
-msgstr ""
+msgstr "Geórgia"
 
 #: auto-translate/includes/config.php:148
 msgid "Germany"
-msgstr ""
+msgstr "Alemanha"
 
 #: auto-translate/includes/config.php:148
 msgid "Austria"
-msgstr ""
+msgstr "Áustria"
 
 #: auto-translate/includes/config.php:148
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Liechtenstein"
 
 #: auto-translate/includes/config.php:149
 msgid "Greece"
-msgstr ""
+msgstr "Grécia"
 
 #: auto-translate/includes/config.php:149
 #: auto-translate/includes/config.php:212
 msgid "Cyprus"
-msgstr ""
+msgstr "Chipre"
 
 #: auto-translate/includes/config.php:150
 msgid "Gujarat"
-msgstr ""
+msgstr "Gujarat"
 
 #: auto-translate/includes/config.php:151
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #: auto-translate/includes/config.php:152
 msgid "Niger"
-msgstr ""
+msgstr "Níger"
 
 #: auto-translate/includes/config.php:153
 msgid "Hawaii"
-msgstr ""
+msgstr "Havaí"
 
 #: auto-translate/includes/config.php:154
 #: auto-translate/includes/config.php:219
 msgid "Israel"
-msgstr ""
+msgstr "Israel"
 
 #: auto-translate/includes/config.php:155
 #: auto-translate/includes/config.php:179
@@ -857,1043 +858,1040 @@ msgstr ""
 #: auto-translate/includes/config.php:210
 #: auto-translate/includes/config.php:214
 msgid "India"
-msgstr ""
+msgstr "Índia"
 
 #: auto-translate/includes/config.php:155
 #: auto-translate/includes/config.php:191
 #: auto-translate/includes/config.php:199
 #: auto-translate/includes/config.php:214
 msgid "Pakistan"
-msgstr ""
+msgstr "Paquistão"
 
 #: auto-translate/includes/config.php:156
 #: auto-translate/includes/config.php:216
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnã"
 
 #: auto-translate/includes/config.php:156
 #: auto-translate/includes/config.php:171
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #: auto-translate/includes/config.php:156
 #: auto-translate/includes/config.php:184
 msgid "Myanmar"
-msgstr ""
+msgstr "Mianmar"
 
 #: auto-translate/includes/config.php:156
 #: auto-translate/includes/config.php:211
 msgid "Thailand"
-msgstr ""
+msgstr "Tailândia"
 
 #: auto-translate/includes/config.php:157
 msgid "Hungary"
-msgstr ""
+msgstr "Hungria"
 
 #: auto-translate/includes/config.php:158
 msgid "Iceland"
-msgstr ""
+msgstr "Islândia"
 
 #: auto-translate/includes/config.php:160
 #: auto-translate/includes/config.php:164
 #: auto-translate/includes/config.php:178
 #: auto-translate/includes/config.php:205
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonésia"
 
 #: auto-translate/includes/config.php:162
 msgid "Italy"
-msgstr ""
+msgstr "Itália"
 
 #: auto-translate/includes/config.php:163
 msgid "Japan"
-msgstr ""
+msgstr "Japão"
 
 #: auto-translate/includes/config.php:165
 msgid "Karnataka"
-msgstr ""
+msgstr "Karnataka"
 
 #: auto-translate/includes/config.php:166
 #: auto-translate/includes/config.php:193
 msgid "Kazakhstan"
-msgstr ""
+msgstr "Cazaquistão"
 
 #: auto-translate/includes/config.php:167
 msgid "Cambodia"
-msgstr ""
+msgstr "Camboja"
 
 #: auto-translate/includes/config.php:168
 msgid "South Korea"
-msgstr ""
+msgstr "Coreia do Sul"
 
 #: auto-translate/includes/config.php:168
 msgid "North Korea"
-msgstr ""
+msgstr "Coreia do Norte"
 
 #: auto-translate/includes/config.php:169
 msgid "Kurdistan"
-msgstr ""
+msgstr "Curdistão"
 
 #: auto-translate/includes/config.php:170
 #: auto-translate/includes/config.php:193
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "Quirguistão"
 
 #: auto-translate/includes/config.php:172
 msgid "Rome"
-msgstr ""
+msgstr "Roma"
 
 #: auto-translate/includes/config.php:173
 msgid "Latvia"
-msgstr ""
+msgstr "Letônia"
 
 #: auto-translate/includes/config.php:174
 msgid "Lithuania"
-msgstr ""
+msgstr "Lituânia"
 
 #: auto-translate/includes/config.php:175
 msgid "Luxembourg"
-msgstr ""
+msgstr "Luxemburgo"
 
 #: auto-translate/includes/config.php:177
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagáscar"
 
 #: auto-translate/includes/config.php:178
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #: auto-translate/includes/config.php:180
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #: auto-translate/includes/config.php:181
 msgid "Cook Islands"
-msgstr ""
+msgstr "Ilhas Cook"
 
 #: auto-translate/includes/config.php:183
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongólia"
 
 #: auto-translate/includes/config.php:185
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #: auto-translate/includes/config.php:186
 msgid "Norway"
-msgstr ""
+msgstr "Noruega"
 
 #: auto-translate/includes/config.php:187
 msgid "Afghanistan"
-msgstr ""
+msgstr "Afeganistão"
 
 #: auto-translate/includes/config.php:188
 msgid "Iran"
-msgstr ""
+msgstr "Irã"
 
 #: auto-translate/includes/config.php:189
 msgid "Poland"
-msgstr ""
+msgstr "Polônia"
 
 #: auto-translate/includes/config.php:190
 msgid "Portugal"
-msgstr ""
+msgstr "Portugal"
 
 #: auto-translate/includes/config.php:190
 msgid "Brazil"
-msgstr ""
+msgstr "Brasil"
 
 #: auto-translate/includes/config.php:190
 msgid "Mozambique"
-msgstr ""
+msgstr "Moçambique"
 
 #: auto-translate/includes/config.php:190
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #: auto-translate/includes/config.php:192
 msgid "Romania"
-msgstr ""
+msgstr "Romênia"
 
 #: auto-translate/includes/config.php:192
 msgid "Moldova"
-msgstr ""
+msgstr "Moldávia"
 
 #: auto-translate/includes/config.php:193
 msgid "Russia"
-msgstr ""
+msgstr "Rússia"
 
 #: auto-translate/includes/config.php:193
 #: auto-translate/includes/config.php:208
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tadjiquistão"
 
 #: auto-translate/includes/config.php:194
 msgid "Samoa"
-msgstr ""
+msgstr "Samoa"
 
 #: auto-translate/includes/config.php:195
 msgid "Scotland"
-msgstr ""
+msgstr "Escócia"
 
 #: auto-translate/includes/config.php:196
 msgid "Serbia"
-msgstr ""
+msgstr "Sérvia"
 
 #: auto-translate/includes/config.php:197
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesoto"
 
 #: auto-translate/includes/config.php:200
 #: auto-translate/includes/config.php:209
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Sri Lanca"
 
 #: auto-translate/includes/config.php:201
 msgid "Slovakia"
-msgstr ""
+msgstr "Eslováquia"
 
 #: auto-translate/includes/config.php:202
 msgid "Slovenia"
-msgstr ""
+msgstr "Eslovênia"
 
 #: auto-translate/includes/config.php:204
 msgid "Spain"
-msgstr ""
+msgstr "Espanha"
 
 #: auto-translate/includes/config.php:204
 msgid "Mexico"
-msgstr ""
+msgstr "México"
 
 #: auto-translate/includes/config.php:204
 msgid "Argentina"
-msgstr ""
+msgstr "Argentina"
 
 #: auto-translate/includes/config.php:204
 msgid "Colombia"
-msgstr ""
+msgstr "Colômbia"
 
 #: auto-translate/includes/config.php:204
 msgid "Peru"
-msgstr ""
+msgstr "Perú"
 
 #: auto-translate/includes/config.php:204
 msgid "Ecuador"
-msgstr ""
+msgstr "Equador"
 
 #: auto-translate/includes/config.php:204
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolívia"
 
 #: auto-translate/includes/config.php:204
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 #: auto-translate/includes/config.php:204
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Guiné Equatorial"
 
 #: auto-translate/includes/config.php:204
 msgid "Guatemala"
-msgstr ""
+msgstr "Guatemala"
 
 #: auto-translate/includes/config.php:204
 msgid "Cuba"
-msgstr ""
+msgstr "Cuba"
 
 #: auto-translate/includes/config.php:204
 msgid "Dominican Republic"
-msgstr ""
+msgstr "República Dominicana"
 
 #: auto-translate/includes/config.php:204
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: auto-translate/includes/config.php:204
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguai"
 
 #: auto-translate/includes/config.php:204
 msgid "El Salvador"
-msgstr ""
+msgstr "Salvador"
 
 #: auto-translate/includes/config.php:204
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nicarágua"
 
 #: auto-translate/includes/config.php:204
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 #: auto-translate/includes/config.php:204
 msgid "Panama"
-msgstr ""
+msgstr "Panamá"
 
 #: auto-translate/includes/config.php:204
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguai"
 
 #: auto-translate/includes/config.php:206
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzânia"
 
 #: auto-translate/includes/config.php:206
 msgid "Rwanda"
-msgstr ""
+msgstr "Ruanda"
 
 #: auto-translate/includes/config.php:206
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #: auto-translate/includes/config.php:207
 msgid "Sweden"
-msgstr ""
+msgstr "Suécia"
 
 #: auto-translate/includes/config.php:212
 msgid "Turkey"
-msgstr ""
+msgstr "Turquia"
 
 #: auto-translate/includes/config.php:213
 msgid "Ukraine"
-msgstr ""
+msgstr "Ucrânia"
 
 #: auto-translate/includes/config.php:215
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbequistão"
 
 #: auto-translate/includes/config.php:217
 msgid "Wales"
-msgstr ""
+msgstr "País de Gales"
 
 #: auto-translate/admin/class-auto-translate-button-widget.php:16
 msgid "Automatic Translator Button"
-msgstr ""
+msgstr "Automatic Translator Button"
 
 #: auto-translate/admin/class-auto-translate-button-widget.php:19
 msgid "Translation button"
-msgstr ""
+msgstr "Botão de tradução"
 
 #: auto-translate/admin/class-auto-translate-admin.php:137
 msgid "Automatic Translator Settings"
-msgstr ""
+msgstr "Automatic Translator Settings"
 
 #: auto-translate/admin/class-auto-translate-admin.php:137
 msgid "Translator"
-msgstr ""
+msgstr "Translator"
 
 #: auto-translate/admin/class-auto-translate-admin.php:567
 msgid "Settings"
-msgstr ""
+msgstr "Configurações"
 
 #: auto-translate/admin/class-auto-translate-admin.php:582
 msgid "Support forum"
-msgstr ""
+msgstr "Fórum de suporte"
 
 #: auto-translate/admin/class-auto-translate-admin.php:587
 msgid "Rate us ★★★★★"
-msgstr ""
+msgstr "Avalie-nos ★★★★★"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:23
 #: auto-translate/admin/partials/auto-translate-admin-display.php:33
 msgid "Automatic Translator"
-msgstr ""
+msgstr "Automatic Translator"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:27
 msgid ""
-"Your site was using the legacy Classic widget. It has been migrated "
-"automatically to the Custom selector in this version."
+"Your site was using the legacy Classic widget. It has been migrated automatically to the Custom selector in this version."
 msgstr ""
+"Seu site estava usando o widget Classic legado. Foi migrado automaticamente para o seletor Customizado nesta versão."
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:37
 msgid "Language settings"
-msgstr ""
+msgstr "Configurações de idioma"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:38
 msgid "Placement"
-msgstr ""
+msgstr "Posicionamento"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:39
 msgid "Styling"
-msgstr ""
+msgstr "Estilo"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:40
 msgid "Advanced"
-msgstr ""
+msgstr "Avançado"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:43
 #: auto-translate/admin/partials/auto-translate-admin-display.php:74
 msgid "Save changes"
-msgstr ""
+msgstr "Salvar alterações"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:46
 msgid "Plugin links"
-msgstr ""
+msgstr "Links de plugins"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:47
 msgid "⭐️ Love this plugin? Give us 5 stars on WordPress.org :)"
-msgstr ""
+msgstr "⭐️ Ama este plugin? Dê-nos 5 estrelas no WordPress.org :)"
 
 #: auto-translate/admin/partials/auto-translate-admin-display.php:48
 msgid "⭐️ Need help? Visit the support forum. ⭐️"
-msgstr ""
+msgstr "⭐️ Precisa de ajuda? Visite o fórum de suporte. ⭐️"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:22
 msgid "Floating selector"
-msgstr ""
+msgstr "Seletor flutuante"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:26
 msgid "Show floating selector"
-msgstr ""
+msgstr "Mostrar seletor flutuante"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:27
 msgid ""
-"A persistent selector anchored to a viewport corner, visible on every page. "
-"Independent from menu or shortcode placements."
+"A persistent selector anchored to a viewport corner, visible on every page. Independent from menu or shortcode placements."
 msgstr ""
+"Um seletor persistente ancorado em um canto da janela de visualização, visível em todas as páginas. Independente de posicionamentos de menu ou código de acesso."
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:39
 msgid "Position"
-msgstr ""
+msgstr "Posição"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:40
 msgid "Which corner of the viewport to anchor the selector."
-msgstr ""
+msgstr "Em qual canto da viewport ancorar o seletor."
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:44
 msgid "Top left"
-msgstr ""
+msgstr "Canto superior esquerdo"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:45
 msgid "Top right"
-msgstr ""
+msgstr "Canto superior direito"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:46
 msgid "Bottom right"
-msgstr ""
+msgstr "Canto inferior direito"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:47
 msgid "Bottom left"
-msgstr ""
+msgstr "Canto inferior esquerdo"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:53
 msgid "Offset from edge"
-msgstr ""
+msgstr "Deslocamento da borda"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:54
 msgid "Distance from the viewport edge and admin bar, in pixels."
-msgstr ""
+msgstr "Distância da borda da janela de visualização e da barra de administração, em pixels."
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:58
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:60
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:69
 msgid "Navigation menu"
-msgstr ""
+msgstr "Menu de navegação"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:73
 msgid "Menu placement"
-msgstr ""
+msgstr "Posicionamento no menu"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:74
 msgid ""
-"Inject the selector into a registered WordPress navigation menu or "
-"Navigation block. If your theme does not expose menus here, use a shortcode, "
-"widget, or block."
+"Inject the selector into a registered WordPress navigation menu or Navigation block. If your theme does not expose menus here, use a shortcode, widget, or block."
 msgstr ""
+"Injete o seletor em um menu de navegação WordPress registrado ou bloco de navegação. Se o seu tema não expõe menus aqui, use um shortcode, widget ou bloco."
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:78
 msgid "Disabled"
-msgstr ""
+msgstr "Desativado"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:80
 msgid "Classic Menus"
-msgstr ""
+msgstr "Menus Clássicos"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:88
 msgid "Navigation Blocks"
-msgstr ""
+msgstr "Blocos de navegação"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:100
 msgid "Position in menu"
-msgstr ""
+msgstr "Posição no menu"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:101
 msgid "Insert the selector at the start or end of the selected menu."
-msgstr ""
+msgstr "Insira o seletor no início ou no final do menu selecionado."
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:107
 msgid "Start"
-msgstr ""
+msgstr "No início"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:111
 msgid "End of menu"
-msgstr ""
+msgstr "No final"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:120
 msgid "CSS injection"
-msgstr ""
+msgstr "Injeção de CSS"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:124
 msgid "Wrapper CSS selector"
-msgstr ""
+msgstr "Seletor CSS de wrapper"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:125
 msgid ""
-"Appends selector instances to matching elements on page load. Use a valid "
-"CSS selector, e.g. .site-header .language-slot"
+"Appends selector instances to matching elements on page load. Use a valid CSS selector, e.g. .site-header .language-slot"
 msgstr ""
+"Acrescenta instâncias do seletor aos elementos correspondentes no carregamento da página. Use um seletor CSS válido, por exemplo, .site-header .language-slot"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:135
 msgid "Manual placement"
-msgstr ""
+msgstr "Posicionamento manual"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:139
 msgid "Method"
-msgstr ""
+msgstr "Método"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:140
 msgid "Best for"
-msgstr ""
+msgstr "Melhor para"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:141
 msgid "How to use"
-msgstr ""
+msgstr "Como usar"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:147
 msgid "Selector block"
-msgstr ""
+msgstr "Bloco seletor"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:148
 msgid "Block editor"
-msgstr ""
+msgstr "Editor de blocos"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:150
 msgid "Block editor, Site Editor, template parts"
-msgstr ""
+msgstr "Editor de blocos, Editor de sites, partes de modelo"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:153
 msgid ""
-"Search for \"Automatic Translator Selector\" in the block inserter and place "
-"it anywhere in your layout."
+"Search for \"Automatic Translator Selector\" in the block inserter and place it anywhere in your layout."
 msgstr ""
+"Procure por \"Automatic Translator Selector\" no inseridor de blocos e posicione-o em qualquer lugar do layout."
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:155
 msgid ""
-"This WordPress install does not expose the required block APIs yet. Use the "
-"widget or shortcode placement methods instead."
+"This WordPress install does not expose the required block APIs yet. Use the widget or shortcode placement methods instead."
 msgstr ""
+"Esta instalação do WordPress ainda não expõe as APIs de bloco necessárias. Use os métodos de posicionamento de widget ou shortcode."
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:161
 msgid "Widget"
-msgstr ""
+msgstr "Widget"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:162
 msgid "Widget areas"
-msgstr ""
+msgstr "Áreas de widgets"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:164
 msgid "Widget areas and sidebars"
-msgstr ""
+msgstr "Áreas de widgets e barras laterais"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:165
 msgid ""
-"Go to <b>Appearance → Widgets</b> or the Site Editor, then add the Automatic "
-"Translator Button widget to any area."
+"Go to <b>Appearance → Widgets</b> or the Site Editor, then add the Automatic Translator Button widget to any area."
 msgstr ""
+"Acesse <b>Aparência → Widgets</b> ou o Editor do site e adicione o Automatic Translator Button widget a qualquer área."
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:169
 msgid "Shortcode"
-msgstr ""
+msgstr "Shortcode"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:170
 msgid "Classic editor"
-msgstr ""
+msgstr "Editor clássico"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:172
 msgid "Pages, builders, classic editor, templates"
-msgstr ""
+msgstr "Páginas, construtores, editor clássico, modelos"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:174
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:184
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:185
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:179
 msgid "Language link"
-msgstr ""
+msgstr "Link de idioma"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:180
 msgid "Menus"
-msgstr ""
+msgstr "Menus"
 
 #: auto-translate/admin/partials/auto-translate-admin-placement-settings-display.php:182
 msgid "Menus and custom language switch links"
-msgstr ""
+msgstr "Menus e links personalizados para troca de idioma"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:49
 msgid "Language label style"
-msgstr ""
+msgstr "Estilo de rótulo de idioma"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:53
 msgid "More info about language label styles"
-msgstr ""
+msgstr "Mais informações sobre estilos de rótulos de idiomas"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:60
 msgid "How language names appear in the selector dropdown."
-msgstr ""
+msgstr "Como os nomes dos idiomas aparecem no menu suspenso do seletor."
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:63
 msgid "Language names"
-msgstr ""
+msgstr "Nomes de idiomas"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:66
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:220
 msgid "Native names"
-msgstr ""
+msgstr "Nomes nativos"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:70
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:230
 msgid "Localized names"
-msgstr ""
+msgstr "Nomes localizados"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:80
 msgid "Supported languages"
-msgstr ""
+msgstr "Idiomas suportados"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:81
 msgid "selected"
-msgstr ""
+msgstr "selecionado"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:94
 msgid ""
-"For more than 10 languages we suggest enabling the 'Popup with search' "
-"feature under 'Styling' -> 'Selector behavior'"
+"For more than 10 languages we suggest enabling the 'Popup with search' feature under 'Styling' -> 'Selector behavior'"
 msgstr ""
+"Para mais de 10 idiomas, sugerimos ativar o recurso “Pop-up com pesquisa” em “Estilo” -> “Comportamento do seletor”."
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:98
-msgid ""
-"Tip: this language list is sortable. Drag and drop languages to control "
-"selector order."
+msgid "Tip: this language list is sortable. Drag and drop languages to control selector order."
 msgstr ""
+"Dica: esta lista de idiomas é classificável. Arraste e solte idiomas para controlar a ordem do seletor."
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:102
 msgid "Search languages..."
-msgstr ""
+msgstr "Pesquisar idiomas..."
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:103
 msgid "Select all"
-msgstr ""
+msgstr "Selecionar tudo"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:104
 msgid "Clear all"
-msgstr ""
+msgstr "Limpar tudo"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:111
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 #. translators: %s: language name.
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:155
 #, php-format
 msgid "%s flag variant"
-msgstr ""
+msgstr "Variante da sinalização %s"
 
 #. translators: %s: language name.
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:169
 #, php-format
 msgid "%s flag variants"
-msgstr ""
+msgstr "%s variantes de sinalização"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:213
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:216
 msgid "Language label styles"
-msgstr ""
+msgstr "Estilos de rótulo de idioma"
 
 #: auto-translate/admin/partials/auto-translate-admin-language-settings-display.php:217
 msgid ""
-"Native names show each language in its own writing. Localized names show "
-"language names in the current WordPress locale."
+"Native names show each language in its own writing. Localized names show language names in the current WordPress locale."
 msgstr ""
+"Os nomes nativos mostram cada idioma em sua própria escrita. Os nomes localizados mostram os nomes dos idiomas no idioma atual do WordPress."
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:12
 msgid "Appearance"
-msgstr ""
+msgstr "Aparência"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:16
 msgid "Icon style"
-msgstr ""
+msgstr "Estilo do ícone"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:17
 msgid "How the language is visually represented in the selector button."
-msgstr ""
+msgstr "Como o idioma é representado visualmente no botão seletor."
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:41
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:31
 msgid "Choose Icon"
-msgstr ""
+msgstr "Escolher ícone"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:48
 msgid "Label text"
-msgstr ""
+msgstr "Texto do rótulo"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:49
 msgid "What text appears alongside the icon in the button."
-msgstr ""
+msgstr "Qual texto aparece ao lado do ícone no botão."
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:53
 msgid "Language name"
-msgstr ""
+msgstr "Nome do idioma"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:54
 msgid "Language code"
-msgstr ""
+msgstr "Código do idioma"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:55
 msgid "Name + code"
-msgstr ""
+msgstr "Nome + código"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:61
 msgid "Chevron style"
-msgstr ""
+msgstr "Estilo do chevron"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:62
 msgid "Dropdown indicator shown next to the selector text."
-msgstr ""
+msgstr "Indicador suspenso mostrado próximo ao texto do seletor."
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:74
 msgid "Selector behavior"
-msgstr ""
+msgstr "Comportamento do seletor"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:75
-msgid ""
-"Standard dropdown works well for a few languages. Popup with search is "
-"better for 10+."
+msgid "Standard dropdown works well for a few languages. Popup with search is better for 10+."
 msgstr ""
+"O menu suspenso padrão funciona bem para poucos idiomas. O pop-up com pesquisa é melhor para 10 ou mais."
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:79
 msgid "Dropdown"
-msgstr ""
+msgstr "Menu suspenso"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:80
 msgid "Popup with search"
-msgstr ""
+msgstr "Pop-up com pesquisa"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:88
 msgid "Colors"
-msgstr ""
+msgstr "Cores"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:91
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:78
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:149
 msgid "Border color"
-msgstr ""
+msgstr "Cor da borda"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:93
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:158
 msgid "Background color"
-msgstr ""
+msgstr "Cor de fundo"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:97
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:39
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:174
 msgid "Font color"
-msgstr ""
+msgstr "Cor da fonte"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:99
 msgid "Hover background"
-msgstr ""
+msgstr "Fundo ao passar o mouse"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:103
 msgid "Font hover color"
-msgstr ""
+msgstr "Cor de foco da fonte"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:105
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:71
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:142
 msgid "Border thickness"
-msgstr ""
+msgstr "Espessura da borda"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:117
 msgid "Typography"
-msgstr ""
+msgstr "Tipografia"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:121
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:46
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:181
 msgid "Font name"
-msgstr ""
+msgstr "Nome da fonte"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:122
 msgid "Override the selector font. Leave blank to inherit from your theme."
-msgstr ""
+msgstr "Substitua a fonte do seletor. Deixe em branco para herdar do seu tema."
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:125
 msgid "e.g. Roboto, Open Sans"
-msgstr ""
+msgstr "por exemplo Roboto, Open Sans"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:130
 msgid "Underline on hover"
-msgstr ""
+msgstr "Sublinhado ao passar o mouse"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:131
 msgid "Underline the hovered dropdown item text."
-msgstr ""
+msgstr "Sublinhe o texto do item suspenso suspenso."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:22
 msgid "Behavior"
-msgstr ""
+msgstr "Comportamento"
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:26
 msgid "Auto-translate for visitors"
-msgstr ""
+msgstr "Tradução automática para visitantes"
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:27
 msgid ""
-"Automatically translate the site into each visitor's browser language on "
-"first visit. Visitors can still switch manually at any time."
+"Automatically translate the site into each visitor's browser language on first visit. Visitors can still switch manually at any time."
 msgstr ""
+"Traduza automaticamente o site para o idioma do navegador de cada visitante na primeira visita. Os visitantes ainda podem mudar manualmente a qualquer momento."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:45
 msgid "Translation exclusions"
-msgstr ""
+msgstr "Exclusões de tradução"
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:49
 msgid ""
-"Add one CSS selector per line. Matching elements will be marked with "
-"notranslate and translate=\"no\" before Google Translate initializes."
+"Add one CSS selector per line. Matching elements will be marked with notranslate and translate=\"no\" before Google Translate initializes."
 msgstr ""
+"Adicione um seletor CSS por linha. Os elementos correspondentes serão marcados com notranslate e translate=\"no\" antes da inicialização do Google Tradutor."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:53
 msgid ""
-"Tip: You can also exclude elements from translation by adding the class "
-"`notranslate` and the property `translate=\"no\"`."
+"Tip: You can also exclude elements from translation by adding the class `notranslate` and the property `translate=\"no\"`."
 msgstr ""
+"Dica: Você também pode excluir elementos da tradução adicionando a classe `notranslate` e a propriedade `translate=\"no\"`."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:56
 msgid ""
-"Selector validation runs in the browser when saving this screen. Invalid "
-"selectors are ignored on the frontend."
+"Selector validation runs in the browser when saving this screen. Invalid selectors are ignored on the frontend."
 msgstr ""
+"A validação do seletor é executada no navegador ao salvar esta tela. Seletores inválidos são ignorados no frontend."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:61
 msgid "Custom CSS"
-msgstr ""
+msgstr "CSS personalizado"
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:65
 msgid ""
-"These rules apply to the selector widget only. The Google Translate language "
-"list iframe cannot be styled here."
+"These rules apply to the selector widget only. The Google Translate language list iframe cannot be styled here."
 msgstr ""
+"Estas regras se aplicam apenas ao widget seletor. O iframe da lista de idiomas do Google Tradutor não pode ser estilizado aqui."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:72
 msgid "Danger zone"
-msgstr ""
+msgstr "Zona de perigo"
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:76
 msgid "Delete all data on uninstall"
-msgstr ""
+msgstr "Exclua todos os dados na desinstalação"
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:77
 msgid ""
-"When enabled, all plugin settings are permanently erased when you uninstall "
-"the plugin. This action cannot be undone."
+"When enabled, all plugin settings are permanently erased when you uninstall the plugin. This action cannot be undone."
 msgstr ""
+"Quando ativado, todas as configurações do plugin são apagadas permanentemente quando você desinstala o plugin. Esta ação não pode ser desfeita."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:83
 msgid "I understand — permanently delete all plugin data on uninstall"
-msgstr ""
+msgstr "Eu entendo – exclua permanentemente todos os dados do plugin na desinstalação"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:11
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:17
 msgid "Add icon"
-msgstr ""
+msgstr "Adicionar ícone"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:12
 msgid "Whether to add an icon to the button or not"
-msgstr ""
+msgstr "Adicionar um ícone ao botão ou não"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:21
 msgid "Icon"
-msgstr ""
+msgstr "Ícone"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:22
 msgid "This is the icon used on the front-end button"
-msgstr ""
+msgstr "Este é o ícone usado no botão front-end"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:40
 msgid "Button's font color"
-msgstr ""
+msgstr "Cor da fonte do botão"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:47
 msgid "Button's font name"
-msgstr ""
+msgstr "Nome da fonte do botão"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:50
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:185
 msgid "Leave it blank if not sure"
-msgstr ""
+msgstr "Deixe em branco se não tiver certeza"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:55
 msgid "Color 1"
-msgstr ""
+msgstr "Cor 1"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:56
 msgid "Button's initial color"
-msgstr ""
+msgstr "Cor inicial do botão"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:62
 msgid "Color 2"
-msgstr ""
+msgstr "Cor 2"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:63
 msgid "Button's last color"
-msgstr ""
+msgstr "Última cor do botão"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:72
 msgid "Buttons's border thickness in pixels"
-msgstr ""
+msgstr "Espessura da borda dos botões em pixels"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:79
 msgid "Button's border color"
-msgstr ""
+msgstr "Cor da borda do botão"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:87
 msgid "Rounded corners"
-msgstr ""
+msgstr "Cantos arredondados"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:88
 msgid "This is the front-end button's roundness"
-msgstr ""
+msgstr "Esta é a redondeza do botão frontal"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:91
 msgid "Squared"
-msgstr ""
+msgstr "Quadrado"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:92
 msgid "Rounded"
-msgstr ""
+msgstr "Arredondado"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:93
 msgid "Very rounded"
-msgstr ""
+msgstr "Muito arredondado"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:98
 msgid "Size"
-msgstr ""
+msgstr "Tamanho"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:99
 msgid "This is the front-end button's size"
-msgstr ""
+msgstr "Este é o tamanho do botão frontal"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:102
 msgid "Small"
-msgstr ""
+msgstr "Pequeno"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:103
 msgid "Large"
-msgstr ""
+msgstr "Grande"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:109
 msgid "Dropdown Styling"
-msgstr ""
+msgstr "Estilo do menu suspenso"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:119
 msgid "Select Language"
-msgstr ""
+msgstr "Selecione o idioma"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:130
 msgid "Box shadow"
-msgstr ""
+msgstr "Sombra da caixa"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:131
 msgid "Whether to display the box shadow or not"
-msgstr ""
+msgstr "Se deve ou não exibir a sombra da caixa"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:136
 msgid "Display box shadow"
-msgstr ""
+msgstr "Mostrar sombra da caixa"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:143
 msgid "Dropdown's border thickness in pixels"
-msgstr ""
+msgstr "Espessura da borda do menu suspenso em pixels"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:150
 msgid "Dropdown's border color"
-msgstr ""
+msgstr "Cor da borda do menu suspenso"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:159
 msgid "Dropdown's background color"
-msgstr ""
+msgstr "Cor de fundo do menu suspenso"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:165
 msgid "Hover color"
-msgstr ""
+msgstr "Cor do foco"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:166
 msgid "Dropdown's hover over color"
-msgstr ""
+msgstr "Cor ao passar o mouse no menu suspenso"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:175
 msgid "Dropdown's font color"
-msgstr ""
+msgstr "Cor da fonte do menu suspenso"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:182
 msgid "Dropdown's font name"
-msgstr ""
+msgstr "Nome da fonte do menu suspenso"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:190
 msgid "Font hover over color"
-msgstr ""
+msgstr "Passe o mouse sobre a cor da fonte"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:191
 msgid "Dropdown's font color when hovered over"
-msgstr ""
+msgstr "Cor da fonte do menu suspenso ao passar o mouse"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:197
 msgid "Font selected color"
-msgstr ""
+msgstr "Cor selecionada da fonte"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-classic-display.php:198
 msgid "Dropdown's font color when selected"
-msgstr ""
+msgstr "Cor da fonte do menu suspenso quando selecionado"
 
 #: auto-translate/admin/partials/auto-translate-admin-visual-settings-display.php:77
 msgid "Live preview"
-msgstr ""
+msgstr "Visualização ao vivo"
 
 #: auto-translate/public/partials/widgets/auto-translate-widget-minimalist.php:45
 msgid "Search language"
-msgstr ""
+msgstr "Pesquisar idioma"
 
 #: auto-translate/public/partials/widgets/auto-translate-widget-minimalist.php:46
 msgid "Search language…"
-msgstr ""
+msgstr "Pesquisar idioma…"
 
 #: auto-translate/public/partials/auto-translate-public-header-display.php:62
 msgid "Switching language."
-msgstr ""
+msgstr "Alterando idioma."
 
 #: auto-translate/public/partials/auto-translate-public-header-display.php:63
 msgid "Translation unavailable. Please try again."
-msgstr ""
+msgstr "Tradução indisponível. Por favor, tente novamente."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:43
 msgid "Source language override"
-msgstr ""
+msgstr "Substituição do idioma de origem"
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:44
 msgid "By default, Automatic Translator uses your WordPress Site Language. Change this only if your site content is written in a different language."
-msgstr ""
+msgstr "Por padrão, Automatic Translator usa o idioma do site do WordPress. Altere isso apenas se o conteúdo do seu site estiver escrito em outro idioma."
 
 #: auto-translate/admin/partials/auto-translate-admin-advanced-settings-display.php:53
 msgid "Use WordPress Site Language (%s)"
-msgstr ""
+msgstr "Usar o idioma do site do WordPress (%s)"

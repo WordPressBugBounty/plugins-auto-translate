@@ -56,6 +56,7 @@ window.wpatConfig = <?php echo wp_json_encode(
 		'hostLanguage'             => $wpat_host_language,
 		'wrapperSelector'          => (string) get_option( 'wpat_wrapper_selector', '' ),
 		'excludedSelectors'        => array_values( array_filter( array_map( 'trim', preg_split( '/\r\n|\r|\n/', (string) get_option( 'wpat_excluded_selectors', '' ) ) ) ) ),
+		'minimalistShadowCss'      => (string) get_option( 'wpat_min_custom_css', '' ),
 		'googleMountId'            => $wpat_google_mount_id,
 		'googleScriptUrl'          => $wpat_google_script_url,
 		'messages'                 => array(

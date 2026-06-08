@@ -66,6 +66,7 @@ $wpat_option_keys = array(
 	'wpat_auto_detect',
 	'wpat_show_in_menu',
 	'wpat_custom_css',
+	'wpat_min_custom_css',
 	'wpat_delete_data_on_uninstall',
 	'wpat_size', // legacy option key from old versions.
 );

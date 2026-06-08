@@ -1,6 +1,6 @@
 <?php
 
-namespace Appsero;
+namespace WpatAppsero;
 
 /**
  * Appsero Insights
@@ -10,6 +10,21 @@ namespace Appsero;
  * and admin email.
  */
 class Insights {
+
+    /**
+     * Internal hook and action names used by the local Appsero fork.
+     */
+    private const TRACKER_DATA_FILTER = 'wpat_appsero_tracker_data';
+    private const IS_LOCAL_FILTER = 'wpat_appsero_is_local';
+    private const TRACKER_SEND_EVENT_HOOK = 'wpat_tracker_send_event';
+    private const TRACKER_OPTIN_QUERY_ARG = 'wpat_tracker_optin';
+    private const TRACKER_OPTOUT_QUERY_ARG = 'wpat_tracker_optout';
+    private const TRACKER_OPTIN_HOOK = 'wpat_tracker_optin';
+    private const TRACKER_OPTOUT_HOOK = 'wpat_tracker_optout';
+    private const UNINSTALL_SUBMIT_AJAX_ACTION = 'wpat_submit_uninstall_reason';
+    private const UNINSTALL_SUBMITTED_HOOK = 'wpat_uninstall_reason_submitted';
+    private const CUSTOM_DEACTIVATION_REASONS_FILTER = 'wpat_appsero_custom_deactivation_reasons';
+    private const SECURITY_NONCE_ACTION = 'wpat-appsero-security-nonce';
 
     /**
      * The notice text
@@ -58,7 +73,7 @@ class Insights {
             $client = new Client( $client, $name, $file );
         }
 
-        if ( is_object( $client ) && is_a( $client, 'Appsero\Client' ) ) {
+        if ( is_object( $client ) && is_a( $client, __NAMESPACE__ . '\Client' ) ) {
             $this->client = $client;
         }
     }
@@ -163,10 +178,10 @@ class Insights {
 
         add_action( 'admin_init', array( $this, 'handle_optin_optout' ) );
 
-        add_action( 'wp_ajax_' . $this->client->slug . '_submit-uninstall-reason', array( $this, 'uninstall_reason_submission' ) );
+        add_action( 'wp_ajax_' . self::UNINSTALL_SUBMIT_AJAX_ACTION, array( $this, 'uninstall_reason_submission' ) );
 
         add_filter( 'cron_schedules', array( $this, 'add_weekly_schedule' ) );
-        add_action( $this->client->slug . '_tracker_send_event', array( $this, 'send_tracking_data' ) );
+        add_action( self::TRACKER_SEND_EVENT_HOOK, array( $this, 'send_tracking_data' ) );
     }
 
     /**
@@ -280,7 +295,8 @@ class Insights {
             $data['tracking_skipped'] = true;
         }
 
-        return apply_filters( $this->client->slug . '_tracker_data', $data );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Local fork uses a fixed prefixed hook constant.
+        return apply_filters( self::TRACKER_DATA_FILTER, $data );
     }
 
     /**
@@ -375,7 +391,8 @@ class Insights {
             $is_local = true;
         }
 
-        return apply_filters( 'appsero_is_local', $is_local );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Local fork uses a fixed prefixed hook constant.
+        return apply_filters( self::IS_LOCAL_FILTER, $is_local );
     }
 
     /**
@@ -384,7 +401,7 @@ class Insights {
      * @return void
      */
     private function schedule_event() {
-        $hook_name = wp_unslash( $this->client->slug . '_tracker_send_event' );
+        $hook_name = self::TRACKER_SEND_EVENT_HOOK;
 
         if ( ! wp_next_scheduled( $hook_name ) ) {
             wp_schedule_event( time(), 'weekly', $hook_name );
@@ -397,7 +414,7 @@ class Insights {
      * @return void
      */
     private function clear_schedule_event() {
-        wp_clear_scheduled_hook( $this->client->slug . '_tracker_send_event' );
+        wp_clear_scheduled_hook( self::TRACKER_SEND_EVENT_HOOK );
     }
 
     /**
@@ -418,8 +435,8 @@ class Insights {
             return;
         }
 
-        $optin_url  = wp_nonce_url( add_query_arg( $this->client->slug . '_tracker_optin', 'true' ), '_wpnonce' );
-        $optout_url = wp_nonce_url( add_query_arg( $this->client->slug . '_tracker_optout', 'true' ), '_wpnonce' );
+        $optin_url  = wp_nonce_url( add_query_arg( self::TRACKER_OPTIN_QUERY_ARG, 'true' ), '_wpnonce' );
+        $optout_url = wp_nonce_url( add_query_arg( self::TRACKER_OPTOUT_QUERY_ARG, 'true' ), '_wpnonce' );
 
         if ( empty( $this->notice ) ) {
             $notice = sprintf(
@@ -432,9 +449,14 @@ class Insights {
 
         $policy_url = 'https://appsero.com/privacy-policy/';
 
-        $notice .= ' (<a class="' . $this->client->slug . '-insights-data-we-collect" href="#">' . $this->client->__trans( 'what we collect' ) . '</a>)';
-        $notice .= '<p class="description" style="display:none;">' . implode( ', ', $this->data_we_collect() ) . '. ';
-        $notice .= 'We are using <em>Appsero</em> to collect your data. <a href="' . $policy_url . '" target="_blank">Learn more</a> &#8599;</p>';
+        $notice .= ' (<a class="' . esc_attr( $this->client->slug ) . '-insights-data-we-collect" href="#">' . esc_html( $this->client->__trans( 'what we collect' ) ) . '</a>)';
+        $notice .= '<p class="description" style="display:none;">' . esc_html( implode( ', ', $this->data_we_collect() ) ) . '. ';
+        $notice .= wp_kses_post(
+            sprintf(
+                'We are using <em>Appsero</em> to collect your data. <a href="%1$s" target="_blank" rel="noopener noreferrer">Learn more</a> &#8599;',
+                esc_url( $policy_url )
+            )
+        ) . '</p>';
 
         echo '<div class="updated"><p>';
         echo wp_kses_post( $notice );
@@ -462,12 +484,12 @@ class Insights {
 
         if ( $this->is_optin_request() ) {
             $this->optin();
-            $this->handle_redirection( $this->client->slug . '_tracker_optin' );
+            $this->handle_redirection( self::TRACKER_OPTIN_QUERY_ARG );
         }
 
         if ( $this->is_optout_request() ) {
             $this->optout();
-            $this->handle_redirection( $this->client->slug . '_tracker_optout' );
+            $this->handle_redirection( self::TRACKER_OPTOUT_QUERY_ARG );
         }
     }
 
@@ -495,7 +517,7 @@ class Insights {
      * @return bool
      */
     private function is_optin_request() {
-        return isset( $_GET[ $this->client->slug . '_tracker_optin' ] ) && 'true' === $_GET[ $this->client->slug . '_tracker_optin' ];
+        return 'true' === filter_input( INPUT_GET, self::TRACKER_OPTIN_QUERY_ARG, FILTER_SANITIZE_FULL_SPECIAL_CHARS );
     }
 
     /**
@@ -504,7 +526,7 @@ class Insights {
      * @return bool
      */
     private function is_optout_request() {
-        return isset( $_GET[ $this->client->slug . '_tracker_optout' ] ) && 'true' === $_GET[ $this->client->slug . '_tracker_optout' ];
+        return 'true' === filter_input( INPUT_GET, self::TRACKER_OPTOUT_QUERY_ARG, FILTER_SANITIZE_FULL_SPECIAL_CHARS );
     }
 
     /**
@@ -559,7 +581,8 @@ class Insights {
         $this->schedule_event();
         $this->send_tracking_data();
 
-        do_action( $this->client->slug . '_tracker_optin', $this->get_tracking_data() );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Local fork uses a fixed prefixed hook constant.
+        do_action( self::TRACKER_OPTIN_HOOK, $this->get_tracking_data() );
     }
 
     /**
@@ -575,7 +598,8 @@ class Insights {
 
         $this->clear_schedule_event();
 
-        do_action( $this->client->slug . '_tracker_optout' );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Local fork uses a fixed prefixed hook constant.
+        do_action( self::TRACKER_OPTOUT_HOOK );
     }
 
     /**
@@ -585,15 +609,9 @@ class Insights {
      * @return int
      */
     public function get_post_count( $post_type ) {
-        global $wpdb;
+        $counts = wp_count_posts( $post_type );
 
-        return (int) $wpdb->get_var(
-            $wpdb->prepare(
-                "SELECT count(ID) FROM $wpdb->posts WHERE post_type = %s and post_status = %s",
-                $post_type,
-                'publish'
-            )
-        );
+        return isset( $counts->publish ) ? (int) $counts->publish : 0;
     }
 
     /**
@@ -722,7 +740,7 @@ class Insights {
     public function add_weekly_schedule( $schedules ) {
         $schedules['weekly'] = array(
             'interval' => DAY_IN_SECONDS * 7,
-            'display'  => __( 'Once Weekly', 'appsero' ),
+            'display'  => $this->client->__trans( 'Once Weekly' ),
         );
 
         return $schedules;
@@ -740,7 +758,7 @@ class Insights {
             return;
         }
 
-        $hook_name = $this->client->slug . '_tracker_send_event';
+        $hook_name = self::TRACKER_SEND_EVENT_HOOK;
 
         if ( ! wp_next_scheduled( $hook_name ) ) {
             wp_schedule_event( time(), 'weekly', $hook_name );
@@ -850,7 +868,7 @@ class Insights {
             wp_send_json_error();
         }
 
-        if ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), 'appsero-security-nonce' ) ) {
+        if ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['nonce'] ) ), self::SECURITY_NONCE_ACTION ) ) {
             wp_send_json_error( 'Nonce verification failed' );
         }
 
@@ -867,7 +885,8 @@ class Insights {
         /*
          * Fire after the plugin _uninstall_reason_submitted
          */
-        do_action( $this->client->slug . '_uninstall_reason_submitted', $data );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Local fork uses a fixed prefixed hook constant.
+        do_action( self::UNINSTALL_SUBMITTED_HOOK, $data );
 
         wp_send_json_success();
     }
@@ -886,13 +905,14 @@ class Insights {
 
         $this->deactivation_modal_styles();
         $reasons        = $this->get_uninstall_reasons();
-        $custom_reasons = apply_filters( 'appsero_custom_deactivation_reasons', [], $this->client );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Local fork uses a fixed prefixed hook constant.
+        $custom_reasons = apply_filters( self::CUSTOM_DEACTIVATION_REASONS_FILTER, [], $this->client );
         ?>
 
-        <div class="wd-dr-modal" id="<?php echo $this->client->slug; ?>-wd-dr-modal">
+        <div class="wd-dr-modal" id="<?php echo esc_attr( $this->client->slug ); ?>-wd-dr-modal">
             <div class="wd-dr-modal-wrap">
                 <div class="wd-dr-modal-header">
-                    <h3> <?php $this->client->_etrans( 'Goodbyes are always hard. If you have a moment, please let us know how we can improve.' ); ?> </h3>
+                    <h3><?php echo esc_html( $this->client->__trans( 'Goodbyes are always hard. If you have a moment, please let us know how we can improve.' ) ); ?></h3>
                 </div>
 
                 <div class="wd-dr-modal-body">
@@ -900,9 +920,9 @@ class Insights {
                         <?php foreach ( $reasons as $reason ) { ?>
                             <li data-placeholder="<?php echo esc_attr( $reason['placeholder'] ); ?>">
                                 <label>
-                                    <input type="radio" name="selected-reason" value="<?php echo $reason['id']; ?>">
-                                    <div class="wd-de-reason-icon"><?php echo $reason['icon']; ?></div>
-                                    <div class="wd-de-reason-text"><?php echo $reason['text']; ?></div>
+                                    <input type="radio" name="selected-reason" value="<?php echo esc_attr( $reason['id'] ); ?>">
+                                    <div class="wd-de-reason-icon"><?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper returns SVG sanitized through an explicit allowlist. */ echo $this->get_safe_svg_icon_markup( $reason['icon'] ); ?></div>
+                                    <div class="wd-de-reason-text"><?php echo esc_html( $reason['text'] ); ?></div>
                                 </label>
                             </li>
                         <?php } ?>
@@ -912,9 +932,9 @@ class Insights {
                             <?php foreach ( $custom_reasons as $reason ) { ?>
                                 <li data-placeholder="<?php echo esc_attr( $reason['placeholder'] ); ?>" data-customreason="true">
                                     <label>
-                                        <input type="radio" name="selected-reason" value="<?php echo $reason['id']; ?>">
-                                        <div class="wd-de-reason-icon"><?php echo $reason['icon']; ?></div>
-                                        <div class="wd-de-reason-text"><?php echo $reason['text']; ?></div>
+                                        <input type="radio" name="selected-reason" value="<?php echo esc_attr( $reason['id'] ); ?>">
+                                        <div class="wd-de-reason-icon"><?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper returns SVG sanitized through an explicit allowlist. */ echo $this->get_safe_svg_icon_markup( $reason['icon'] ); ?></div>
+                                        <div class="wd-de-reason-text"><?php echo esc_html( $reason['text'] ); ?></div>
                                     </label>
                                 </li>
                             <?php } ?>
@@ -923,19 +943,19 @@ class Insights {
                     <div class="wd-dr-modal-reason-input"><textarea></textarea></div>
                     <p class="wd-dr-modal-reasons-bottom">
                         <?php
-                        echo sprintf(
+                        echo wp_kses_post( sprintf(
                             $this->client->__trans( 'We share your data with <a href="%1$s" target="_blank">Appsero</a> to troubleshoot problems &amp; make product improvements. <a href="%2$s" target="_blank">Learn more</a> &#8599;' ),
                             esc_url( 'https://appsero.com/' ),
                             esc_url( 'https://appsero.com/privacy-policy' )
-                        );
+                        ) );
                         ?>
                     </p>
                 </div>
 
                 <div class="wd-dr-modal-footer">
-                    <a href="#" class="dont-bother-me wd-dr-button-secondary"><?php $this->client->_etrans( 'Skip & Deactivate' ); ?></a>
-                    <button class="wd-dr-button-secondary wd-dr-cancel-modal"><?php $this->client->_etrans( 'Cancel' ); ?></button>
-                    <button class="wd-dr-submit-modal"><?php $this->client->_etrans( 'Submit & Deactivate' ); ?></button>
+                    <a href="#" class="dont-bother-me wd-dr-button-secondary"><?php echo esc_html( $this->client->__trans( 'Skip & Deactivate' ) ); ?></a>
+                    <button class="wd-dr-button-secondary wd-dr-cancel-modal"><?php echo esc_html( $this->client->__trans( 'Cancel' ) ); ?></button>
+                    <button class="wd-dr-submit-modal"><?php echo esc_html( $this->client->__trans( 'Submit & Deactivate' ) ); ?></button>
                 </div>
             </div>
         </div>
@@ -943,11 +963,11 @@ class Insights {
         <script type="text/javascript">
             (function($) {
                 $(function() {
-                    var modal = $('#<?php echo $this->client->slug; ?>-wd-dr-modal');
+                    var modal = $('#<?php echo esc_js( $this->client->slug ); ?>-wd-dr-modal');
                     var deactivateLink = '';
 
                     // Open modal
-                    $('#the-list').on('click', 'a.<?php echo $this->client->slug; ?>-deactivate-link', function(e) {
+                    $('#the-list').on('click', 'a.<?php echo esc_js( $this->client->slug ); ?>-deactivate-link', function(e) {
                         e.preventDefault();
 
                         modal.addClass('modal-active');
@@ -1005,8 +1025,8 @@ class Insights {
                             url: ajaxurl,
                             type: 'POST',
                             data: {
-                                nonce: '<?php echo wp_create_nonce( 'appsero-security-nonce' ); ?>',
-                                action: '<?php echo $this->client->slug; ?>_submit-uninstall-reason',
+                                nonce: '<?php echo esc_js( wp_create_nonce( self::SECURITY_NONCE_ACTION ) ); ?>',
+                                action: '<?php echo esc_js( self::UNINSTALL_SUBMIT_AJAX_ACTION ); ?>',
                                 reason_id: (0 === $radio.length) ? 'none' : $radio.val(),
                                 reason_info: (0 !== $input.length) ? $input.val().trim() : ''
                             },
@@ -1024,6 +1044,37 @@ class Insights {
         </script>
 
 		<?php
+    }
+
+    /**
+     * Render a vendored uninstall-reason SVG icon with an explicit safe allowlist.
+     *
+     * @param string $icon SVG markup.
+     * @return string
+     */
+    private function get_safe_svg_icon_markup( $icon ) {
+        return wp_kses(
+            $icon,
+            array(
+                'svg'  => array(
+                    'xmlns'             => true,
+                    'width'             => true,
+                    'height'            => true,
+                    'viewbox'           => true,
+                    'viewBox'           => true,
+                    'enable-background' => true,
+                    'version'           => true,
+                    'xml:space'         => true,
+                ),
+                'g'    => array(
+                    'fill' => true,
+                ),
+                'path' => array(
+                    'd'    => true,
+                    'fill' => true,
+                ),
+            )
+        );
     }
 
     /**

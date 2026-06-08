@@ -141,11 +141,6 @@ class Auto_Translate_Admin {
 		/* Language settings */
 		register_setting(
 			'auto-translate-language-settings-group',
-			'wpat_base_language',
-			array( 'sanitize_callback' => array( $this, 'sanitize_base_language' ) )
-		);
-		register_setting(
-			'auto-translate-language-settings-group',
 			'wpat_supported_languages',
 			array(
 				'type'              => 'array',
@@ -153,7 +148,6 @@ class Auto_Translate_Admin {
 			)
 		);
 		register_setting( 'auto-translate-language-settings-group', 'wpat_language_order', array( 'sanitize_callback' => array( $this, 'sanitize_language_order' ) ) );
-		register_setting( 'auto-translate-language-settings-group', 'wpat_language_name_display', array( 'sanitize_callback' => array( $this, 'sanitize_language_name_display' ) ) );
 		register_setting( 'auto-translate-language-settings-group', 'wpat_language_flags', array( 'sanitize_callback' => array( $this, 'sanitize_language_flags' ) ) );
 
 		/* Styling settings */
@@ -224,7 +218,10 @@ class Auto_Translate_Admin {
 
 		/* Advanced settings */
 		register_setting( 'auto-translate-advanced-settings-group', 'wpat_auto_detect', array( 'sanitize_callback' => array( $this, 'sanitize_auto_detect' ) ) );
+		register_setting( 'auto-translate-advanced-settings-group', 'wpat_base_language', array( 'sanitize_callback' => array( $this, 'sanitize_base_language' ) ) );
+		register_setting( 'auto-translate-advanced-settings-group', 'wpat_language_name_display', array( 'sanitize_callback' => array( $this, 'sanitize_language_name_display' ) ) );
 		register_setting( 'auto-translate-advanced-settings-group', 'wpat_custom_css', array( 'sanitize_callback' => array( $this, 'sanitize_custom_css' ) ) );
+		register_setting( 'auto-translate-advanced-settings-group', 'wpat_min_custom_css', array( 'sanitize_callback' => array( $this, 'sanitize_custom_css' ) ) );
 		register_setting( 'auto-translate-advanced-settings-group', 'wpat_excluded_selectors', array( 'sanitize_callback' => array( $this, 'sanitize_excluded_selectors' ) ) );
 		register_setting( 'auto-translate-advanced-settings-group', 'wpat_delete_data_on_uninstall', array( 'sanitize_callback' => array( $this, 'sanitize_toggle' ) ) );
 	}
@@ -255,12 +252,16 @@ class Auto_Translate_Admin {
 
 	public function sanitize_base_language( $value ) {
 		$value = Auto_Translate_Config::normalize_lang_code( $value );
+		if ( '' === $value ) {
+			return '';
+		}
 		$supported_languages = Auto_Translate_Config::get_supported_languages();
 		if ( isset( $supported_languages[ $value ] ) ) {
 			return $value;
 		}
-		if ( isset( $supported_languages['en'] ) ) {
-			return 'en';
+		$wp_language = Auto_Translate_Config::get_wordpress_locale_language();
+		if ( isset( $supported_languages[ $wp_language ] ) ) {
+			return $wp_language;
 		}
 		if ( ! empty( $supported_languages ) ) {
 			return array_key_first( $supported_languages );
@@ -490,9 +491,8 @@ class Auto_Translate_Admin {
 				'langs_per_column' => $langs_per_column,
 				'columns' => max( 1, (int) ceil( count( $wpat_supported_languages ) / $langs_per_column ) ),
 				'wpat_supported_languages' => get_option('wpat_supported_languages'),
-				'wpat_base_language' => get_option('wpat_base_language'),
+				'wpat_base_language' => Auto_Translate_Config::get_resolved_base_language(),
 				'wpat_language_order' => get_option('wpat_language_order', ''),
-				'wpat_language_name_display' => get_option('wpat_language_name_display', 'native'),
 				'wpat_language_flags' => get_option( 'wpat_language_flags', array() ),
 				'wpat_languages_countries' => Auto_Translate_Config::get_languages_countries(),
 			],
@@ -550,7 +550,12 @@ class Auto_Translate_Admin {
 			],
 			'advanced_settings' => [
 				'wpat_auto_detect' => get_option('wpat_auto_detect'),
+				'wpat_base_language' => Auto_Translate_Config::normalize_lang_code( (string) get_option( 'wpat_base_language', '' ) ),
+				'wpat_resolved_base_language' => Auto_Translate_Config::get_resolved_base_language(),
+				'wpat_language_name_display' => get_option('wpat_language_name_display', 'native'),
+				'supported_languages' => $wpat_supported_languages,
 				'wpat_custom_css' => get_option('wpat_custom_css', ''),
+				'wpat_min_custom_css' => get_option('wpat_min_custom_css', ''),
 				'wpat_excluded_selectors' => get_option( 'wpat_excluded_selectors', '' ),
 				'wpat_delete_data_on_uninstall' => get_option('wpat_delete_data_on_uninstall', ''),
 				'columns' => 1

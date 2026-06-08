@@ -17,10 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 $wpat_supported_languages = Auto_Translate_Config::get_supported_languages();
 $wpat_minimalist    = $vars['tabs']['visual_settings']['minimalist'];
-$wpat_label_mode    = $vars['tabs']['language_setting']['wpat_language_name_display'];
+$wpat_label_mode    = $vars['tabs']['advanced_settings']['wpat_language_name_display'];
 $wpat_columns       = $vars['tabs']['visual_settings']['columns'];
 $wpat_widget_type   = $vars['tabs']['visual_settings']['wpat_widget_type'];
-$wpat_base_language = Auto_Translate_Config::normalize_lang_code( (string) ( $vars['tabs']['language_setting']['wpat_base_language'] ?? 'en' ) );
+$wpat_base_language = Auto_Translate_Config::get_resolved_base_language();
 $wpat_selected_languages = $vars['tabs']['language_setting']['wpat_supported_languages'] ?? array();
 $wpat_language_order = (string) ( $vars['tabs']['language_setting']['wpat_language_order'] ?? '' );
 $wpat_preview_flags = is_array( $wpat_minimalist['wpat_language_flags'] ?? null ) ? $wpat_minimalist['wpat_language_flags'] : array();

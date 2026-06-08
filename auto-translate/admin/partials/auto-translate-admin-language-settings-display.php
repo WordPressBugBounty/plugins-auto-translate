@@ -27,54 +27,6 @@ $wpat_languages_countries = is_array( $wpat_data['wpat_languages_countries'] ?? 
 $wpat_plugin_file = dirname( dirname( __DIR__ ) ) . '/auto-translate.php';
 ?>
 <div class="wpat-settings-panel">
-<div class="wpat-card wpat-card-language-base">
-    <h3 class="wpat-card-title"><?php esc_html_e( 'Site language', 'auto-translate' ); ?></h3>
-    <table class="form-table">
-        <tr valign="top">
-            <th scope="row">
-                <?php esc_html_e('Base language', 'auto-translate'); ?><br/>
-                <small><?php esc_html_e('What is your website\'s original language?','auto-translate'); ?></small>
-            </th>
-            <td colspan="<?php echo esc_attr( $wpat_data['columns'] ); ?>"><select name="wpat_base_language">
-                    <?php foreach ( $wpat_data['supported_languages'] as $wpat_code => $wpat_lang ) : ?>
-                        <option value="<?php echo esc_attr( $wpat_code ); ?>" <?php selected( (string) $wpat_data['wpat_base_language'], (string) $wpat_code ); ?>><?php echo esc_html( $wpat_lang ); ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </td>
-        </tr>
-
-        <tr valign="top">
-            <th scope="row">
-                <span class="wpat-help-label-wrap">
-                    <?php esc_html_e('Language label style', 'auto-translate'); ?>
-                    <button
-                        type="button"
-                        class="wpat-help-trigger"
-                        aria-label="<?php esc_attr_e( 'More info about language label styles', 'auto-translate' ); ?>"
-                        aria-haspopup="dialog"
-                        aria-controls="wpat-language-label-style-help-modal"
-                    >
-                        <span class="dashicons dashicons-editor-help" aria-hidden="true"></span>
-                    </button>
-                </span><br/>
-                <small><?php esc_html_e('How language names appear in the selector dropdown.', 'auto-translate'); ?></small>
-            </th>
-            <td colspan="<?php echo esc_attr( $wpat_data['columns'] ); ?>">
-                <div class="wpat-pill-group" role="radiogroup" aria-label="<?php esc_attr_e( 'Language names', 'auto-translate' ); ?>">
-                    <label class="wpat-pill">
-                        <input type="radio" name="wpat_language_name_display" value="native" <?php checked( (string) $wpat_data['wpat_language_name_display'], 'native' ); ?> />
-                        <span><?php esc_html_e('Native names', 'auto-translate'); ?></span>
-                    </label>
-                    <label class="wpat-pill">
-                        <input type="radio" name="wpat_language_name_display" value="english" <?php checked( (string) $wpat_data['wpat_language_name_display'], 'english' ); ?> />
-                        <span><?php esc_html_e('English names', 'auto-translate'); ?></span>
-                    </label>
-                </div>
-            </td>
-        </tr>
-    </table>
-</div>
-
 <div class="wpat-card wpat-card-languages">
     <h3 class="wpat-card-title">
         <?php esc_html_e('Supported languages', 'auto-translate'); ?>
@@ -91,7 +43,7 @@ $wpat_plugin_file = dirname( dirname( __DIR__ ) ) . '/auto-translate.php';
         <?php endif; ?>
         ">
             <span class="dashicons dashicons-info"></span>
-            <span><?php esc_html_e( 'For more than 10 languages we suggest enabling the \'Poupup with search\' feature under \'Styling\' -> \'Selector behavior\'', 'auto-translate' ); ?></span>
+            <span><?php esc_html_e( 'For more than 10 languages we suggest enabling the \'Popup with search\' feature under \'Styling\' -> \'Selector behavior\'', 'auto-translate' ); ?></span>
         </div>
         <div class="wpat-advanced-info wpat-advanced-idea">
             <span class="dashicons dashicons-lightbulb"></span>
@@ -205,37 +157,4 @@ $wpat_plugin_file = dirname( dirname( __DIR__ ) ) . '/auto-translate.php';
         </div>
     </div>
 </div>
-</div>
-
-<div id="wpat-language-label-style-help-modal" class="wpat-help-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="wpat-language-help-title">
-    <div class="wpat-help-modal__backdrop" data-wpat-close-help-modal></div>
-    <div class="wpat-help-modal__dialog">
-        <button type="button" class="wpat-help-modal__close" aria-label="<?php esc_attr_e( 'Close', 'auto-translate' ); ?>" data-wpat-close-help-modal>
-            <span class="dashicons dashicons-no-alt" aria-hidden="true"></span>
-        </button>
-        <h4 id="wpat-language-help-title"><?php esc_html_e( 'Language label styles', 'auto-translate' ); ?></h4>
-        <p><?php esc_html_e( 'Native names show each language in its own writing. English names show all language names in English.', 'auto-translate' ); ?></p>
-        <div class="wpat-help-modal__examples">
-            <div class="wpat-help-modal__example">
-                <strong><?php esc_html_e( 'Native names', 'auto-translate' ); ?></strong>
-                <ul>
-                    <li>العربية</li>
-                    <li>Français</li>
-                    <li>Русский</li>
-                    <li>Deutsch</li>
-                    <li>Português</li>
-                </ul>
-            </div>
-            <div class="wpat-help-modal__example">
-                <strong><?php esc_html_e( 'English names', 'auto-translate' ); ?></strong>
-                <ul>
-                    <li>Arabic</li>
-                    <li>French</li>
-                    <li>Russian</li>
-                    <li>German</li>
-                    <li>Portuguese</li>
-                </ul>
-            </div>
-        </div>
-    </div>
 </div>

@@ -148,7 +148,7 @@ class Auto_Translate {
 
 		$plugin_i18n = new Auto_Translate_i18n();
 
-		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'init', $plugin_i18n, 'register_locale_fallbacks' );
 
 	}
 
@@ -188,11 +188,15 @@ class Auto_Translate {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_filter( 'script_loader_tag', $plugin_public, 'add_defer_to_public_script_tags', 10, 3 );
 		$this->loader->add_action( 'init', $plugin_public, 'register_selector_block' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'hook_javascript_translator' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'hook_content_translator' );
 		$this->loader->add_filter('wp_nav_menu_items', $plugin_public,'hook_menu_item', 10, 2);
 		$this->loader->add_filter( 'render_block', $plugin_public, 'hook_navigation_block', 10, 2 );
+		$this->loader->add_action( 'save_post_et_header_layout', $plugin_public, 'clear_divi_shortcode_layout_cache' );
+		$this->loader->add_action( 'save_post_et_body_layout', $plugin_public, 'clear_divi_shortcode_layout_cache' );
+		$this->loader->add_action( 'save_post_et_footer_layout', $plugin_public, 'clear_divi_shortcode_layout_cache' );
 		$this->loader->add_shortcode( 'auto_translate_button', $plugin_public, 'auto_translate_button_function' );
 		$this->loader->add_shortcode( 'auto_translate_link', $plugin_public, 'auto_translate_link_function' );
 

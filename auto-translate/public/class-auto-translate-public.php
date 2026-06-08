@@ -26,6 +26,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Auto_Translate_Public
 {
+    /**
+     * Cache key for Divi Theme Builder shortcode detection.
+     *
+     * @var string
+     */
+    private $divi_shortcode_cache_key = 'wpat_divi_shortcode_layouts_have_button';
 
     /**
      * The ID of this plugin.
@@ -119,6 +125,30 @@ class Auto_Translate_Public
         $this->enqueue_public_scripts();
     }
 
+    /**
+     * Mark plugin frontend scripts as defer-safe.
+     *
+     * The translator bootstraps from DOMContentLoaded-compatible markup and does not
+     * rely on synchronous parser execution.
+     *
+     * @since 2.1.0
+     * @param string $tag    Script tag HTML.
+     * @param string $handle Registered script handle.
+     * @return string
+     */
+    public function add_defer_to_public_script_tags( $tag, $handle ) {
+        $deferred_handles = array(
+            $this->plugin_name,
+            $this->plugin_name . '-global',
+        );
+
+        if ( ! in_array( $handle, $deferred_handles, true ) || false !== strpos( $tag, ' defer' ) ) {
+            return $tag;
+        }
+
+        return str_replace( ' src=', ' defer src=', $tag );
+    }
+
     private function enqueue_public_scripts() {
 
         /**
@@ -191,7 +221,7 @@ class Auto_Translate_Public
         // Classic settings
         $wpat_button_icon = get_option('wpat_button_icon');
         $wpat_show_icon = get_option('wpat_show_icon');
-        $wpat_base_language = get_option('wpat_base_language');
+        $wpat_base_language = Auto_Translate_Config::get_resolved_base_language();
         $wpat_color_1 = get_option('wpat_color_1');
         $wpat_color_2 = get_option('wpat_color_2');
         $wpat_border_radius = get_option('wpat_border_radius');
@@ -289,6 +319,10 @@ class Auto_Translate_Public
             }
         }
 
+        if ( $this->shortcode_in_divi_layouts() ) {
+            return true;
+        }
+
         if ( is_active_widget( false, false, 'wpat_button_widget', true ) ) {
             return true;
         }
@@ -300,9 +334,80 @@ class Auto_Translate_Public
         return false;
     }
 
+    /**
+     * Detect shortcode usage in published Divi Theme Builder layouts.
+     *
+     * @since 2.0.1
+     * @return bool
+     */
+    private function shortcode_in_divi_layouts() {
+        $divi_layout_post_types = $this->get_divi_layout_post_types();
+        if ( empty( $divi_layout_post_types ) ) {
+            return false;
+        }
+
+        $cached_result = get_transient( $this->divi_shortcode_cache_key );
+        if ( false !== $cached_result ) {
+            return (bool) $cached_result;
+        }
+
+        $layout_posts = get_posts(
+            array(
+                'post_type'              => $divi_layout_post_types,
+                'post_status'            => 'publish',
+                'numberposts'            => -1,
+                'update_post_meta_cache' => false,
+                'update_post_term_cache' => false,
+            )
+        );
+
+        $has_shortcode = false;
+        foreach ( $layout_posts as $layout_post ) {
+            if ( $layout_post instanceof WP_Post && false !== strpos( (string) $layout_post->post_content, '[auto_translate_button' ) ) {
+                $has_shortcode = true;
+                break;
+            }
+        }
+
+        set_transient( $this->divi_shortcode_cache_key, $has_shortcode, defined( 'HOUR_IN_SECONDS' ) ? HOUR_IN_SECONDS : 3600 );
+
+        return $has_shortcode;
+    }
+
+    /**
+     * Return the active Divi Theme Builder layout post types available on this site.
+     *
+     * @since 2.0.1
+     * @return array<int, string>
+     */
+    private function get_divi_layout_post_types() {
+        $post_types = array(
+            'et_header_layout',
+            'et_body_layout',
+            'et_footer_layout',
+        );
+
+        return array_values(
+            array_filter(
+                $post_types,
+                'post_type_exists'
+            )
+        );
+    }
+
+    /**
+     * Invalidate the cached Divi shortcode detection on relevant layout saves.
+     *
+     * @since 2.0.1
+     * @return void
+     */
+    public function clear_divi_shortcode_layout_cache() {
+        delete_transient( $this->divi_shortcode_cache_key );
+    }
+
     private function get_included_languages(){
         $wpat_supported_languages = Auto_Translate_Config::get_supported_languages();
-        $wpat_base_language = get_option('wpat_base_language');
+        $wpat_base_language = Auto_Translate_Config::get_resolved_base_language();
         $wpat_selected_languages = get_option('wpat_supported_languages');
         $wpat_language_order = get_option( 'wpat_language_order', '' );
 
@@ -513,7 +618,7 @@ class Auto_Translate_Public
         $wpat_min_hover_color       = get_option('wpat_min_hover_color');
         $wpat_min_font_hover_color  = get_option('wpat_min_font_hover_color');
         $wpat_widget_size           = get_option('wpat_widget_size');
-        $wpat_base_language         = get_option('wpat_base_language');
+        $wpat_base_language         = Auto_Translate_Config::get_resolved_base_language();
         $wpat_auto_detect           = get_option('wpat_auto_detect');
         $wpat_menu_item_classes     = $menu_item_classes;
         $wpat_floating_position     = sanitize_key( (string) get_option('wpat_floating_position', 'top_left') );
@@ -529,6 +634,23 @@ class Auto_Translate_Public
             (string) get_option( 'wpat_language_name_display', 'native' ),
             is_array( $wpat_language_flags ) ? $wpat_language_flags : array()
         );
+        $wpat_selector_instance_id = 'wpat-selector-' . absint( wp_rand() );
+        $wpat_dropdown_id          = 'wpat-minimalist-dropdown-' . absint( wp_rand() );
+        $wpat_selector_view_model  = $this->get_selector_view_model(
+            array(
+                'instance_id'     => $wpat_selector_instance_id,
+                'dropdown_id'     => $wpat_dropdown_id,
+                'base_language'   => $wpat_base_language,
+                'host_language'   => $wpat_base_language,
+                'auto_detect'     => $wpat_auto_detect,
+                'layout'          => $wpat_min_layout,
+                'text_display'    => $wpat_min_txt_display,
+                'style'           => $wpat_min_style,
+                'icon_class'      => $wpat_min_icon,
+                'chevron_class'   => $wpat_min_chevron,
+                'languages_data'  => $wpat_languages_data,
+            )
+        );
 
         if(!$menu){
             include 'partials/auto-translate-public-display.php';
@@ -539,6 +661,92 @@ class Auto_Translate_Public
         $contents = ob_get_contents();
         ob_end_clean();
         return $contents;
+    }
+
+    /**
+     * Build the selector view model used by the frontend widget runtime.
+     *
+     * @since 2.0.1
+     * @param array $args Selector instance arguments.
+     * @return array
+     */
+    private function get_selector_view_model( $args ) {
+        $base_language = isset( $args['base_language'] ) ? Auto_Translate_Config::normalize_lang_code( $args['base_language'] ) : 'en';
+        $host_language = isset( $args['host_language'] ) ? Auto_Translate_Config::normalize_lang_code( $args['host_language'] ) : $base_language;
+        $text_display  = isset( $args['text_display'] ) ? sanitize_key( $args['text_display'] ) : 'name';
+        $languages     = $this->get_selector_language_view_model(
+            isset( $args['languages_data'] ) && is_array( $args['languages_data'] ) ? $args['languages_data'] : array(),
+            $text_display
+        );
+
+        return array(
+            'instanceId'    => isset( $args['instance_id'] ) ? sanitize_html_class( (string) $args['instance_id'] ) : '',
+            'dropdownId'    => isset( $args['dropdown_id'] ) ? sanitize_html_class( (string) $args['dropdown_id'] ) : '',
+            'widgetType'    => 'minimalist',
+            'baseLanguage'  => $base_language,
+            'hostLanguage'  => $host_language,
+            'autoDetect'    => isset( $args['auto_detect'] ) ? sanitize_text_field( (string) $args['auto_detect'] ) : '',
+            'layout'        => isset( $args['layout'] ) ? sanitize_key( $args['layout'] ) : 'dropdown',
+            'textDisplay'   => $text_display,
+            'style'         => isset( $args['style'] ) ? sanitize_key( $args['style'] ) : '',
+            'iconClass'     => isset( $args['icon_class'] ) ? sanitize_html_class( (string) $args['icon_class'] ) : '',
+            'chevronClass'  => isset( $args['chevron_class'] ) ? sanitize_html_class( (string) $args['chevron_class'] ) : '',
+            'languages'     => $languages,
+            'languageCodes' => array_keys( $languages ),
+            'messages'      => array(
+                'loading' => __( 'Switching language.', 'auto-translate' ),
+                'error'   => __( 'Translation unavailable. Please try again.', 'auto-translate' ),
+            ),
+        );
+    }
+
+    /**
+     * Normalize language records into a UI-focused selector view model.
+     *
+     * @since 2.0.1
+     * @param array  $languages_data Raw language metadata.
+     * @param string $text_display   Configured label style.
+     * @return array
+     */
+    private function get_selector_language_view_model( $languages_data, $text_display ) {
+        $view_model = array();
+
+        foreach ( $languages_data as $lang_code => $lang_data ) {
+            if ( ! is_array( $lang_data ) ) {
+                continue;
+            }
+
+            $normalized_lang_code = isset( $lang_data['lang_code'] ) ? sanitize_text_field( (string) $lang_data['lang_code'] ) : sanitize_text_field( (string) $lang_code );
+            $lang_name            = isset( $lang_data['lang_name'] ) ? sanitize_text_field( (string) $lang_data['lang_name'] ) : $normalized_lang_code;
+            $lang_name_native     = isset( $lang_data['lang_name_native'] ) ? sanitize_text_field( (string) $lang_data['lang_name_native'] ) : $lang_name;
+            $country_code         = isset( $lang_data['country_code'] ) ? sanitize_html_class( (string) $lang_data['country_code'] ) : '';
+
+            switch ( $text_display ) {
+                case 'code':
+                    $display_label = $normalized_lang_code;
+                    break;
+                case 'name_code':
+                    $display_label = $lang_name . ' - ' . $normalized_lang_code;
+                    break;
+                case 'name':
+                default:
+                    $display_label = $lang_name;
+                    break;
+            }
+
+            $search_text = trim( implode( ' ', array_filter( array( $normalized_lang_code, $lang_name, $lang_name_native, $display_label ) ) ) );
+
+            $view_model[ Auto_Translate_Config::normalize_lang_code( (string) $lang_code ) ] = array(
+                'lang_code'        => $normalized_lang_code,
+                'lang_name'        => $lang_name,
+                'lang_name_native' => $lang_name_native,
+                'country_code'     => $country_code,
+                'display_label'    => $display_label,
+                'search_text'      => $search_text,
+            );
+        }
+
+        return $view_model;
     }
 
     private function get_floating_classes( $enabled, $position ) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Appsero;
+namespace WpatAppsero;
 
 /**
  * Appsero Client
@@ -110,7 +110,7 @@ class Client {
     /**
      * Initialize insights class
      *
-     * @return Appsero\Insights
+     * @return WpatAppsero\Insights
      */
     public function insights() {
         if ( ! class_exists( __NAMESPACE__ . '\Insights' ) ) {
@@ -142,17 +142,21 @@ class Client {
         _deprecated_function( __CLASS__ . '::updater', '2.0', '\Appsero\Updater::init($client);, for more details please visit: https://appsero.com/docs/appsero-developers-guide/appsero-client/appsero-sdk-updater-changes/' );
 
         // initialize the new updater
-        if ( method_exists( '\Appsero\Updater', 'init' ) ) {
-            \Appsero\Updater::init( $this );
+        if ( method_exists( '\WpatAppsero\Updater', 'init' ) ) {
+            \WpatAppsero\Updater::init( $this );
         }
     }
 
     /**
      * Initialize license checker
      *
-     * @return Appsero\License
+     * @return WpatAppsero\License|null
      */
     public function license() {
+        if ( ! file_exists( __DIR__ . '/License.php' ) ) {
+            return null;
+        }
+
         if ( ! class_exists( __NAMESPACE__ . '\License' ) ) {
             require_once __DIR__ . '/License.php';
         }
@@ -173,7 +177,7 @@ class Client {
      * @return string
      */
     public function endpoint() {
-        $endpoint = apply_filters( 'appsero_endpoint', 'https://api.appsero.com' );
+        $endpoint = apply_filters( 'wpat_appsero_endpoint', 'https://api.appsero.com' );
 
         return trailingslashit( $endpoint );
     }
@@ -250,7 +254,7 @@ class Client {
     public function is_local_server() {
         $is_local = isset( $_SERVER['REMOTE_ADDR'] ) && in_array( $_SERVER['REMOTE_ADDR'], [ '127.0.0.1', '::1' ], true );
 
-        return apply_filters( 'appsero_is_local', $is_local );
+        return apply_filters( 'wpat_appsero_is_local', $is_local );
     }
 
     /**
