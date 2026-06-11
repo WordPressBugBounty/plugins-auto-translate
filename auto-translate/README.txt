@@ -3,7 +3,7 @@ Contributors: juangirini, googletranslate
 Tags: translate, translation, google translate, language switcher, website translator
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://pampa.dev
@@ -280,6 +280,11 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 9. Advanced custom CSS and uninstall cleanup.
 
 == Changelog ==
+
+= 2.1.1 =
+* Fixed the isolated minimalist selector so it stays styled when hosts combine plugin CSS into aggregated cache URLs
+* Fixed the minimalist selector so the detached open dropdown matches the visible trigger width instead of showing extra empty space beside the language list
+* Delayed the minimalist selector dropdown `slideDown` and `slideUp` animation until the trigger button resize settles so the opening and closing height animation stays aligned with the resized trigger
 
 = 2.1.0 =
 * Added bundled plugin translations for French (France), German, Japanese, Spanish (Spain), Portuguese (Brazil), English (UK), and Italian
