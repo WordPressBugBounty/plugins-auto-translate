@@ -3,7 +3,7 @@ Contributors: juangirini, googletranslate
 Tags: translate, translation, google translate, language switcher, website translator
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 2.1.1
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://pampa.dev
@@ -280,6 +280,12 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 9. Advanced custom CSS and uninstall cleanup.
 
 == Changelog ==
+
+= 2.1.3 =
+* Corrected the WordPress.org release package so it contains the 2.1.3 source and build outputs.
+
+= 2.1.2 =
+* Fixed PHP template calls to `do_shortcode( '[auto_translate_button]' )` so they bootstrap the frontend translator runtime when the floating selector is disabled and the shortcode is not present in post content
 
 = 2.1.1 =
 * Fixed the isolated minimalist selector so it stays styled when hosts combine plugin CSS into aggregated cache URLs

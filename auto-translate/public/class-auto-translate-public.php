@@ -34,6 +34,13 @@ class Auto_Translate_Public
     private $divi_shortcode_cache_key = 'wpat_divi_shortcode_layouts_have_button';
 
     /**
+     * Whether inline runtime fallback markup has already been emitted.
+     *
+     * @var bool
+     */
+    private $inline_runtime_rendered = false;
+
+    /**
      * The ID of this plugin.
      *
      * @since    1.0.0
@@ -541,8 +548,15 @@ class Auto_Translate_Public
     function hook_content_translator()
     {
         $wpat_default_location = get_option('wpat_default_location', true);
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe static container used by the JS adapter.
-        echo '<div id="wpat-google-translate-element" class="google_translate_element wpat-google-translate-root" aria-hidden="true"></div>';
+        if ( ! $this->should_boot_translator() && ! $this->inline_runtime_rendered ) {
+            return;
+        }
+
+        if ( ! $this->inline_runtime_rendered ) {
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe static container used by the JS adapter.
+            echo '<div id="wpat-google-translate-element" class="google_translate_element wpat-google-translate-root" aria-hidden="true"></div>';
+        }
+
         if ( $wpat_default_location ) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe generated markup from plugin templates.
             echo $this->content_translator(true);
@@ -551,7 +565,15 @@ class Auto_Translate_Public
 
     function auto_translate_button_function ($atts = [], $content = null )
     {
-        return $this->content_translator(false);
+        $markup = $this->content_translator(false);
+        if ( $this->should_boot_translator() ) {
+            return $markup;
+        }
+
+        $this->enqueue_public_styles();
+        $this->enqueue_public_scripts();
+
+        return $this->get_inline_runtime_markup() . $markup;
     }
 
     public function auto_translate_link_function( $atts = array(), $content = null ) {
@@ -581,23 +603,38 @@ class Auto_Translate_Public
     }
 
     public function render_selector_block( $attributes = array(), $content = '' ) {
-        static $wpat_block_runtime_rendered = false;
-
         if ( ! $this->should_boot_translator() ) {
             $this->enqueue_public_styles();
             $this->enqueue_public_scripts();
         }
 
         $markup = $this->content_translator( false );
-        if ( $this->should_boot_translator() || $wpat_block_runtime_rendered ) {
+        if ( $this->should_boot_translator() ) {
             return $markup;
         }
 
-        $wpat_block_runtime_rendered = true;
+        return $this->get_inline_runtime_markup() . $markup;
+    }
+
+    /**
+     * Return one-time bootstrap markup for runtime placements missed by wp_enqueue_scripts.
+     *
+     * PHP template calls such as echo do_shortcode( '[auto_translate_button]' ) are not
+     * discoverable during the normal enqueue pass, so they need the same inline runtime
+     * fallback used by server-rendered blocks.
+     *
+     * @since 2.1.2
+     * @return string
+     */
+    private function get_inline_runtime_markup() {
+        if ( $this->inline_runtime_rendered ) {
+            return '';
+        }
+
+        $this->inline_runtime_rendered = true;
 
         return $this->get_translator_bootstrap_markup()
-            . '<div id="wpat-google-translate-element" class="google_translate_element wpat-google-translate-root" aria-hidden="true"></div>'
-            . $markup;
+            . '<div id="wpat-google-translate-element" class="google_translate_element wpat-google-translate-root" aria-hidden="true"></div>';
     }
 
     private function content_translator($default_location,$menu = false, $menu_item_classes = '')
