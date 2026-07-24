@@ -74,6 +74,16 @@ class Auto_Translate_Public
     }
 
     /**
+     * Add a machine-readable plugin version marker to frontend pages.
+     *
+     * @return void
+     */
+    public function add_version_meta()
+    {
+        echo '<meta name="automatic-translator-version" content="' . esc_attr($this->version) . '">' . "\n";
+    }
+
+    /**
      * Register the stylesheets for the public-facing side of the site.
      *
      * @since    1.0.0
@@ -156,6 +166,51 @@ class Auto_Translate_Public
         return str_replace( ' src=', ' defer src=', $tag );
     }
 
+    /**
+     * Surface preview mode inside the existing WordPress admin bar.
+     *
+     * Themes already account for the WordPress admin bar, so preview state belongs
+     * there instead of adding a second layout-affecting frontend banner.
+     *
+     * @param WP_Admin_Bar $wp_admin_bar WordPress admin bar instance.
+     * @return void
+     */
+    public function add_preview_admin_bar_node( $wp_admin_bar ) {
+        if ( is_admin() || ! function_exists( 'is_admin_bar_showing' ) || ! is_admin_bar_showing() || ! $this->is_preview_mode() ) {
+            return;
+        }
+
+        $wp_admin_bar->add_node(
+            array(
+                'id'    => 'wpat-preview-mode',
+                'title' => esc_html__( 'Translator preview', 'auto-translate' ),
+                'href'  => admin_url( 'admin.php?page=auto_translate' ),
+                'meta'  => array(
+                    'class' => 'wpat-preview-admin-bar-node',
+                    'title' => __( 'Only admins can see Automatic Translator until you go live.', 'auto-translate' ),
+                ),
+            )
+        );
+
+        $wp_admin_bar->add_node(
+            array(
+                'id'     => 'wpat-preview-mode-description',
+                'parent' => 'wpat-preview-mode',
+                'title'  => esc_html__( 'Visitors cannot see Automatic Translator yet.', 'auto-translate' ),
+                'href'   => false,
+            )
+        );
+
+        $wp_admin_bar->add_node(
+            array(
+                'id'     => 'wpat-preview-mode-settings',
+                'parent' => 'wpat-preview-mode',
+                'title'  => esc_html__( 'Open Automatic Translator settings', 'auto-translate' ),
+                'href'   => admin_url( 'admin.php?page=auto_translate' ),
+            )
+        );
+    }
+
     private function enqueue_public_scripts() {
 
         /**
@@ -184,6 +239,18 @@ class Auto_Translate_Public
             $this->get_asset_version( 'global/js/auto-translate-global.min.js' ),
             true
         );
+    }
+
+    public function handle_frontend_signal_ajax() {
+        check_ajax_referer( 'wpat_frontend_signal', 'nonce' );
+
+        $signal = isset( $_POST['signal'] ) ? sanitize_key( wp_unslash( $_POST['signal'] ) ) : '';
+
+        if ( 'translation_script_loaded' === $signal && class_exists( 'Auto_Translate_Lifecycle' ) ) {
+            Auto_Translate_Lifecycle::record_translation_script_loaded();
+        }
+
+        wp_send_json_success();
     }
 
     /**
@@ -251,6 +318,8 @@ class Auto_Translate_Public
         $wpat_host_language         = $wpat_base_language;
         $wpat_google_mount_id       = 'wpat-google-translate-element';
         $wpat_google_script_url     = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        $wpat_is_preview_mode       = $this->is_preview_mode();
+        $wpat_frontend_signal_nonce = wp_create_nonce( 'wpat_frontend_signal' );
         include 'partials/auto-translate-public-header-display.php';
 
         return ob_get_clean();
@@ -293,7 +362,7 @@ class Auto_Translate_Public
      * @return bool
      */
     private function should_boot_translator() {
-        if ( is_admin() ) {
+        if ( is_admin() || ! $this->can_render_translator() ) {
             return false;
         }
 
@@ -474,6 +543,10 @@ class Auto_Translate_Public
      * @return string
      */
     function hook_menu_item($items, $args){
+        if ( ! $this->can_render_translator() ) {
+            return $items;
+        }
+
         $menu_markup = '';
         if ( $this->should_render_in_menu( $args ) ) {
             $menu_markup = $this->content_translator( false, true );
@@ -500,6 +573,10 @@ class Auto_Translate_Public
      */
     public function hook_navigation_block( $block_content, $block ) {
         static $wpat_navigation_block_injected = false;
+
+        if ( ! $this->can_render_translator() ) {
+            return $block_content;
+        }
 
         if ( ! is_string( $block_content ) || '' === $block_content ) {
             return $block_content;
@@ -547,6 +624,10 @@ class Auto_Translate_Public
      */
     function hook_content_translator()
     {
+        if ( ! $this->can_render_translator() ) {
+            return;
+        }
+
         $wpat_default_location = get_option('wpat_default_location', true);
         if ( ! $this->should_boot_translator() && ! $this->inline_runtime_rendered ) {
             return;
@@ -565,6 +646,10 @@ class Auto_Translate_Public
 
     function auto_translate_button_function ($atts = [], $content = null )
     {
+        if ( ! $this->can_render_translator() ) {
+            return '';
+        }
+
         $markup = $this->content_translator(false);
         if ( $this->should_boot_translator() ) {
             return $markup;
@@ -577,6 +662,10 @@ class Auto_Translate_Public
     }
 
     public function auto_translate_link_function( $atts = array(), $content = null ) {
+        if ( ! $this->can_render_translator() ) {
+            return '';
+        }
+
         $atts = shortcode_atts(
             array(
                 'lang'  => '',
@@ -603,6 +692,10 @@ class Auto_Translate_Public
     }
 
     public function render_selector_block( $attributes = array(), $content = '' ) {
+        if ( ! $this->can_render_translator() ) {
+            return '';
+        }
+
         if ( ! $this->should_boot_translator() ) {
             $this->enqueue_public_styles();
             $this->enqueue_public_scripts();
@@ -639,6 +732,10 @@ class Auto_Translate_Public
 
     private function content_translator($default_location,$menu = false, $menu_item_classes = '')
     {
+        if ( class_exists( 'Auto_Translate_Lifecycle' ) ) {
+            Auto_Translate_Lifecycle::record_frontend_render( $this->is_preview_mode() ? 'preview' : 'live' );
+        }
+
         ob_start();
         $wpat_widget_type           = Auto_Translate_Config::normalize_widget_type( get_option('wpat_widget_type') );
         $wpat_min_style             = get_option('wpat_min_style');
@@ -658,7 +755,7 @@ class Auto_Translate_Public
         $wpat_base_language         = Auto_Translate_Config::get_resolved_base_language();
         $wpat_auto_detect           = get_option('wpat_auto_detect');
         $wpat_menu_item_classes     = $menu_item_classes;
-        $wpat_floating_position     = sanitize_key( (string) get_option('wpat_floating_position', 'top_left') );
+        $wpat_floating_position     = sanitize_key( (string) get_option('wpat_floating_position', 'bottom_left') );
         $wpat_floating_offset_x     = absint( get_option('wpat_floating_offset_x', 16) );
         $wpat_floating_offset_y     = absint( get_option('wpat_floating_offset_y', 16) );
         $wpat_floating_classes      = $this->get_floating_classes( $default_location, $wpat_floating_position );
@@ -794,6 +891,22 @@ class Auto_Translate_Public
         $position = in_array( $position, array( 'top_left', 'top_right', 'bottom_left', 'bottom_right' ), true ) ? $position : 'top_left';
 
         return 'wpat_float wpat_float_' . $position;
+    }
+
+    private function is_go_live_enabled() {
+        return (bool) get_option( 'wpat_go_live', false );
+    }
+
+    private function current_user_can_preview() {
+        return is_user_logged_in() && current_user_can( 'manage_options' );
+    }
+
+    private function can_render_translator() {
+        return $this->is_go_live_enabled() || $this->current_user_can_preview();
+    }
+
+    private function is_preview_mode() {
+        return ! $this->is_go_live_enabled() && $this->current_user_can_preview();
     }
 
     

@@ -18,7 +18,8 @@ $wpat_navigation_posts = get_posts(
 );
 ?>
 <div class="wpat-settings-panel wpat-placement-settings">
-	<div class="wpat-card">
+	<input type="hidden" name="wpat_launch_checklist_reviewed[placement]" value="1" />
+	<div class="wpat-card" id="wpat-launch-placement">
 		<h3 class="wpat-card-title"><?php esc_html_e( 'Floating selector', 'auto-translate' ); ?></h3>
 		<table class="form-table" role="presentation">
 			<tr valign="top">

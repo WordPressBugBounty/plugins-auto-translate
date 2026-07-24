@@ -59,6 +59,11 @@ window.wpatConfig = <?php echo wp_json_encode(
 		'minimalistShadowCss'      => (string) get_option( 'wpat_min_custom_css', '' ),
 		'googleMountId'            => $wpat_google_mount_id,
 		'googleScriptUrl'          => $wpat_google_script_url,
+		'isPreviewMode'            => (bool) $wpat_is_preview_mode,
+		'telemetry'                => array(
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => $wpat_frontend_signal_nonce,
+		),
 		'messages'                 => array(
 			'loading' => __( 'Switching language.', 'auto-translate' ),
 			'error'   => __( 'Translation unavailable. Please try again.', 'auto-translate' ),

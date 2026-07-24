@@ -8,7 +8,8 @@ $wpat_plugin_file = dirname( dirname( __DIR__ ) ) . '/auto-translate.php';
 $wpat_fr_flag_url = plugins_url( 'public/images/flags/svg/fr.svg', $wpat_plugin_file );
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
-<div class="wpat-card">
+<input type="hidden" name="wpat_launch_checklist_reviewed[style]" value="1" />
+<div class="wpat-card" id="wpat-launch-style">
     <h3 class="wpat-card-title"><?php esc_html_e('Appearance', 'auto-translate'); ?></h3>
     <table class="form-table">
         <tr valign="top">

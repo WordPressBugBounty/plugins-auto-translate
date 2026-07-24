@@ -115,6 +115,11 @@ class Auto_Translate {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-auto-translate-config.php';
 
 		/**
+		 * Local lifecycle tracker for preview/live mode transitions.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-auto-translate-lifecycle.php';
+
+		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
@@ -161,7 +166,8 @@ class Auto_Translate {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Auto_Translate_Admin( $this->get_plugin_name(), $this->get_version() );
+		$lifecycle    = new Auto_Translate_Lifecycle();
+		$plugin_admin = new Auto_Translate_Admin( $this->get_plugin_name(), $this->get_version(), $lifecycle );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -170,8 +176,15 @@ class Auto_Translate {
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'load_widgets' );
 		// Keep migrations in admin flow to avoid version checks on every frontend request.
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'check_version', 1 );
+		$this->loader->add_action( 'admin_post_wpat_set_go_live', $plugin_admin, 'handle_go_live_action' );
+		$this->loader->add_action( 'admin_post_wpat_preview_site', $plugin_admin, 'handle_preview_site_action' );
+		$this->loader->add_action( 'admin_post_wpat_record_launch_action', $plugin_admin, 'handle_record_launch_action' );
+		$this->loader->add_action( 'admin_post_wpat_set_launch_checklist_state', $plugin_admin, 'handle_launch_checklist_state_action' );
+		$this->loader->add_action( 'wp_ajax_wpat_set_launch_checklist_state', $plugin_admin, 'handle_launch_checklist_state_ajax' );
+		$this->loader->add_action( 'update_option_wpat_go_live', $lifecycle, 'handle_go_live_option_update', 10, 3 );
 		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) . '/auto-translate.php' ), $plugin_admin, 'add_plugin_action_links' );
 		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_plugin_row_meta', 10, 2 );
+		$this->loader->add_filter( 'wpat_appsero_deactivation_reasons', $plugin_admin, 'filter_appsero_deactivation_reasons', 10, 2 );
 
 	}
 
@@ -190,13 +203,17 @@ class Auto_Translate {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_filter( 'script_loader_tag', $plugin_public, 'add_defer_to_public_script_tags', 10, 3 );
 		$this->loader->add_action( 'init', $plugin_public, 'register_selector_block' );
+		$this->loader->add_action( 'wp_head', $plugin_public, 'add_version_meta', 1 );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'hook_javascript_translator' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'hook_content_translator' );
+		$this->loader->add_action( 'admin_bar_menu', $plugin_public, 'add_preview_admin_bar_node', 90 );
 		$this->loader->add_filter('wp_nav_menu_items', $plugin_public,'hook_menu_item', 10, 2);
 		$this->loader->add_filter( 'render_block', $plugin_public, 'hook_navigation_block', 10, 2 );
 		$this->loader->add_action( 'save_post_et_header_layout', $plugin_public, 'clear_divi_shortcode_layout_cache' );
 		$this->loader->add_action( 'save_post_et_body_layout', $plugin_public, 'clear_divi_shortcode_layout_cache' );
 		$this->loader->add_action( 'save_post_et_footer_layout', $plugin_public, 'clear_divi_shortcode_layout_cache' );
+		$this->loader->add_action( 'wp_ajax_wpat_record_frontend_signal', $plugin_public, 'handle_frontend_signal_ajax' );
+		$this->loader->add_action( 'wp_ajax_nopriv_wpat_record_frontend_signal', $plugin_public, 'handle_frontend_signal_ajax' );
 		$this->loader->add_shortcode( 'auto_translate_button', $plugin_public, 'auto_translate_button_function' );
 		$this->loader->add_shortcode( 'auto_translate_link', $plugin_public, 'auto_translate_link_function' );
 

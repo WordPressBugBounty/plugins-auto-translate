@@ -9,8 +9,8 @@
  * @wordpress-plugin
  * Plugin Name:       Automatic Translator with Google Translate
  * Description:       Translate your WordPress site with a polished Google Translate language switcher for instant visitor translation.
- * Version:           2.1.3
- * Requires at least: 5.0
+ * Version:           2.2.0
+ * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            Pampa Dev
  * Author URI:        https://pampa.dev
@@ -28,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'AUTO_TRANSLATE_VERSION', '2.1.3' );
+define( 'AUTO_TRANSLATE_VERSION', '2.2.0' );
 
 /**
  * Initialize the plugin tracker.
@@ -41,6 +41,14 @@ function wpat_appsero_init_tracker_auto_translate() {
 		require_once __DIR__ . '/appsero/src/Client.php';
 	}
 
+	if ( ! class_exists( 'Auto_Translate_Lifecycle' ) ) {
+		require_once __DIR__ . '/includes/class-auto-translate-lifecycle.php';
+	}
+
+	if ( ! class_exists( 'Auto_Translate_Config' ) ) {
+		require_once __DIR__ . '/includes/class-auto-translate-config.php';
+	}
+
 	$client = new WpatAppsero\Client(
 		'f2a83449-c6d2-49f9-8e57-8dbc99eaa136',
 		'Automatic Translator with Google Translate',
@@ -48,7 +56,9 @@ function wpat_appsero_init_tracker_auto_translate() {
 	);
 
 	// Active insights.
-	$client->insights()->init();
+	$client->insights()
+		->add_extra( array( 'Auto_Translate_Lifecycle', 'get_appsero_metadata' ) )
+		->init();
 }
 
 wpat_appsero_init_tracker_auto_translate();
@@ -78,11 +88,11 @@ register_deactivation_hook( __FILE__, 'wpat_deactivate_auto_translate' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-auto-translate.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-auto-translate.php';
 
-require plugin_dir_path( __FILE__ ) . 'includes/class-auto-translate-config.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-auto-translate-config.php';
 
-require plugin_dir_path( __FILE__ ) . 'includes/class-auto-translate-languages.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-auto-translate-languages.php';
 
 /**
  * Load language/country config after init so translation functions are not called too early.

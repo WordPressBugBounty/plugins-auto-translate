@@ -34,13 +34,15 @@ class Auto_Translate_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		require_once plugin_dir_path( __FILE__ ) . 'class-auto-translate-lifecycle.php';
 		self::add_options();
 	}
 
 	public static function add_options() {
 		$default_wpat_widget_type = 'minimalist';
 		$is_existing_installation = (bool) get_option('wpat_supported_languages');
-		$default_wpat_floating_position = 'top_left';
+		$has_go_live_option       = null !== get_option( 'wpat_go_live', null );
+		$default_wpat_floating_position = 'bottom_left';
 
 		// The default value for wpat_auto_detect depends on the plugin version we come from.
 		// If we come from a version before 1.4.4, we set the default value to 'disabled'
@@ -101,6 +103,7 @@ class Auto_Translate_Activator {
 
 		/* Advanced settings */
 		add_option('wpat_default_location', true);
+		add_option( 'wpat_go_live', $is_existing_installation );
 		add_option('wpat_floating_position', $default_wpat_floating_position);
 		add_option('wpat_floating_offset_x', 16);
 		add_option('wpat_floating_offset_y', 16);
@@ -112,9 +115,16 @@ class Auto_Translate_Activator {
 		add_option('wpat_min_custom_css', '');
 		add_option( 'wpat_excluded_selectors', '' );
 		add_option('wpat_delete_data_on_uninstall', '');
+		add_option( 'wpat_launch_checklist_completed', $is_existing_installation );
+		add_option( 'wpat_launch_checklist_reviewed', self::get_default_launch_checklist_reviewed( $is_existing_installation ) );
 
 		self::migrate_widget_type();
 		self::migrate_min_custom_css();
+		Auto_Translate_Lifecycle::ensure_activation_state( $is_existing_installation );
+
+		if ( ! $has_go_live_option && ! $is_existing_installation ) {
+			Auto_Translate_Lifecycle::track_activation_default();
+		}
 	}
 
 	public static function migrate_widget_type() {
@@ -140,6 +150,16 @@ class Auto_Translate_Activator {
 		if ( '' === $minimalist_custom_css && '' !== $legacy_custom_css ) {
 			update_option( 'wpat_min_custom_css', $legacy_custom_css );
 		}
+	}
+
+	private static function get_default_launch_checklist_reviewed( $is_existing_installation ) {
+		$reviewed = array(
+			'languages' => false,
+			'style'     => false,
+			'placement' => false,
+		);
+
+		return $is_existing_installation ? array_fill_keys( array_keys( $reviewed ), true ) : $reviewed;
 	}
 
 }

@@ -23,6 +23,7 @@ class Insights {
     private const TRACKER_OPTOUT_HOOK = 'wpat_tracker_optout';
     private const UNINSTALL_SUBMIT_AJAX_ACTION = 'wpat_submit_uninstall_reason';
     private const UNINSTALL_SUBMITTED_HOOK = 'wpat_uninstall_reason_submitted';
+    private const DEACTIVATION_REASONS_FILTER = 'wpat_appsero_deactivation_reasons';
     private const CUSTOM_DEACTIVATION_REASONS_FILTER = 'wpat_appsero_custom_deactivation_reasons';
     private const SECURITY_NONCE_ACTION = 'wpat-appsero-security-nonce';
 
@@ -904,7 +905,8 @@ class Insights {
         }
 
         $this->deactivation_modal_styles();
-        $reasons        = $this->get_uninstall_reasons();
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Local fork uses a fixed prefixed hook constant.
+        $reasons        = apply_filters( self::DEACTIVATION_REASONS_FILTER, $this->get_uninstall_reasons(), $this->client );
         // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Local fork uses a fixed prefixed hook constant.
         $custom_reasons = apply_filters( self::CUSTOM_DEACTIVATION_REASONS_FILTER, [], $this->client );
         ?>
@@ -921,7 +923,7 @@ class Insights {
                             <li data-placeholder="<?php echo esc_attr( $reason['placeholder'] ); ?>">
                                 <label>
                                     <input type="radio" name="selected-reason" value="<?php echo esc_attr( $reason['id'] ); ?>">
-                                    <div class="wd-de-reason-icon"><?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper returns SVG sanitized through an explicit allowlist. */ echo $this->get_safe_svg_icon_markup( $reason['icon'] ); ?></div>
+                                    <div class="wd-de-reason-icon"><?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper sanitizes supported icon markup through explicit allowlists. */ echo $this->get_safe_icon_markup( $reason['icon'] ); ?></div>
                                     <div class="wd-de-reason-text"><?php echo esc_html( $reason['text'] ); ?></div>
                                 </label>
                             </li>
@@ -933,7 +935,7 @@ class Insights {
                                 <li data-placeholder="<?php echo esc_attr( $reason['placeholder'] ); ?>" data-customreason="true">
                                     <label>
                                         <input type="radio" name="selected-reason" value="<?php echo esc_attr( $reason['id'] ); ?>">
-                                        <div class="wd-de-reason-icon"><?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper returns SVG sanitized through an explicit allowlist. */ echo $this->get_safe_svg_icon_markup( $reason['icon'] ); ?></div>
+                                        <div class="wd-de-reason-icon"><?php /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Helper sanitizes supported icon markup through explicit allowlists. */ echo $this->get_safe_icon_markup( $reason['icon'] ); ?></div>
                                         <div class="wd-de-reason-text"><?php echo esc_html( $reason['text'] ); ?></div>
                                     </label>
                                 </li>
@@ -1047,12 +1049,19 @@ class Insights {
     }
 
     /**
-     * Render a vendored uninstall-reason SVG icon with an explicit safe allowlist.
+     * Render a vendored uninstall-reason icon with explicit safe allowlists.
      *
-     * @param string $icon SVG markup.
+     * @param string $icon SVG markup or plugin-owned image URL.
      * @return string
      */
-    private function get_safe_svg_icon_markup( $icon ) {
+    private function get_safe_icon_markup( $icon ) {
+        if ( is_string( $icon ) && preg_match( '#^https?://#i', $icon ) ) {
+            return sprintf(
+                '<img src="%s" alt="" loading="lazy" decoding="async" />',
+                esc_url( $icon )
+            );
+        }
+
         return wp_kses(
             $icon,
             array(
@@ -1229,7 +1238,7 @@ class Insights {
             ul.wd-de-reasons li {
                 padding: 0 5px;
                 margin: 0;
-                width: 14.26%;
+                width: 12.5%;
             }
 
             ul.wd-de-reasons label {
@@ -1239,7 +1248,7 @@ class Insights {
                 display: block;
                 text-align: center;
                 height: 100%;
-                padding: 15px 3px 8px 3px;
+                padding: 20px 8px 14px 8px;
             }
 
             ul.wd-de-reasons label:after {
@@ -1263,11 +1272,19 @@ class Insights {
 
             .wd-de-reason-text {
                 color: #4A5568;
-                font-size: 13px;
+                font-size: 14px;
+                line-height: 1.25;
             }
 
             .wd-de-reason-icon {
-                margin-bottom: 7px;
+                margin-bottom: 13px;
+            }
+
+            .wd-de-reason-icon img {
+                display: inline-block;
+                width: 44px;
+                height: 44px;
+                object-fit: contain;
             }
 
             ul.wd-de-reasons li.wd-de-reason-selected label {
@@ -1278,6 +1295,10 @@ class Insights {
             li.wd-de-reason-selected .wd-de-reason-icon svg,
             li.wd-de-reason-selected .wd-de-reason-icon svg g {
                 fill: #fff;
+            }
+
+            li.wd-de-reason-selected .wd-de-reason-icon img {
+                filter: brightness(0) invert(1);
             }
 
             li.wd-de-reason-selected .wd-de-reason-text {

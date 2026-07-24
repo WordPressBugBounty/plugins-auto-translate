@@ -1,9 +1,9 @@
 === Automatic Translator with Google Translate ===
 Contributors: juangirini, googletranslate
 Tags: translate, translation, google translate, language switcher, website translator
-Requires at least: 5.0
+Requires at least: 6.5
 Tested up to: 7.0
-Stable tag: 2.1.3
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://pampa.dev
@@ -281,6 +281,14 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 
 == Changelog ==
 
+= Unreleased =
+
+= 2.2.0 =
+* Added a preview-mode dashboard flow so new installs can configure and preview Automatic Translator as admins before making it visible to visitors.
+* Added a setup checklist for the core launch steps: choosing languages, setting placement, adjusting styling, previewing the site, and going live.
+* Added a machine-readable frontend meta tag containing the installed plugin version.
+* Updated Appsero deactivation feedback with clearer Automatic Translator-specific reasons and matching reason icons.
+
 = 2.1.3 =
 * Corrected the WordPress.org release package so it contains the 2.1.3 source and build outputs.
 
@@ -288,9 +296,17 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 * Fixed PHP template calls to `do_shortcode( '[auto_translate_button]' )` so they bootstrap the frontend translator runtime when the floating selector is disabled and the shortcode is not present in post content
 
 = 2.1.1 =
+* Raised the minimum supported WordPress version to 6.5
 * Fixed the isolated minimalist selector so it stays styled when hosts combine plugin CSS into aggregated cache URLs
 * Fixed the minimalist selector so the detached open dropdown matches the visible trigger width instead of showing extra empty space beside the language list
 * Delayed the minimalist selector dropdown `slideDown` and `slideUp` animation until the trigger button resize settles so the opening and closing height animation stays aligned with the resized trigger
+* Added a preview-first frontend flow so new installs are admin-only until explicitly set live, while existing installs stay live on upgrade
+* Added local-only lifecycle tracking for preview/live mode transitions, including aggregate snapshot data for onboarding follow-up features
+* Added lifecycle-aware Appsero deactivation reasons so preview/live state can shape the most relevant local feedback choices
+* Added a collapsible first-screen launch checklist that marks languages, selector styling, and placement reviewed after each matching settings tab is saved
+* Changed floating selector placement so it scrolls with the document instead of staying fixed to the viewport
+* Changed the default floating selector position for new installs to bottom left while preserving existing saved placements
+* Changed the minimalist dropdown animation so upward-opening menus slide up from the trigger
 
 = 2.1.0 =
 * Added bundled plugin translations for French (France), German, Japanese, Spanish (Spain), Portuguese (Brazil), English (UK), and Italian
