@@ -2,8 +2,8 @@
 Contributors: juangirini, googletranslate
 Tags: translate, translation, google translate, language switcher, website translator
 Requires at least: 6.5
-Tested up to: 7.0
-Stable tag: 2.2.0
+Tested up to: 7.1
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Author URI: https://pampa.dev
@@ -282,6 +282,27 @@ Learn more about how [Appsero collects and uses this data](https://appsero.com/p
 == Changelog ==
 
 = Unreleased =
+* Fix: Keep individual language checkboxes available after using the Select all or Clear all actions.
+
+* Changed the default Automatic Translator admin tab to Styling.
+* Made the admin review and support notice dismissible until the plugin is updated.
+
+* Fix saving the custom order of supported languages from Language settings.
+* Put Styling first in the setup checklist and settings tabs, and rename the Language settings tab to Languages.
+
+* Added a guided selector style studio with Compact, Minimal, and Native dropdown starting styles, a live light/dark preview, and deterministic presets that each apply a complete selector style.
+* Added Compact presets for Quick switcher, Searchable picker, Code only, and Emoji flags + name; added Minimal presets for Emoji flags, Flags + code, Code only, and Names + divider.
+* Added an optional Customize your preferences step for Compact and Minimal styles, with controls that only appear where they apply: selector behaviour and chevrons for Compact, and inline text dividers for Minimal.
+* Added a native HTML language dropdown runtime option with live-preview sizing that matches the frontend browser control.
+* Added transparent border, background, and hover-background controls for the Minimal selector; Minimal presets start with all three colour overrides off while keeping chosen colours available for reuse.
+* Added Emoji flags as a new style while keeping existing Flat flags selections supported for migrating sites; Flat flags are no longer offered for new selections.
+* Fixed preset application so all style, preview, and colour controls update reliably.
+* Updated the admin settings screen with a more consistent native WordPress admin visual style across cards, tabs, controls, language columns, and responsive layouts.
+* Added collapsible Plugin status and Setup checklist cards that keep their status summaries visible and remember each user's expanded or collapsed state.
+* Improved admin settings navigation and checklist controls, including clearer completion counts, mobile-friendly controls, and preserved review/support links.
+
+= 2.2.1 =
+* Confirmed compatibility with WordPress 7.1.
 
 = 2.2.0 =
 * Added a preview-mode dashboard flow so new installs can configure and preview Automatic Translator as admins before making it visible to visitors.

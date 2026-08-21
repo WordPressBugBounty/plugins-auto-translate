@@ -44,7 +44,7 @@ $wpat_plugin_file = dirname( dirname( __DIR__ ) ) . '/auto-translate.php';
         <?php endif; ?>
         ">
             <span class="dashicons dashicons-info"></span>
-            <span><?php esc_html_e( 'For more than 10 languages we suggest enabling the \'Popup with search\' feature under \'Styling\' -> \'Selector behavior\'', 'auto-translate' ); ?></span>
+            <span><?php esc_html_e( 'For more than 10 languages, use the Searchable picker preset under \'Styling\'.', 'auto-translate' ); ?></span>
         </div>
         <div class="wpat-advanced-info wpat-advanced-idea">
             <span class="dashicons dashicons-lightbulb"></span>

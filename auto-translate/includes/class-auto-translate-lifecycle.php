@@ -646,7 +646,7 @@ class Auto_Translate_Lifecycle {
 	private static function get_switcher_style() {
 		$style = sanitize_key( (string) get_option( 'wpat_min_style', 'flags' ) );
 
-		return in_array( $style, array( 'flags', 'flat_flags', 'icon', 'clean' ), true ) ? $style : 'unknown';
+		return in_array( $style, array( 'flags', 'emoji_flags', 'flat_flags', 'icon', 'clean' ), true ) ? $style : 'unknown';
 	}
 
 	/**
@@ -655,7 +655,7 @@ class Auto_Translate_Lifecycle {
 	 * @return bool
 	 */
 	private static function flags_enabled() {
-		return in_array( self::get_switcher_style(), array( 'flags', 'flat_flags' ), true );
+		return in_array( self::get_switcher_style(), array( 'flags', 'emoji_flags', 'flat_flags' ), true );
 	}
 
 	/**

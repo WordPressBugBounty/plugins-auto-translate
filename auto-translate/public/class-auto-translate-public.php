@@ -737,19 +737,25 @@ class Auto_Translate_Public
         }
 
         ob_start();
-        $wpat_widget_type           = Auto_Translate_Config::normalize_widget_type( get_option('wpat_widget_type') );
+		$wpat_widget_type           = Auto_Translate_Config::normalize_widget_type( get_option('wpat_widget_type') );
+		$wpat_min_base_style        = get_option( 'wpat_min_base_style', 'compact' );
+		$wpat_min_transparent_default = 'minimal' === $wpat_min_base_style ? 'on' : '';
         $wpat_min_style             = get_option('wpat_min_style');
         $wpat_min_layout            = get_option('wpat_min_layout', 'dropdown');
         $wpat_min_icon              = get_option('wpat_min_icon');
         $wpat_min_txt_display       = get_option('wpat_min_txt_display');
         $wpat_min_chevron           = get_option('wpat_min_chevron');
-        $wpat_min_txt_underline     = get_option('wpat_min_txt_underline');
+		$wpat_min_txt_underline     = get_option( 'wpat_min_txt_underline', '' );
+		$wpat_min_text_divider      = get_option( 'wpat_min_text_divider', 'none' );
         $wpat_min_border_thickness  = get_option('wpat_min_border_thickness');
         $wpat_min_border_color      = get_option('wpat_min_border_color');
+		$wpat_min_border_transparent = get_option( 'wpat_min_border_transparent', $wpat_min_transparent_default );
         $wpat_min_background_color  = get_option('wpat_min_background_color');
+		$wpat_min_background_transparent = get_option( 'wpat_min_background_transparent', $wpat_min_transparent_default );
         $wpat_min_font_color        = get_option('wpat_min_font_color');
         $wpat_min_font_family       = get_option('wpat_min_font_family');
-        $wpat_min_hover_color       = get_option('wpat_min_hover_color');
+		$wpat_min_hover_color       = get_option( 'wpat_min_hover_color', '#f0f0f0' );
+		$wpat_min_hover_transparent = get_option( 'wpat_min_hover_transparent', $wpat_min_transparent_default );
         $wpat_min_font_hover_color  = get_option('wpat_min_font_hover_color');
         $wpat_widget_size           = get_option('wpat_widget_size');
         $wpat_base_language         = Auto_Translate_Config::get_resolved_base_language();
@@ -778,6 +784,7 @@ class Auto_Translate_Public
                 'host_language'   => $wpat_base_language,
                 'auto_detect'     => $wpat_auto_detect,
                 'layout'          => $wpat_min_layout,
+				'base_style'      => $wpat_min_base_style,
                 'text_display'    => $wpat_min_txt_display,
                 'style'           => $wpat_min_style,
                 'icon_class'      => $wpat_min_icon,
@@ -813,14 +820,15 @@ class Auto_Translate_Public
             $text_display
         );
 
-        return array(
+		return array(
             'instanceId'    => isset( $args['instance_id'] ) ? sanitize_html_class( (string) $args['instance_id'] ) : '',
             'dropdownId'    => isset( $args['dropdown_id'] ) ? sanitize_html_class( (string) $args['dropdown_id'] ) : '',
             'widgetType'    => 'minimalist',
             'baseLanguage'  => $base_language,
             'hostLanguage'  => $host_language,
             'autoDetect'    => isset( $args['auto_detect'] ) ? sanitize_text_field( (string) $args['auto_detect'] ) : '',
-            'layout'        => isset( $args['layout'] ) ? sanitize_key( $args['layout'] ) : 'dropdown',
+			'layout'        => isset( $args['layout'] ) ? sanitize_key( $args['layout'] ) : 'dropdown',
+			'baseStyle'     => isset( $args['base_style'] ) ? sanitize_key( $args['base_style'] ) : 'compact',
             'textDisplay'   => $text_display,
             'style'         => isset( $args['style'] ) ? sanitize_key( $args['style'] ) : '',
             'iconClass'     => isset( $args['icon_class'] ) ? sanitize_html_class( (string) $args['icon_class'] ) : '',

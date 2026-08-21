@@ -30,6 +30,8 @@ class Auto_Translate_Admin {
 	const LAUNCH_CHECKLIST_COMPLETED_OPTION = 'wpat_launch_checklist_completed';
 	const LAUNCH_CHECKLIST_REVIEWED_OPTION = 'wpat_launch_checklist_reviewed';
 	const LAUNCH_CHECKLIST_USER_META = 'wpat_launch_checklist_state';
+	const PLUGIN_STATUS_USER_META = 'wpat_plugin_status_state';
+	const PLUGIN_LINKS_NOTICE_USER_META = 'wpat_plugin_links_notice_dismissed_version';
 	const LIFECYCLE_SAVE_MARKER_OPTION = 'wpat_lifecycle_last_saved_tab';
 
 	/**
@@ -123,6 +125,7 @@ class Auto_Translate_Admin {
 			array(
 				'ajaxUrl'              => admin_url( 'admin-ajax.php' ),
 				'launchChecklistNonce' => wp_create_nonce( 'wpat_set_launch_checklist_state' ),
+				'pluginLinksNoticeNonce' => wp_create_nonce( 'wpat_dismiss_plugin_links_notice' ),
 			)
 		);
 		wp_enqueue_script( $this->plugin_name . '-global', plugin_dir_url( dirname(__FILE__) ) . 'global/js/auto-translate-global.min.js', array(), $this->version, true );
@@ -206,14 +209,19 @@ class Auto_Translate_Admin {
 			array( 'sanitize_callback' => array( $this, 'sanitize_font_family' ) )
 		);
 		// Minimalist settings
+		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_base_style', array( 'sanitize_callback' => array( $this, 'sanitize_min_base_style' ) ) );
+		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_preset', array( 'sanitize_callback' => array( $this, 'sanitize_min_preset' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_style', array( 'sanitize_callback' => array( $this, 'sanitize_min_style' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_layout', array( 'sanitize_callback' => array( $this, 'sanitize_min_layout' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_icon', array( 'sanitize_callback' => array( $this, 'sanitize_html_class_option' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_txt_display', array( 'sanitize_callback' => array( $this, 'sanitize_min_txt_display' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_txt_underline', array( 'sanitize_callback' => array( $this, 'sanitize_min_txt_underline' ) ) );
+		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_text_divider', array( 'sanitize_callback' => array( $this, 'sanitize_min_text_divider' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_border_thickness', array( 'sanitize_callback' => array( $this, 'sanitize_min_border_thickness' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_border_color', array( 'sanitize_callback' => array( $this, 'sanitize_min_border_color' ) ) );
+		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_border_transparent', array( 'sanitize_callback' => array( $this, 'sanitize_toggle' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_background_color', array( 'sanitize_callback' => array( $this, 'sanitize_min_background_color' ) ) );
+		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_background_transparent', array( 'sanitize_callback' => array( $this, 'sanitize_toggle' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_font_color', array( 'sanitize_callback' => array( $this, 'sanitize_min_font_color' ) ) );
 		register_setting(
 			'auto-translate-visual-settings-group',
@@ -221,6 +229,7 @@ class Auto_Translate_Admin {
 			array( 'sanitize_callback' => array( $this, 'sanitize_font_family' ) )
 		);
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_hover_color', array( 'sanitize_callback' => array( $this, 'sanitize_min_hover_color' ) ) );
+		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_hover_transparent', array( 'sanitize_callback' => array( $this, 'sanitize_toggle' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_font_hover_color', array( 'sanitize_callback' => array( $this, 'sanitize_min_font_hover_color' ) ) );
 		register_setting( 'auto-translate-visual-settings-group', 'wpat_min_chevron', array( 'sanitize_callback' => array( $this, 'sanitize_min_chevron' ) ) );
 
@@ -321,11 +330,14 @@ class Auto_Translate_Admin {
 	public function sanitize_min_hover_color( $value ) { return $this->sanitize_hex_color_option( $value, '#ffffff' ); }
 	public function sanitize_min_font_hover_color( $value ) { return $this->sanitize_hex_color_option( $value, '#000000' ); }
 
-	public function sanitize_min_style( $value ) { return $this->sanitize_enum( $value, array( 'flags', 'flat_flags', 'icon', 'clean' ), 'flags' ); }
+	public function sanitize_min_style( $value ) { return $this->sanitize_enum( $value, array( 'flags', 'emoji_flags', 'flat_flags', 'icon', 'clean' ), 'flags' ); }
+	public function sanitize_min_base_style( $value ) { return $this->sanitize_enum( $value, array( 'compact', 'minimal', 'native' ), 'compact' ); }
+	public function sanitize_min_preset( $value ) { return $this->sanitize_enum( $value, array( 'quick_switcher', 'searchable_picker', 'compact_code_only', 'compact_emoji_name', 'minimal_flags', 'minimal_flags_code', 'minimal_code_only', 'minimal_name_pipe', 'minimal_custom', 'custom', 'classic', 'pill', 'soft_outline', 'links', 'flags', 'names', 'codes', 'standard', 'compact_native' ), 'quick_switcher' ); }
 	public function sanitize_min_layout( $value ) { return $this->sanitize_enum( $value, array( 'dropdown', 'popup_search' ), 'dropdown' ); }
-	public function sanitize_min_txt_display( $value ) { return $this->sanitize_enum( $value, array( 'name', 'name_code', 'code' ), 'name' ); }
+	public function sanitize_min_txt_display( $value ) { return $this->sanitize_enum( $value, array( 'name', 'name_code', 'code', 'none' ), 'name' ); }
 	public function sanitize_language_name_display( $value ) { return $this->sanitize_enum( $value, array( 'english', 'native' ), 'english' ); }
 	public function sanitize_min_txt_underline( $value ) { return $this->sanitize_enum( $value, array( '', 'wpat_min_txt_underline' ), '' ); }
+	public function sanitize_min_text_divider( $value ) { return $this->sanitize_enum( $value, array( 'none', 'pipe', 'brackets' ), 'none' ); }
 	public function sanitize_min_chevron( $value ) {
 		return $this->sanitize_enum( $value, array( 'dashicons-arrow-down-alt2', 'dashicons-arrow-down', 'dashicons-arrow-down-none' ), 'dashicons-arrow-down-alt2' );
 	}
@@ -583,12 +595,14 @@ class Auto_Translate_Admin {
 		return ! $is_live && ! $this->is_launch_checklist_completed();
 	}
 
-	private function get_launch_checklist_state_url( $state ) {
+	private function get_launch_checklist_state_url( $state, $panel = 'checklist' ) {
 		$state = 'open' === $state ? 'open' : 'collapsed';
+		$panel = 'status' === $panel ? 'status' : 'checklist';
 		$url   = add_query_arg(
 			array(
 				'action'     => 'wpat_set_launch_checklist_state',
 				'wpat_state' => $state,
+				'wpat_panel' => $panel,
 			),
 			admin_url( 'admin-post.php' )
 		);
@@ -601,6 +615,21 @@ class Auto_Translate_Admin {
 		update_user_meta( get_current_user_id(), self::LAUNCH_CHECKLIST_USER_META, $state );
 
 		return $state;
+	}
+
+	private function is_plugin_status_open() {
+		return 'collapsed' !== get_user_meta( get_current_user_id(), self::PLUGIN_STATUS_USER_META, true );
+	}
+
+	private function set_plugin_status_state( $state ) {
+		$state = 'open' === $state ? 'open' : 'collapsed';
+		update_user_meta( get_current_user_id(), self::PLUGIN_STATUS_USER_META, $state );
+
+		return $state;
+	}
+
+	private function should_show_plugin_links_notice() {
+		return $this->version !== get_user_meta( get_current_user_id(), self::PLUGIN_LINKS_NOTICE_USER_META, true );
 	}
 
 	private function get_preview_site_url() {
@@ -695,6 +724,7 @@ class Auto_Translate_Admin {
 
 		$style_labels = array(
 			'flags'      => __( 'Flags', 'auto-translate' ),
+			'emoji_flags' => __( 'Emoji flags', 'auto-translate' ),
 			'flat_flags' => __( 'Flat flags', 'auto-translate' ),
 			'icon'       => __( 'Icon', 'auto-translate' ),
 			'clean'      => __( 'Text only', 'auto-translate' ),
@@ -707,6 +737,7 @@ class Auto_Translate_Admin {
 			'name'      => __( 'Language name', 'auto-translate' ),
 			'code'      => __( 'Language code', 'auto-translate' ),
 			'name_code' => __( 'Name + code', 'auto-translate' ),
+			'none'      => __( 'No text', 'auto-translate' ),
 		);
 
 		return array(
@@ -767,7 +798,15 @@ class Auto_Translate_Admin {
 
 		return array(
 			array(
-				'title'        => __( 'Language settings', 'auto-translate' ),
+				'title'        => __( 'Styling', 'auto-translate' ),
+				'is_ready'     => $reviewed['style'],
+				'summary'      => $style['summary'],
+				'meta'         => $style['meta'],
+				'action_label' => __( 'Adjust style', 'auto-translate' ),
+				'action_url'   => $this->get_tracked_admin_tab_url( 'visual_settings', 'wpat-launch-style', 'adjust_style' ),
+			),
+			array(
+				'title'        => __( 'Languages', 'auto-translate' ),
 				'is_ready'     => $reviewed['languages'],
 				'summary'      => $languages['summary'],
 				'meta'         => $languages['meta'],
@@ -781,14 +820,6 @@ class Auto_Translate_Admin {
 				'meta'         => $placement['meta'],
 				'action_label' => __( 'Set placement', 'auto-translate' ),
 				'action_url'   => $this->get_tracked_admin_tab_url( 'placement_settings', 'wpat-launch-placement', 'set_placement' ),
-			),
-			array(
-				'title'        => __( 'Styling', 'auto-translate' ),
-				'is_ready'     => $reviewed['style'],
-				'summary'      => $style['summary'],
-				'meta'         => $style['meta'],
-				'action_label' => __( 'Adjust style', 'auto-translate' ),
-				'action_url'   => $this->get_tracked_admin_tab_url( 'visual_settings', 'wpat-launch-style', 'adjust_style' ),
 			),
 		);
 	}
@@ -880,7 +911,12 @@ class Auto_Translate_Admin {
 		check_admin_referer( 'wpat_set_launch_checklist_state' );
 
 		$state = isset( $_GET['wpat_state'] ) ? sanitize_key( wp_unslash( $_GET['wpat_state'] ) ) : 'collapsed';
-		$this->set_launch_checklist_state( $state );
+		$panel = isset( $_GET['wpat_panel'] ) ? sanitize_key( wp_unslash( $_GET['wpat_panel'] ) ) : 'checklist';
+		if ( 'status' === $panel ) {
+			$this->set_plugin_status_state( $state );
+		} else {
+			$this->set_launch_checklist_state( $state );
+		}
 
 		$redirect_to = wp_get_referer();
 		if ( ! is_string( $redirect_to ) || '' === $redirect_to ) {
@@ -902,13 +938,30 @@ class Auto_Translate_Admin {
 		check_ajax_referer( 'wpat_set_launch_checklist_state', 'nonce' );
 
 		$state = isset( $_POST['wpat_state'] ) ? sanitize_key( wp_unslash( $_POST['wpat_state'] ) ) : 'collapsed';
-		$state = $this->set_launch_checklist_state( $state );
+		$panel = isset( $_POST['wpat_panel'] ) ? sanitize_key( wp_unslash( $_POST['wpat_panel'] ) ) : 'checklist';
+		$state = 'status' === $panel ? $this->set_plugin_status_state( $state ) : $this->set_launch_checklist_state( $state );
 
 		wp_send_json_success(
 			array(
 				'state' => $state,
 			)
 		);
+	}
+
+	/**
+	 * Dismiss the review and support notice for the current plugin version.
+	 *
+	 * The notice automatically returns after an update because the dismissed
+	 * version stored in user meta no longer matches the running version.
+	 */
+	public function handle_plugin_links_notice_dismissal_ajax() {
+		if ( ! $this->current_user_can_manage_plugin() ) {
+			wp_send_json_error( array( 'message' => __( 'You are not allowed to manage Automatic Translator.', 'auto-translate' ) ), 403 );
+		}
+
+		check_ajax_referer( 'wpat_dismiss_plugin_links_notice', 'nonce' );
+		update_user_meta( get_current_user_id(), self::PLUGIN_LINKS_NOTICE_USER_META, $this->version );
+		wp_send_json_success();
 	}
 
 	public function auto_translate_settings_page(){
@@ -918,6 +971,8 @@ class Auto_Translate_Admin {
 
 		$wpat_supported_languages = Auto_Translate_Config::get_supported_languages();
 		$langs_per_column = 27;
+		$wpat_min_base_style = get_option( 'wpat_min_base_style', 'compact' );
+		$wpat_min_transparent_default = 'minimal' === $wpat_min_base_style ? 'on' : '';
 		$vars = [];
 		$is_live = $this->is_go_live_enabled();
 		$wpat_mode_updated_input = filter_input( INPUT_GET, 'wpat_mode_updated', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
@@ -925,7 +980,7 @@ class Auto_Translate_Admin {
 		$wpat_active_tab_input = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		$vars['active_tab'] = is_string( $wpat_active_tab_input )
 			? sanitize_key( $wpat_active_tab_input )
-			: 'language_settings';
+			: 'visual_settings';
 		$vars['plugin_icon_url'] = plugins_url( 'assets/icon-128x128.png', dirname( __DIR__ ) . '/auto-translate.php' );
 		$vars['classic_widget_migrated_notice'] = $this->consume_classic_widget_migration_notice();
 		$vars['reviews_url'] = $this->get_five_star_reviews_url();
@@ -934,8 +989,12 @@ class Auto_Translate_Admin {
 		$vars['go_live_action_url'] = admin_url( 'admin-post.php' );
 		$vars['is_live'] = $is_live;
 		$vars['is_preview_mode'] = ! $is_live;
+		$vars['is_plugin_status_open'] = $this->is_plugin_status_open();
+		$vars['plugin_status_open_url'] = $this->get_launch_checklist_state_url( 'open', 'status' );
+		$vars['plugin_status_collapsed_url'] = $this->get_launch_checklist_state_url( 'collapsed', 'status' );
 		$vars['launch_overview_items'] = $this->get_launch_overview_items( $wpat_supported_languages );
 		$vars['is_launch_checklist_open'] = $this->is_launch_checklist_open( $is_live );
+		$vars['show_plugin_links_notice'] = $this->should_show_plugin_links_notice();
 		$vars['show_launch_checklist_url'] = $this->get_launch_checklist_state_url( 'open' );
 		$vars['hide_launch_checklist_url'] = $this->get_launch_checklist_state_url( 'collapsed' );
 		$vars['mode_updated'] = '1' === $wpat_mode_updated_input;
@@ -977,16 +1036,25 @@ class Auto_Translate_Admin {
 				],
 				'minimalist' => [
 					'wpat_min_style' => get_option('wpat_min_style'),
+					'wpat_min_base_style' => $wpat_min_base_style,
+					'wpat_min_preset' => get_option( 'wpat_min_preset', 'quick_switcher' ),
 					'wpat_min_layout' => get_option('wpat_min_layout', 'dropdown'),
 					'wpat_min_icon' => get_option('wpat_min_icon'),
 					'wpat_min_txt_display' => get_option('wpat_min_txt_display'),
-					'wpat_min_txt_underline' => get_option('wpat_min_txt_underline'),
+					'wpat_min_txt_underline' => get_option( 'wpat_min_txt_underline', '' ),
+					'wpat_min_text_divider' => get_option( 'wpat_min_text_divider', 'none' ),
 					'wpat_min_border_thickness' => get_option('wpat_min_border_thickness'),
 					'wpat_min_border_color' => get_option('wpat_min_border_color'),
+					'wpat_min_border_transparent' => get_option( 'wpat_min_border_transparent', $wpat_min_transparent_default ),
+					'wpat_min_border_transparent_is_default' => false === get_option( 'wpat_min_border_transparent', false ),
 					'wpat_min_background_color' => get_option('wpat_min_background_color'),
+					'wpat_min_background_transparent' => get_option( 'wpat_min_background_transparent', $wpat_min_transparent_default ),
+					'wpat_min_background_transparent_is_default' => false === get_option( 'wpat_min_background_transparent', false ),
 					'wpat_min_font_color' => get_option('wpat_min_font_color'),
 					'wpat_min_font_family' => get_option('wpat_min_font_family'),
-					'wpat_min_hover_color' => get_option('wpat_min_hover_color'),
+					'wpat_min_hover_color' => get_option( 'wpat_min_hover_color', '#f0f0f0' ),
+					'wpat_min_hover_transparent' => get_option( 'wpat_min_hover_transparent', $wpat_min_transparent_default ),
+					'wpat_min_hover_transparent_is_default' => false === get_option( 'wpat_min_hover_transparent', false ),
 					'wpat_min_font_hover_color' => get_option('wpat_min_font_hover_color'),
 					'wpat_min_chevron' => get_option('wpat_min_chevron'),
 					'wpat_language_flags' => get_option( 'wpat_language_flags', array() ),

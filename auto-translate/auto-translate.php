@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       Automatic Translator with Google Translate
  * Description:       Translate your WordPress site with a polished Google Translate language switcher for instant visitor translation.
- * Version:           2.2.0
+ * Version:           2.2.1
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Author:            Pampa Dev
@@ -28,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'AUTO_TRANSLATE_VERSION', '2.2.0' );
+define( 'AUTO_TRANSLATE_VERSION', '2.2.1' );
 
 /**
  * Initialize the plugin tracker.

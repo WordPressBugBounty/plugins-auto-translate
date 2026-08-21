@@ -181,6 +181,7 @@ class Auto_Translate {
 		$this->loader->add_action( 'admin_post_wpat_record_launch_action', $plugin_admin, 'handle_record_launch_action' );
 		$this->loader->add_action( 'admin_post_wpat_set_launch_checklist_state', $plugin_admin, 'handle_launch_checklist_state_action' );
 		$this->loader->add_action( 'wp_ajax_wpat_set_launch_checklist_state', $plugin_admin, 'handle_launch_checklist_state_ajax' );
+		$this->loader->add_action( 'wp_ajax_wpat_dismiss_plugin_links_notice', $plugin_admin, 'handle_plugin_links_notice_dismissal_ajax' );
 		$this->loader->add_action( 'update_option_wpat_go_live', $lifecycle, 'handle_go_live_option_update', 10, 3 );
 		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) . '/auto-translate.php' ), $plugin_admin, 'add_plugin_action_links' );
 		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_plugin_row_meta', 10, 2 );

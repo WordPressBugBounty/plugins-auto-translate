@@ -86,18 +86,21 @@ class Auto_Translate_Activator {
 		add_option('wpat_dropdown_shadow', '');
 		add_option('wpat_dropdown_font_family', '');
 		// Minimalist settings
+		add_option( 'wpat_min_base_style', 'compact' );
+		add_option( 'wpat_min_preset', 'quick_switcher' );
 		add_option('wpat_min_style', 'flags');
 		add_option('wpat_min_layout', 'dropdown');
 		add_option('wpat_min_icon', 'dashicons-admin-site-alt3');
 		add_option('wpat_min_txt_display', 'name');
 		add_option('wpat_min_chevron', 'dashicons-arrow-down-alt2');
-		add_option('wpat_min_txt_underline', 'wpat_min_txt_underline');
+		add_option('wpat_min_txt_underline', '');
+		add_option('wpat_min_text_divider', 'none');
 		add_option('wpat_min_border_thickness', 1);
 		add_option('wpat_min_border_color', '#f0f0f0');
 		add_option('wpat_min_background_color', '#fff');
 		add_option('wpat_min_font_color', '#000');
 		add_option('wpat_min_font_family', '');
-		add_option('wpat_min_hover_color', '#fff');
+		add_option('wpat_min_hover_color', '#f0f0f0');
 		add_option('wpat_min_font_hover_color', '#000');
 		add_option( 'wpat_language_flags', array() );
 
