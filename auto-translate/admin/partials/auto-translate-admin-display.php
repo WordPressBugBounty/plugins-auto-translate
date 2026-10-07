@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <?php if( is_admin()): ?>
-<div class="wrap" id="wpat_admin">
+<div class="wrap" id="wpat_admin" data-wpat-draft-channel="wpat-settings-draft" data-wpat-draft-storage-key="wpat_settings_draft" data-wpat-draft-debounce="700" data-wpat-show-publish-reminder="<?php echo esc_attr( ! empty( $vars['show_publish_reminder'] ) ? 'true' : 'false' ); ?>" data-wpat-publish-readiness="<?php echo esc_attr( wp_json_encode( $vars['publish_readiness'] ?? array() ) ); ?>">
     <h1 class="wp-heading-inline screen-reader-text"><?php esc_html_e( 'Automatic Translator', 'auto-translate' ); ?></h1>
     <hr class="wp-header-end" />
     <?php if ( ! empty( $vars['classic_widget_migrated_notice'] ) ) : ?>
@@ -59,122 +59,64 @@ if ( ! defined( 'ABSPATH' ) ) {
                 </span>
             </div>
             <div class="wpat-admin-header__actions">
-                <a class="button button-secondary" href="<?php echo esc_url( $vars['preview_site_url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Preview site', 'auto-translate' ); ?></a>
-                <form method="post" action="<?php echo esc_url( $vars['go_live_action_url'] ); ?>">
+                <span data-wpat-draft-status data-wpat-publish-announcement aria-live="polite" aria-atomic="true"></span>
+                <span class="wpat-admin-header__discard-slot">
+                    <button type="button" class="button button-link" data-wpat-draft-retry hidden><?php esc_html_e( 'Discard changes', 'auto-translate' ); ?></button>
+                    <button type="button" class="button button-secondary" data-wpat-draft-discard hidden disabled><?php esc_html_e( 'Discard changes', 'auto-translate' ); ?></button>
+                </span>
+                <button type="button" class="button button-secondary" data-wpat-draft-save disabled><?php echo esc_html( ! empty( $vars['is_live'] ) ? __( 'Save', 'auto-translate' ) : __( 'Save draft', 'auto-translate' ) ); ?></button>
+                <a class="button button-secondary" data-wpat-preview-site href="<?php echo esc_url( $vars['preview_site_url'] ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Preview site', 'auto-translate' ); ?></a>
+                <form method="post" action="<?php echo esc_url( $vars['go_live_action_url'] ); ?>" data-wpat-publish-form>
                     <input type="hidden" name="action" value="wpat_set_go_live" />
                     <input type="hidden" name="wpat_go_live" value="<?php echo esc_attr( ! empty( $vars['is_live'] ) ? '0' : '1' ); ?>" />
+					<input type="hidden" name="wpat_publish_confirmed" value="0" />
                     <?php wp_nonce_field( 'wpat_set_go_live' ); ?>
-                    <button type="submit" class="button <?php echo esc_attr( ! empty( $vars['is_live'] ) ? '' : 'button-primary' ); ?>">
-                        <?php echo esc_html( ! empty( $vars['is_live'] ) ? __( 'Switch to preview', 'auto-translate' ) : __( 'Go Live', 'auto-translate' ) ); ?>
+                    <button type="submit" class="button <?php echo esc_attr( ! empty( $vars['is_live'] ) ? '' : 'button-primary' ); ?>" data-wpat-publish-submit>
+                        <?php echo esc_html( ! empty( $vars['is_live'] ) ? __( 'Unpublish', 'auto-translate' ) : __( 'Publish', 'auto-translate' ) ); ?>
                     </button>
+					<div class="wpat-publish-reminder" data-wpat-publish-reminder hidden role="dialog" aria-modal="true" aria-labelledby="wpat-publish-reminder-title" aria-describedby="wpat-publish-reminder-description">
+						<div class="wpat-publish-reminder__panel" tabindex="-1">
+							<h2 id="wpat-publish-reminder-title"><?php esc_html_e( 'Ready to publish?', 'auto-translate' ); ?></h2>
+							<p id="wpat-publish-reminder-description"><?php esc_html_e( 'Double-check these settings before making Automatic Translator visible to visitors.', 'auto-translate' ); ?></p>
+							<ul class="wpat-publish-checklist" aria-label="<?php esc_attr_e( 'Publish readiness checks', 'auto-translate' ); ?>">
+								<li data-wpat-publish-check="languages" data-wpat-publish-complete="false">
+									<strong><?php esc_html_e( 'Languages', 'auto-translate' ); ?></strong>
+									<span data-wpat-publish-check-status></span>
+									<span data-wpat-publish-check-detail></span>
+								</li>
+								<li data-wpat-publish-check="placement" data-wpat-publish-complete="false">
+									<strong><?php esc_html_e( 'Placement', 'auto-translate' ); ?></strong>
+									<span data-wpat-publish-check-status></span>
+									<span data-wpat-publish-check-detail></span>
+								</li>
+								<li data-wpat-publish-check="styling" data-wpat-publish-complete="false">
+									<strong><?php esc_html_e( 'Styling', 'auto-translate' ); ?></strong>
+									<span data-wpat-publish-check-status></span>
+									<span data-wpat-publish-check-detail></span>
+								</li>
+							</ul>
+							<label><input type="hidden" name="wpat_publish_reminder_enabled" value="0" /><input type="checkbox" name="wpat_publish_reminder_enabled" value="1" checked /> <?php esc_html_e( 'Always show this reminder before publishing.', 'auto-translate' ); ?></label>
+							<div class="wpat-publish-reminder__actions">
+								<button type="button" class="button button-secondary" data-wpat-publish-cancel><?php esc_html_e( 'Cancel', 'auto-translate' ); ?></button>
+								<button type="button" class="button button-primary" data-wpat-publish-confirm><?php esc_html_e( 'Publish', 'auto-translate' ); ?></button>
+							</div>
+						</div>
+					</div>
                 </form>
             </div>
         </div>
         <div class="wpat-admin-workspace">
             <?php require 'auto-translate-admin-preview-display.php'; ?>
             <div class="wpat-admin-body">
-            <section class="wpat-dashboard-section" aria-label="<?php esc_attr_e( 'Plugin status', 'auto-translate' ); ?>">
-                <?php if ( ! empty( $vars['launch_overview_items'] ) && is_array( $vars['launch_overview_items'] ) ) : ?>
-                    <?php $wpat_launch_checklist_is_open = ! empty( $vars['is_launch_checklist_open'] ); ?>
-                    <?php $wpat_launch_completed_count = count( array_filter( $vars['launch_overview_items'], static function ( $wpat_launch_item ) { return ! empty( $wpat_launch_item['is_ready'] ); } ) ); ?>
-                    <?php $wpat_launch_total_count = count( $vars['launch_overview_items'] ); ?>
-                    <section
-                        class="wpat-launch-overview"
-                        id="wpat-launch-overview"
-                        aria-labelledby="wpat-launch-overview-title"
-                    >
-                        <div class="wpat-launch-overview__header">
-                            <div class="wpat-launch-overview__heading">
-                                <span class="wpat-dashboard-card__eyebrow"><?php esc_html_e( 'Setup checklist', 'auto-translate' ); ?></span>
-                                <h2 id="wpat-launch-overview-title"><?php esc_html_e( 'Review before going live', 'auto-translate' ); ?></h2>
-                                <span class="wpat-launch-overview__progress" aria-hidden="true"><?php echo esc_html( $wpat_launch_completed_count . '/' . $wpat_launch_total_count ); ?></span>
-                            </div>
-                            <a
-                                class="wpat-launch-overview__toggle"
-                                href="<?php echo esc_url( $wpat_launch_checklist_is_open ? $vars['hide_launch_checklist_url'] : $vars['show_launch_checklist_url'] ); ?>"
-                                data-wpat-launch-checklist-toggle="<?php echo esc_attr( $wpat_launch_checklist_is_open ? 'collapsed' : 'open' ); ?>"
-                                aria-controls="wpat-launch-overview-content"
-                                aria-expanded="<?php echo esc_attr( $wpat_launch_checklist_is_open ? 'true' : 'false' ); ?>"
-                                data-wpat-launch-checklist-label-open="<?php esc_attr_e( 'Hide setup checklist', 'auto-translate' ); ?>"
-                                data-wpat-launch-checklist-label-collapsed="<?php esc_attr_e( 'Show setup checklist', 'auto-translate' ); ?>"
-                                aria-label="<?php echo esc_attr( $wpat_launch_checklist_is_open ? __( 'Hide setup checklist', 'auto-translate' ) : __( 'Show setup checklist', 'auto-translate' ) ); ?>"
-                                title="<?php echo esc_attr( $wpat_launch_checklist_is_open ? __( 'Hide setup checklist', 'auto-translate' ) : __( 'Show setup checklist', 'auto-translate' ) ); ?>"
-                            >
-                                <span class="dashicons <?php echo esc_attr( $wpat_launch_checklist_is_open ? 'dashicons-minus' : 'dashicons-plus-alt2' ); ?>" aria-hidden="true"></span>
-                            </a>
-                        </div>
-                        <div class="wpat-launch-overview__grid" id="wpat-launch-overview-content" <?php echo $wpat_launch_checklist_is_open ? '' : 'hidden'; ?>>
-                            <?php foreach ( $vars['launch_overview_items'] as $wpat_launch_item ) : ?>
-                                <?php $wpat_launch_is_ready = ! empty( $wpat_launch_item['is_ready'] ); ?>
-                                <article class="wpat-launch-overview__item <?php echo esc_attr( $wpat_launch_is_ready ? 'is-ready' : 'is-incomplete' ); ?>">
-                                    <span
-                                        class="wpat-launch-overview__check"
-                                        aria-label="<?php echo esc_attr( $wpat_launch_is_ready ? __( 'Complete', 'auto-translate' ) : __( 'Incomplete', 'auto-translate' ) ); ?>"
-                                        role="img"
-                                    >
-                                        <span class="dashicons <?php echo esc_attr( $wpat_launch_is_ready ? 'dashicons-yes' : 'dashicons-minus' ); ?>" aria-hidden="true"></span>
-                                    </span>
-                                    <div class="wpat-launch-overview__copy">
-                                        <h3><?php echo esc_html( $wpat_launch_item['title'] ?? '' ); ?></h3>
-                                    </div>
-                                    <div class="wpat-launch-overview__action">
-                                        <a class="button button-secondary" href="<?php echo esc_url( $wpat_launch_item['action_url'] ?? '#' ); ?>">
-                                            <?php esc_html_e( 'Go', 'auto-translate' ); ?>
-                                        </a>
-                                    </div>
-                                </article>
-                            <?php endforeach; ?>
-                        </div>
-                    </section>
-                <?php endif; ?>
-            </section>
             <div class="nav-tab-wrapper wpat-settings-tabs">
-                <a href="?page=auto_translate&tab=visual_settings" class="nav-tab <?php echo esc_attr( $vars['active_tab'] === 'visual_settings' ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e('Styling', 'auto-translate'); ?></a>
-                <a href="?page=auto_translate&tab=language_settings" class="nav-tab <?php echo esc_attr( $vars['active_tab'] === 'language_settings' ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e('Languages', 'auto-translate'); ?></a>
-                <a href="?page=auto_translate&tab=placement_settings" class="nav-tab <?php echo esc_attr( $vars['active_tab'] === 'placement_settings' ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e('Placement', 'auto-translate'); ?></a>
-                <a href="?page=auto_translate&tab=advanced_settings" class="nav-tab <?php echo esc_attr( $vars['active_tab'] === 'advanced_settings' ? 'nav-tab-active' : '' ); ?>"><?php esc_html_e('Advanced', 'auto-translate'); ?></a>
+                <a href="?page=auto_translate&tab=visual_settings" class="nav-tab <?php echo esc_attr( $vars['active_tab'] === 'visual_settings' ? 'nav-tab-active' : '' ); ?>"<?php echo 'visual_settings' === $vars['active_tab'] ? ' aria-current="page"' : ''; ?>><?php esc_html_e('Styling', 'auto-translate'); ?></a>
+                <a href="?page=auto_translate&tab=language_settings" class="nav-tab <?php echo esc_attr( $vars['active_tab'] === 'language_settings' ? 'nav-tab-active' : '' ); ?>"<?php echo 'language_settings' === $vars['active_tab'] ? ' aria-current="page"' : ''; ?>><?php esc_html_e('Languages', 'auto-translate'); ?></a>
+                <a href="?page=auto_translate&tab=placement_settings" class="nav-tab <?php echo esc_attr( $vars['active_tab'] === 'placement_settings' ? 'nav-tab-active' : '' ); ?>"<?php echo 'placement_settings' === $vars['active_tab'] ? ' aria-current="page"' : ''; ?>><?php esc_html_e('Placement', 'auto-translate'); ?></a>
+                <a href="?page=auto_translate&tab=advanced_settings" class="nav-tab <?php echo esc_attr( $vars['active_tab'] === 'advanced_settings' ? 'nav-tab-active' : '' ); ?>"<?php echo 'advanced_settings' === $vars['active_tab'] ? ' aria-current="page"' : ''; ?>><?php esc_html_e('Advanced', 'auto-translate'); ?></a>
             </div>
-            <?php
-            $wpat_active_tab_labels = array(
-                'visual_settings'    => __( 'Styling', 'auto-translate' ),
-                'language_settings'  => __( 'Languages', 'auto-translate' ),
-                'placement_settings' => __( 'Placement', 'auto-translate' ),
-                'advanced_settings'  => __( 'Advanced', 'auto-translate' ),
-            );
-            $wpat_active_tab_label = $wpat_active_tab_labels[ $vars['active_tab'] ] ?? __( 'Settings', 'auto-translate' );
-            ?>
             <section class="wpat-tab-section" aria-labelledby="wpat-tab-section-title">
-                <div class="wpat-tab-section__header">
-                    <h2 id="wpat-tab-section-title"><?php echo esc_html( $wpat_active_tab_label ); ?></h2>
-                </div>
-                <form id="wpat-settings-form" method="post" action="options.php">
-                    <input type="hidden" name="wpat_lifecycle_last_saved_tab" value="<?php echo esc_attr( $vars['active_tab'] ); ?>" />
-        <?php
-            if( $vars['active_tab'] == 'language_settings' ) {
-                settings_fields( 'auto-translate-language-settings-group' );
-                do_settings_sections( 'auto-translate-language-settings-group' );
-                require 'auto-translate-admin-language-settings-display.php';
-            }
-            elseif( $vars['active_tab'] == 'placement_settings' ) {
-                settings_fields( 'auto-translate-placement-settings-group' );
-                do_settings_sections( 'auto-translate-placement-settings-group' );
-                require 'auto-translate-admin-placement-settings-display.php';
-            }
-            elseif( $vars['active_tab'] == 'visual_settings' ) {
-                settings_fields( 'auto-translate-visual-settings-group' );
-                do_settings_sections( 'auto-translate-visual-settings-group' );
-                require 'auto-translate-admin-visual-settings-display.php'; 
-            }
-            elseif( $vars['active_tab'] == 'advanced_settings' ) {
-                settings_fields( 'auto-translate-advanced-settings-group' );
-                do_settings_sections( 'auto-translate-advanced-settings-group' );
-                require 'auto-translate-admin-advanced-settings-display.php'; 
-            }
-        ?>                
-                </form>
-                <div class="wpat-admin-footer">
-                    <button type="submit" form="wpat-settings-form" class="button button-primary button-hero wpat-save-button"><?php esc_html_e( 'Save changes', 'auto-translate' ); ?></button>
-                </div>
+                <div class="wpat-settings-tab-status screen-reader-text" data-wpat-settings-tab-status role="status" aria-live="polite" aria-atomic="true"></div>
+                <?php require 'auto-translate-admin-settings-tab-display.php'; ?>
             </section>
             </div>
         </div>

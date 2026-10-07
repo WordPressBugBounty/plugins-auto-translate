@@ -120,6 +120,11 @@ class Auto_Translate {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-auto-translate-lifecycle.php';
 
 		/**
+		 * Private, short-lived settings drafts used by the admin workspace preview.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-auto-translate-settings-draft.php';
+
+		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
@@ -178,10 +183,12 @@ class Auto_Translate {
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'check_version', 1 );
 		$this->loader->add_action( 'admin_post_wpat_set_go_live', $plugin_admin, 'handle_go_live_action' );
 		$this->loader->add_action( 'admin_post_wpat_preview_site', $plugin_admin, 'handle_preview_site_action' );
-		$this->loader->add_action( 'admin_post_wpat_record_launch_action', $plugin_admin, 'handle_record_launch_action' );
-		$this->loader->add_action( 'admin_post_wpat_set_launch_checklist_state', $plugin_admin, 'handle_launch_checklist_state_action' );
-		$this->loader->add_action( 'wp_ajax_wpat_set_launch_checklist_state', $plugin_admin, 'handle_launch_checklist_state_ajax' );
 		$this->loader->add_action( 'wp_ajax_wpat_dismiss_plugin_links_notice', $plugin_admin, 'handle_plugin_links_notice_dismissal_ajax' );
+		$this->loader->add_action( 'wp_ajax_wpat_save_settings_draft', $plugin_admin, 'handle_save_settings_draft_ajax' );
+		$this->loader->add_action( 'wp_ajax_wpat_get_publish_readiness', $plugin_admin, 'handle_get_publish_readiness_ajax' );
+		$this->loader->add_action( 'wp_ajax_wpat_commit_settings_draft', $plugin_admin, 'handle_commit_settings_draft_ajax' );
+		$this->loader->add_action( 'wp_ajax_wpat_discard_settings_draft', $plugin_admin, 'handle_discard_settings_draft_ajax' );
+		$this->loader->add_action( 'wp_ajax_wpat_load_settings_tab', $plugin_admin, 'handle_load_settings_tab_ajax' );
 		$this->loader->add_action( 'update_option_wpat_go_live', $lifecycle, 'handle_go_live_option_update', 10, 3 );
 		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) . '/auto-translate.php' ), $plugin_admin, 'add_plugin_action_links' );
 		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_plugin_row_meta', 10, 2 );
@@ -201,12 +208,16 @@ class Auto_Translate {
 		$plugin_public = new Auto_Translate_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		// Run after WordPress has resolved the front-end request and current user.
+		// At init the authenticated user can still be unavailable on some sites.
+		$this->loader->add_action( 'wp', $plugin_public, 'enable_settings_draft_preview', 1 );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_filter( 'script_loader_tag', $plugin_public, 'add_defer_to_public_script_tags', 10, 3 );
 		$this->loader->add_action( 'init', $plugin_public, 'register_selector_block' );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'add_version_meta', 1 );
 		$this->loader->add_action( 'wp_head', $plugin_public, 'hook_javascript_translator' );
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'hook_content_translator' );
+		$this->loader->add_action( 'wp_footer', $plugin_public, 'render_settings_draft_preview_refresh_listener', 99 );
 		$this->loader->add_action( 'admin_bar_menu', $plugin_public, 'add_preview_admin_bar_node', 90 );
 		$this->loader->add_filter('wp_nav_menu_items', $plugin_public,'hook_menu_item', 10, 2);
 		$this->loader->add_filter( 'render_block', $plugin_public, 'hook_navigation_block', 10, 2 );

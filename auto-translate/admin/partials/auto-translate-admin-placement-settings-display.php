@@ -18,19 +18,18 @@ $wpat_navigation_posts = get_posts(
 );
 ?>
 <div class="wpat-settings-panel wpat-placement-settings">
-	<input type="hidden" name="wpat_launch_checklist_reviewed[placement]" value="1" />
-	<div class="wpat-card" id="wpat-launch-placement">
+	<div class="wpat-card">
 		<h3 class="wpat-card-title"><?php esc_html_e( 'Floating selector', 'auto-translate' ); ?></h3>
 		<table class="form-table" role="presentation">
 			<tr valign="top">
 				<th scope="row">
-					<?php esc_html_e( 'Show floating selector', 'auto-translate' ); ?><br/>
+					<span id="wpat-default-location-label"><?php esc_html_e( 'Show floating selector', 'auto-translate' ); ?></span><br/>
 					<small><?php esc_html_e( 'A persistent selector anchored to a viewport corner, visible on every page. Independent from menu or shortcode placements.', 'auto-translate' ); ?></small>
 				</th>
 				<td colspan="<?php echo esc_attr( $wpat_data['columns'] ); ?>">
 					<label class="wpat-toggle" for="wpat_default_location">
 						<input type="hidden" name="wpat_default_location" value="0" />
-						<input type="checkbox" id="wpat_default_location" name="wpat_default_location" value="1" <?php checked( (bool) $wpat_data['wpat_default_location'], true ); ?> />
+						<input type="checkbox" id="wpat_default_location" name="wpat_default_location" value="1" aria-labelledby="wpat-default-location-label" <?php checked( (bool) $wpat_data['wpat_default_location'], true ); ?> />
 						<span class="wpat-toggle-slider" aria-hidden="true"></span>
 					</label>
 				</td>

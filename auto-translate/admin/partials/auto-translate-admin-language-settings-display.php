@@ -27,8 +27,7 @@ $wpat_languages_countries = is_array( $wpat_data['wpat_languages_countries'] ?? 
 $wpat_plugin_file = dirname( dirname( __DIR__ ) ) . '/auto-translate.php';
 ?>
 <div class="wpat-settings-panel">
-<input type="hidden" name="wpat_launch_checklist_reviewed[languages]" value="1" />
-<div class="wpat-card wpat-card-languages" id="wpat-launch-languages">
+<div class="wpat-card wpat-card-languages">
     <h3 class="wpat-card-title">
         <?php esc_html_e('Supported languages', 'auto-translate'); ?>
         <span class="wpat-language-selected-count" id="wpat_language_selected_count">0 <?php esc_html_e( 'selected', 'auto-translate' ); ?></span>
@@ -57,6 +56,7 @@ $wpat_plugin_file = dirname( dirname( __DIR__ ) ) . '/auto-translate.php';
             <button type="button" class="button" id="wpat_language_clear_all"><?php esc_html_e( 'Clear all', 'auto-translate' ); ?></button>
         </div>
 
+        <input type="hidden" name="wpat_supported_languages[]" value="" />
         <input type="hidden" id="wpat_language_order" name="wpat_language_order" value="<?php echo esc_attr( (string) $wpat_data['wpat_language_order'] ); ?>" />
         <div class="wpat-language-list-shell">
             <label class="wpat-language-all">

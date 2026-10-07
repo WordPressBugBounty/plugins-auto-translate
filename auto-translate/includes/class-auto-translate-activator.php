@@ -40,7 +40,7 @@ class Auto_Translate_Activator {
 
 	public static function add_options() {
 		$default_wpat_widget_type = 'minimalist';
-		$is_existing_installation = (bool) get_option('wpat_supported_languages');
+		$is_existing_installation = null !== get_option( 'wpat_supported_languages', null );
 		$has_go_live_option       = null !== get_option( 'wpat_go_live', null );
 		$default_wpat_floating_position = 'bottom_left';
 
@@ -118,8 +118,6 @@ class Auto_Translate_Activator {
 		add_option('wpat_min_custom_css', '');
 		add_option( 'wpat_excluded_selectors', '' );
 		add_option('wpat_delete_data_on_uninstall', '');
-		add_option( 'wpat_launch_checklist_completed', $is_existing_installation );
-		add_option( 'wpat_launch_checklist_reviewed', self::get_default_launch_checklist_reviewed( $is_existing_installation ) );
 
 		self::migrate_widget_type();
 		self::migrate_min_custom_css();
@@ -153,16 +151,6 @@ class Auto_Translate_Activator {
 		if ( '' === $minimalist_custom_css && '' !== $legacy_custom_css ) {
 			update_option( 'wpat_min_custom_css', $legacy_custom_css );
 		}
-	}
-
-	private static function get_default_launch_checklist_reviewed( $is_existing_installation ) {
-		$reviewed = array(
-			'languages' => false,
-			'style'     => false,
-			'placement' => false,
-		);
-
-		return $is_existing_installation ? array_fill_keys( array_keys( $reviewed ), true ) : $reviewed;
 	}
 
 }

@@ -59,6 +59,20 @@ class Auto_Translate_Public
     private $version;
 
     /**
+     * Private settings values applied only to an authenticated draft preview.
+     *
+     * @var array<string, mixed>
+     */
+    private $settings_draft_preview = array();
+
+    /**
+     * Whether this request is an authenticated private settings preview.
+     *
+     * @var bool
+     */
+    private $is_settings_draft_preview = false;
+
+    /**
      * Initialize the class and set its properties.
      *
      * @since    1.0.0
@@ -71,6 +85,110 @@ class Auto_Translate_Public
         $this->plugin_name = $plugin_name;
         $this->version = $version;
 
+    }
+
+    /**
+     * Apply a signed editor-owned draft only to this frontend request.
+     *
+     * The token, logged-in editor, and HTTP-only browser-session cookie must
+     * all agree. This prevents a copied preview URL from exposing staged
+     * settings and keeps the public option values unchanged.
+     *
+     * @return void
+     */
+    public function enable_settings_draft_preview()
+    {
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended -- The signed token itself authorizes this read-only preview request.
+        if ( is_admin() || ! isset( $_GET['wpat_settings_preview'] ) || ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
+
+        $token   = isset( $_GET['wpat_settings_preview'] ) ? sanitize_text_field( wp_unslash( $_GET['wpat_settings_preview'] ) ) : '';
+        // phpcs:enable
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- The session is sanitized and verified against the signed preview token below.
+        $session = isset( $_COOKIE['wpat_settings_draft_session'] ) ? sanitize_text_field( wp_unslash( $_COOKIE['wpat_settings_draft_session'] ) ) : '';
+        if ( ! is_string( $token ) || ! is_string( $session ) ) {
+            return;
+        }
+
+        $draft_store = new Auto_Translate_Settings_Draft();
+        $draft       = $draft_store->validate_preview_token_for_owner( $token, get_current_user_id(), sanitize_text_field( $session ) );
+        if ( false === $draft || ! is_array( $draft['payload'] ?? null ) ) {
+            return;
+        }
+
+        $this->settings_draft_preview    = $draft['payload'];
+        $this->is_settings_draft_preview = true;
+        nocache_headers();
+
+        foreach ( array_keys( $this->settings_draft_preview ) as $option ) {
+            add_filter( 'option_' . $option, array( $this, 'filter_settings_draft_preview_option' ), 10, 2 );
+        }
+    }
+
+    /**
+     * Override an option value only while rendering the authenticated preview.
+     *
+     * @param mixed  $value  Stored option value.
+     * @param string $option Option name.
+     * @return mixed
+     */
+    public function filter_settings_draft_preview_option( $value, $option )
+    {
+        if ( ! $this->is_settings_draft_preview || ! array_key_exists( $option, $this->settings_draft_preview ) ) {
+            return $value;
+        }
+
+        return $this->settings_draft_preview[ $option ];
+    }
+
+    /**
+     * Reload an authenticated settings preview after the editor autosaves a
+     * newer draft revision. The signed URL remains owner and browser-session
+     * scoped; it intentionally points at the current private draft.
+     *
+     * @return void
+     */
+    public function render_settings_draft_preview_refresh_listener()
+    {
+        if ( ! $this->is_settings_draft_preview ) {
+            return;
+        }
+
+        ?>
+        <script>
+        (function () {
+            var channelName = 'wpat-settings-draft';
+            var storageKey = 'wpat_settings_draft';
+
+            function refreshFor(event) {
+                if (!event || event.source !== 'wpat-settings-draft' || ['saved', 'committed', 'discarded'].indexOf(event.event) === -1) {
+                    return;
+                }
+                window.location.reload();
+            }
+
+            if (typeof window.BroadcastChannel === 'function') {
+                var channel = new window.BroadcastChannel(channelName);
+                channel.onmessage = function (message) {
+                    refreshFor(message.data);
+                };
+                return;
+            }
+
+            window.addEventListener('storage', function (event) {
+                if (event.key !== storageKey || !event.newValue) {
+                    return;
+                }
+                try {
+                    refreshFor(JSON.parse(event.newValue));
+                } catch (error) {
+                    // Ignore malformed storage notifications from other scripts.
+                }
+            });
+        }());
+        </script>
+        <?php
     }
 
     /**
@@ -860,6 +978,7 @@ class Auto_Translate_Public
 
             $normalized_lang_code = isset( $lang_data['lang_code'] ) ? sanitize_text_field( (string) $lang_data['lang_code'] ) : sanitize_text_field( (string) $lang_code );
             $lang_name            = isset( $lang_data['lang_name'] ) ? sanitize_text_field( (string) $lang_data['lang_name'] ) : $normalized_lang_code;
+            $lang_name_english    = isset( $lang_data['lang_name_english'] ) ? sanitize_text_field( (string) $lang_data['lang_name_english'] ) : $lang_name;
             $lang_name_native     = isset( $lang_data['lang_name_native'] ) ? sanitize_text_field( (string) $lang_data['lang_name_native'] ) : $lang_name;
             $country_code         = isset( $lang_data['country_code'] ) ? sanitize_html_class( (string) $lang_data['country_code'] ) : '';
 
@@ -881,6 +1000,7 @@ class Auto_Translate_Public
             $view_model[ Auto_Translate_Config::normalize_lang_code( (string) $lang_code ) ] = array(
                 'lang_code'        => $normalized_lang_code,
                 'lang_name'        => $lang_name,
+                'lang_name_english' => $lang_name_english,
                 'lang_name_native' => $lang_name_native,
                 'country_code'     => $country_code,
                 'display_label'    => $display_label,

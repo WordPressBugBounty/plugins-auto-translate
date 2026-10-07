@@ -20,11 +20,20 @@ if ( ! in_array( $wpat_min_base_style, array( 'compact', 'minimal', 'native' ), 
 	$wpat_min_base_style = 'compact';
 }
 
-$wpat_country_flag_emoji = static function( $country_code ) {
+$wpat_non_emoji_flag_codes = array( 'EO' );
+$wpat_country_has_emoji_flag = static function( $country_code ) use ( $wpat_non_emoji_flag_codes ) {
 	$country_code = strtoupper( sanitize_key( (string) $country_code ) );
 
-	if ( ! preg_match( '/^[A-Z]{2}$/', $country_code ) ) {
-		return '';
+	return (bool) preg_match( '/^[A-Z]{2}$/', $country_code ) && ! in_array( $country_code, $wpat_non_emoji_flag_codes, true );
+};
+
+$wpat_country_flag_emoji = static function( $country_code, $fallback_code = '' ) use ( $wpat_country_has_emoji_flag ) {
+	$country_code = strtoupper( sanitize_key( (string) $country_code ) );
+
+	if ( ! $wpat_country_has_emoji_flag( $country_code ) ) {
+		$fallback_code = strtoupper( sanitize_key( (string) $fallback_code ) );
+
+		return '' !== $fallback_code ? $fallback_code : '?';
 	}
 
 	$emoji = '';
@@ -84,7 +93,7 @@ $wpat_country_flag_emoji = static function( $country_code ) {
             $wpat_display_label = isset( $wpat_selector_lang['display_label'] ) ? (string) $wpat_selector_lang['display_label'] : '';
             ?>
             <button type="button" class="wpat_minimal_link wpat_lang_item" data-lang-code="<?php echo esc_attr( $wpat_lang_code ); ?>" data-wpat-label="<?php echo esc_attr( $wpat_display_label ); ?>" aria-label="<?php echo esc_attr( $wpat_display_label ); ?>" role="listitem">
-                <div class="wpat_flag <?php echo esc_attr( $wpat_lang['country_code'] ); ?>" data-wpat-flag-emoji="<?php echo esc_attr( $wpat_country_flag_emoji( $wpat_lang['country_code'] ) ); ?>"></div>
+                <div class="wpat_flag <?php echo esc_attr( $wpat_lang['country_code'] ); ?><?php echo $wpat_country_has_emoji_flag( $wpat_lang['country_code'] ) ? '' : ' wpat_flag_fallback_code'; ?>" data-wpat-flag-emoji="<?php echo esc_attr( $wpat_country_flag_emoji( $wpat_lang['country_code'], $wpat_lang_code ) ); ?>"></div>
                 <div class="wpat_lang_name skiptranslate"><?php echo esc_html( $wpat_lang['lang_name'] ); ?></div>
                 <div class="wpat_lang_name_code skiptranslate">&nbsp;-&nbsp;</div>
                 <div class="wpat_lang_code skiptranslate"><?php echo esc_html( $wpat_lang['lang_code'] ); ?></div>
@@ -154,7 +163,7 @@ $wpat_country_flag_emoji = static function( $country_code ) {
         $wpat_option_id = $wpat_dropdown_id . '-option-' . sanitize_html_class( (string) $wpat_lang_code );
         ?>
         <button type="button" id="<?php echo esc_attr( $wpat_option_id ); ?>" class="wpat_lang_item" data-lang-code="<?php echo esc_attr( $wpat_lang_code )?>" data-lang-name="<?php echo esc_attr( strtolower( $wpat_lang['lang_name'] ) ); ?>" data-lang-native="<?php echo esc_attr( strtolower( $wpat_lang['lang_name_native'] ) ); ?>" data-wpat-search="<?php echo esc_attr( strtolower( $wpat_search_text ) ); ?>" data-wpat-label="<?php echo esc_attr( $wpat_display_label ); ?>" role="option" aria-selected="false" tabindex="-1">
-            <div class="wpat_flag <?php echo esc_attr( $wpat_lang['country_code'] )?>" data-wpat-flag-emoji="<?php echo esc_attr( $wpat_country_flag_emoji( $wpat_lang['country_code'] ) ); ?>"></div>
+            <div class="wpat_flag <?php echo esc_attr( $wpat_lang['country_code'] )?><?php echo $wpat_country_has_emoji_flag( $wpat_lang['country_code'] ) ? '' : ' wpat_flag_fallback_code'; ?>" data-wpat-flag-emoji="<?php echo esc_attr( $wpat_country_flag_emoji( $wpat_lang['country_code'], $wpat_lang_code ) ); ?>"></div>
             <div class="wpat_lang_name skiptranslate"><?php echo esc_html( $wpat_lang['lang_name'] )?></div>
             <div class="wpat_lang_name_code skiptranslate">&nbsp;-&nbsp;</div>
             <div class="wpat_lang_code skiptranslate"><?php echo esc_html( $wpat_lang['lang_code'] )?></div>

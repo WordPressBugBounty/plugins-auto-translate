@@ -14,9 +14,8 @@ if ( 'clean' === $wpat_minimalist['wpat_min_style'] && 'none' === $wpat_min_text
 }
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>
-<input type="hidden" name="wpat_launch_checklist_reviewed[style]" value="1" />
 <div id="wpat-custom-styling"<?php echo in_array( $wpat_min_preset, array( 'custom', 'minimal_custom' ), true ) ? '' : ' hidden'; ?>>
-<div class="wpat-card" id="wpat-launch-style">
+<div class="wpat-card">
     <h3 class="wpat-card-title"><?php esc_html_e('Style your selector', 'auto-translate'); ?></h3>
     <table class="form-table">
         <tr valign="top">
@@ -48,6 +47,10 @@ if ( 'clean' === $wpat_minimalist['wpat_min_style'] && 'none' === $wpat_min_text
                         <input type="radio" name="wpat_min_style" value="clean" <?php checked( $wpat_minimalist['wpat_min_style'], 'clean' ); ?>/>
                         <span class="wpat-style-tile-icon">EN</span><span>Text only</span>
                     </label>
+                </div>
+                <div class="wpat-advanced-info suggestion" data-wpat-emoji-flags-notice<?php echo 'emoji_flags' === $wpat_minimalist['wpat_min_style'] ? '' : ' hidden'; ?> role="note">
+                    <span class="dashicons dashicons-info" aria-hidden="true"></span>
+                    <span><?php esc_html_e( 'Some flags may not be available as emojis. Check the preview to verify your languages.', 'auto-translate' ); ?></span>
                 </div>
                 <div class="wpat_min_icon_wrapper <?php echo $wpat_minimalist['wpat_min_style']==='icon'?'':'wpat_hidden'?> wpat-icon-picker-row">
                     <input id="wpat_min_icon" name="wpat_min_icon" type="hidden" value="<?php echo esc_attr( $wpat_minimalist['wpat_min_icon'] );?>"/>
@@ -181,12 +184,12 @@ if ( 'clean' === $wpat_minimalist['wpat_min_style'] && 'none' === $wpat_min_text
         </tr>
         <tr valign="top">
             <th scope="row">
-                <?php esc_html_e('Underline on hover', 'auto-translate'); ?><br/>
+                <span id="wpat-min-txt-underline-label"><?php esc_html_e('Underline on hover', 'auto-translate'); ?></span><br/>
                 <small><?php esc_html_e('Underline the hovered dropdown item text.', 'auto-translate'); ?></small>
             </th>
             <td colspan="<?php echo $wpat_columns?>">
                 <label class="wpat-toggle" for="wpat_min_txt_underline">
-                    <input type="checkbox" id="wpat_min_txt_underline" value="wpat_min_txt_underline" name="wpat_min_txt_underline" <?php checked( $wpat_minimalist['wpat_min_txt_underline'], 'wpat_min_txt_underline' ); ?>/>
+                    <input type="checkbox" id="wpat_min_txt_underline" value="wpat_min_txt_underline" name="wpat_min_txt_underline" aria-labelledby="wpat-min-txt-underline-label" <?php checked( $wpat_minimalist['wpat_min_txt_underline'], 'wpat_min_txt_underline' ); ?>/>
                     <span class="wpat-toggle-slider" aria-hidden="true"></span>
                 </label>
             </td>

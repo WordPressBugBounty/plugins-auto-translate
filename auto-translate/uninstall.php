@@ -86,9 +86,6 @@ $wpat_option_keys = array(
 	'wpat_excluded_selectors',
 	'wpat_delete_data_on_uninstall',
 	'wpat_classic_widget_migrated_notice',
-	'wpat_launch_checklist_completed',
-	'wpat_launch_checklist_reviewed',
-	'wpat_lifecycle_last_saved_tab',
 	'wpat_lifecycle',
 	'wpat_size', // legacy option key from old versions.
 );
@@ -96,5 +93,3 @@ $wpat_option_keys = array(
 foreach ( $wpat_option_keys as $wpat_option_key ) {
 	delete_option( $wpat_option_key );
 }
-
-delete_metadata( 'user', 0, 'wpat_launch_checklist_state', '', true );

@@ -23,7 +23,7 @@ $wpat_data = $vars['tabs']['advanced_settings'];
     <table class="form-table">
         <tr valign="top">
             <th scope="row">
-                <?php esc_html_e( 'Auto-translate for visitors', 'auto-translate' ); ?><br/>
+                <span id="wpat-auto-detect-label"><?php esc_html_e( 'Auto-translate for visitors', 'auto-translate' ); ?></span><br/>
                 <small><?php esc_html_e( 'Automatically translate the site into each visitor\'s browser language on first visit. Visitors can still switch manually at any time.', 'auto-translate' ); ?></small>
             </th>
             <td colspan="<?php echo esc_attr( $wpat_data['columns'] ); ?>">
@@ -32,6 +32,7 @@ $wpat_data = $vars['tabs']['advanced_settings'];
                     <input
                         type="checkbox"
                         id="wpat_auto_detect_toggle"
+                        aria-labelledby="wpat-auto-detect-label"
                         <?php checked( $wpat_data['wpat_auto_detect'], 'enabled' ); ?>
                     />
                     <span class="wpat-toggle-slider" aria-hidden="true"></span>

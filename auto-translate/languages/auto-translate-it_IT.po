@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Automatic Translator with Google Translate 2.2.1\n"
+"Project-Id-Version: Automatic Translator with Google Translate 2.3.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/auto-translate\n"
-"POT-Creation-Date: 2026-07-30T10:08:10+00:00\n"
-"PO-Revision-Date: 2026-06-02 13:24+0200\n"
 "Last-Translator: Pampa Dev <support@pampa.dev>\n"
 "Language-Team: Italian\n"
-"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-01T15:02:38+00:00\n"
+"PO-Revision-Date: 2026-06-02 13:24+0200\n"
+"Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Codex gettext workflow\n"
 
@@ -37,250 +37,180 @@ msgstr "Pampa Dev"
 msgid "https://pampa.dev"
 msgstr "https://pampa.dev"
 
-#: admin/class-auto-translate-admin.php:159
+#: admin/class-auto-translate-admin.php:222
+#: admin/class-auto-translate-admin.php:782
+msgid "Could not save your settings draft. Refresh the page and try again."
+msgstr ""
+"Impossibile salvare la bozza delle tue impostazioni. Aggiorna la pagina e "
+"riprova."
+
+#: admin/class-auto-translate-admin.php:223
+#: admin/class-auto-translate-admin.php:860
+msgid "Could not discard your settings draft. Refresh the page and try again."
+msgstr ""
+"Impossibile scartare la bozza delle tue impostazioni. Aggiorna la pagina e "
+"riprova."
+
+#: admin/class-auto-translate-admin.php:240
+msgid "Could not refresh publish readiness. Try again before publishing."
+msgstr ""
+"Impossibile aggiornare la verifica di pubblicazione. Riprova prima di "
+"pubblicare."
+
+#: admin/class-auto-translate-admin.php:276
 msgid "Automatic Translator Settings"
 msgstr "Automatic Translator Settings"
 
-#: admin/class-auto-translate-admin.php:159
+#: admin/class-auto-translate-admin.php:276
 msgid "Translator"
 msgstr "Translator"
 
-#: admin/class-auto-translate-admin.php:679
-msgid "All languages selected"
-msgstr "Tutte le lingue selezionate"
-
-#. translators: %d: number of selected languages.
-#: admin/class-auto-translate-admin.php:698
-#, php-format
-msgid "Selected languages: %d"
-msgstr "Lingue selezionate: %d"
-
-#. translators: %s: base language name.
-#: admin/class-auto-translate-admin.php:708
-#, php-format
-msgid "Base language: %s"
-msgstr "Lingua di base: %s"
-
-#: admin/class-auto-translate-admin.php:720
-msgid "Flags"
-msgstr "Bandiere"
-
-#: admin/class-auto-translate-admin.php:721
-#: admin/partials/auto-translate-admin-visual-settings-display.php:221
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:35
-msgid "Emoji flags"
-msgstr "Bandiere emoji"
-
-#: admin/class-auto-translate-admin.php:722
-msgid "Flat flags"
-msgstr "Bandiere piatte"
-
-#: admin/class-auto-translate-admin.php:723
-#: admin/partials/auto-translate-admin-visual-settings-classic-display.php:21
-msgid "Icon"
-msgstr "Icona"
-
-#: admin/class-auto-translate-admin.php:724
-msgid "Text only"
-msgstr "Solo testo"
-
-#: admin/class-auto-translate-admin.php:727
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:107
-msgid "Dropdown"
-msgstr "Menu a discesa"
-
-#: admin/class-auto-translate-admin.php:728
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:108
-msgid "Popup with search"
-msgstr "Popup con ricerca"
-
-#: admin/class-auto-translate-admin.php:731
-msgid "Language name"
-msgstr "Nome della lingua"
-
-#: admin/class-auto-translate-admin.php:732
-msgid "Language code"
-msgstr "Codice della lingua"
-
-#: admin/class-auto-translate-admin.php:733
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:69
-msgid "Name + code"
-msgstr "Nome + codice"
-
-#: admin/class-auto-translate-admin.php:734
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:70
-msgid "No text"
-msgstr "Nessun testo"
-
-#. translators: 1: selector icon style, 2: selector text style.
-#: admin/class-auto-translate-admin.php:741
-#, php-format
-msgid "%1$s, %2$s"
-msgstr "%1$s, %2$s"
-
-#: admin/class-auto-translate-admin.php:756
-#: admin/partials/auto-translate-admin-placement-settings-display.php:45
-msgid "Top left"
-msgstr "In alto a sinistra"
-
-#: admin/class-auto-translate-admin.php:757
-#: admin/partials/auto-translate-admin-placement-settings-display.php:46
-msgid "Top right"
-msgstr "In alto a destra"
-
-#: admin/class-auto-translate-admin.php:758
-#: admin/partials/auto-translate-admin-placement-settings-display.php:47
-msgid "Bottom right"
-msgstr "In basso a destra"
-
-#: admin/class-auto-translate-admin.php:759
-#: admin/partials/auto-translate-admin-placement-settings-display.php:48
-msgid "Bottom left"
-msgstr "In basso a sinistra"
-
-#: admin/class-auto-translate-admin.php:763
-#: admin/partials/auto-translate-admin-placement-settings-display.php:23
-msgid "Floating selector"
-msgstr "Selettore flottante"
-
-#: admin/class-auto-translate-admin.php:767
-#: admin/partials/auto-translate-admin-placement-settings-display.php:70
-msgid "Navigation menu"
-msgstr "Menù di navigazione"
-
-#: admin/class-auto-translate-admin.php:768
-msgid "Menu placement enabled"
-msgstr "Posizionamento nel menù attivato"
-
-#: admin/class-auto-translate-admin.php:771
-#: admin/partials/auto-translate-admin-placement-settings-display.php:121
-msgid "CSS injection"
-msgstr "Iniezione CSS"
-
-#: admin/class-auto-translate-admin.php:775
-#: admin/partials/auto-translate-admin-placement-settings-display.php:136
-msgid "Manual placement"
-msgstr "Posizionamento manuale"
-
-#: admin/class-auto-translate-admin.php:776
-msgid "Use a block, widget, or shortcode"
-msgstr "Usa un blocco, widget o shortcode"
-
-#: admin/class-auto-translate-admin.php:795
-#: admin/partials/auto-translate-admin-display.php:164
-#: admin/partials/auto-translate-admin-display.php:171
-msgid "Styling"
-msgstr "Stile"
-
-#: admin/class-auto-translate-admin.php:799
-msgid "Adjust style"
-msgstr "Regola stile"
-
-#: admin/class-auto-translate-admin.php:803
-#: admin/partials/auto-translate-admin-display.php:165
-#: admin/partials/auto-translate-admin-display.php:172
-msgid "Languages"
-msgstr "Lingue"
-
-#: admin/class-auto-translate-admin.php:807
-msgid "Choose languages"
-msgstr "Scegli lingue"
-
-#: admin/class-auto-translate-admin.php:811
-#: admin/partials/auto-translate-admin-display.php:166
-#: admin/partials/auto-translate-admin-display.php:173
-msgid "Placement"
-msgstr "Posizionamento"
-
-#: admin/class-auto-translate-admin.php:815
-msgid "Set placement"
-msgstr "Imposta posizionamento"
-
-#: admin/class-auto-translate-admin.php:823
-#: admin/class-auto-translate-admin.php:838
-#: admin/class-auto-translate-admin.php:863
-#: admin/class-auto-translate-admin.php:902
-#: admin/class-auto-translate-admin.php:927
+#: admin/class-auto-translate-admin.php:762
+#: admin/class-auto-translate-admin.php:798
+#: admin/class-auto-translate-admin.php:830
+#: admin/class-auto-translate-admin.php:852
+#: admin/class-auto-translate-admin.php:1047
+#: admin/class-auto-translate-admin.php:1071
+#: admin/class-auto-translate-admin.php:1129
+#: admin/class-auto-translate-admin.php:1147
 msgid "You are not allowed to manage Automatic Translator."
 msgstr "Non hai i permessi per gestire Automatic Translator."
 
-#: admin/class-auto-translate-admin.php:1074
-#: admin/partials/auto-translate-admin-display.php:176
+#: admin/class-auto-translate-admin.php:810
+msgid ""
+"Your settings draft is no longer available. Refresh the page and try again."
+msgstr ""
+"La bozza delle impostazioni non è più disponibile. Aggiorna la pagina e "
+"riprova."
+
+#: admin/class-auto-translate-admin.php:838
+msgid "Could not save your settings. Refresh the page and try again."
+msgstr "Impossibile salvare le tue impostazioni. Aggiorna la pagina e riprova."
+
+#. translators: %d: number of selected languages.
+#: admin/class-auto-translate-admin.php:942
+#, php-format
+msgid "%d language selected"
+msgid_plural "%d languages selected"
+msgstr[0] "%d lingua selezionata"
+msgstr[1] "%d lingue selezionate"
+
+#. translators: %s: localized selected-language count.
+#: admin/class-auto-translate-admin.php:948
+#, php-format
+msgid "All available languages selected (%s)"
+msgstr "Tutte le lingue disponibili selezionate (%s)"
+
+#: admin/class-auto-translate-admin.php:996
+msgid "Complete"
+msgstr "Completo"
+
+#: admin/class-auto-translate-admin.php:997
+msgid "Incomplete"
+msgstr "Incompleto"
+
+#: admin/class-auto-translate-admin.php:998
+msgid "Floating selector configured"
+msgstr "Selettore flottante configurato"
+
+#: admin/class-auto-translate-admin.php:999
+msgid "Navigation menu placement configured"
+msgstr "Posizionamento nel menu di navigazione configurato"
+
+#: admin/class-auto-translate-admin.php:1000
+msgid "Wrapper selector placement configured"
+msgstr "Posizionamento tramite selettore wrapper configurato"
+
+#: admin/class-auto-translate-admin.php:1001
+msgid "No automatic placement; add a shortcode, widget, or block."
+msgstr ""
+"Nessun posizionamento automatico; aggiungi uno shortcode, widget o blocco."
+
+#: admin/class-auto-translate-admin.php:1002
+msgid "Selector style configured"
+msgstr "Stile del selettore configurato"
+
+#: admin/class-auto-translate-admin.php:1003
+msgid "Choose a selector style."
+msgstr "Scegli uno stile del selettore."
+
+#: admin/class-auto-translate-admin.php:1339
+#: admin/class-auto-translate-admin.php:1347
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: admin/class-auto-translate-admin.php:1089
+#: admin/class-auto-translate-admin.php:1362
 msgid "Support forum"
 msgstr "Forum di supporto"
 
-#: admin/class-auto-translate-admin.php:1094
+#: admin/class-auto-translate-admin.php:1367
 msgid "Rate us ★★★★★"
 msgstr "Votaci ★ ★ ★ ★"
 
-#: admin/class-auto-translate-admin.php:1127
+#: admin/class-auto-translate-admin.php:1400
 msgid "Could not go live"
 msgstr "Non potevo pubblicarlo"
 
-#: admin/class-auto-translate-admin.php:1128
+#: admin/class-auto-translate-admin.php:1401
 #, fuzzy
 msgid "What stopped you from getting Automatic Translator ready to go live?"
 msgstr ""
 "Cosa ti ha impedito di preparare Automatic Translator per la pubblicazione?"
 
-#: admin/class-auto-translate-admin.php:1133
+#: admin/class-auto-translate-admin.php:1406
 msgid "Design did not fit"
 msgstr "Design non adatto"
 
-#: admin/class-auto-translate-admin.php:1134
+#: admin/class-auto-translate-admin.php:1407
 msgid "What looked wrong about the language switcher?"
 msgstr "Cosa non andava nell’aspetto del selettore della lingua?"
 
-#: admin/class-auto-translate-admin.php:1139
+#: admin/class-auto-translate-admin.php:1412
 msgid "Wrong placement"
 msgstr "Posizione sbagliata"
 
-#: admin/class-auto-translate-admin.php:1140
+#: admin/class-auto-translate-admin.php:1413
 msgid "Where did the language switcher appear incorrectly?"
 msgstr "Dove appariva in modo errato il selettore della lingua?"
 
-#: admin/class-auto-translate-admin.php:1145
+#: admin/class-auto-translate-admin.php:1418
 msgid "Poor translation quality"
 msgstr "Qualità traduzione scarsa"
 
-#: admin/class-auto-translate-admin.php:1146
+#: admin/class-auto-translate-admin.php:1419
 msgid "Which languages or content gave you translation quality problems?"
 msgstr ""
 "Quali lingue o contenuti hanno causato problemi di qualità della traduzione?"
 
-#: admin/class-auto-translate-admin.php:1151
+#: admin/class-auto-translate-admin.php:1424
 msgid "Error or performance issue"
 msgstr "Errore o problema di prestazioni"
 
-#: admin/class-auto-translate-admin.php:1152
+#: admin/class-auto-translate-admin.php:1425
 msgid "What error, conflict, or performance issue did you see?"
 msgstr "Quale errore, conflitto o problema di prestazioni hai riscontrato?"
 
-#: admin/class-auto-translate-admin.php:1157
+#: admin/class-auto-translate-admin.php:1430
 msgid "Missing feature"
 msgstr "Funzionalità mancante"
 
-#: admin/class-auto-translate-admin.php:1158
+#: admin/class-auto-translate-admin.php:1431
 msgid "Which feature were you looking for?"
 msgstr "Quale funzionalità stavi cercando?"
 
-#: admin/class-auto-translate-admin.php:1163
+#: admin/class-auto-translate-admin.php:1436
 msgid "Just testing"
 msgstr "Solo una prova"
 
-#: admin/class-auto-translate-admin.php:1164
+#: admin/class-auto-translate-admin.php:1437
 msgid "What were you trying to test?"
 msgstr "Cosa stavi cercando di provare?"
 
-#: admin/class-auto-translate-admin.php:1169
+#: admin/class-auto-translate-admin.php:1442
 msgid "Something else"
 msgstr "Altro"
 
-#: admin/class-auto-translate-admin.php:1170
+#: admin/class-auto-translate-admin.php:1443
 msgid "Tell us what happened."
 msgstr "Raccontaci cosa è successo."
 
@@ -460,7 +390,7 @@ msgid "Portuguese"
 msgstr "portoghese"
 
 #: admin/partials/auto-translate-admin-display.php:23
-#: admin/partials/auto-translate-admin-display.php:46
+#: admin/partials/auto-translate-admin-display.php:55
 msgid "Automatic Translator"
 msgstr "Automatic Translator"
 
@@ -484,139 +414,117 @@ msgstr ""
 "Automatic Translator è tornato in modalità anteprima. Solo gli "
 "amministratori possono vederlo nel frontend."
 
-#: admin/partials/auto-translate-admin-display.php:50
-#: admin/partials/auto-translate-admin-display.php:60
-msgid "Plugin status"
-msgstr "Stato del plugin"
-
-#: admin/partials/auto-translate-admin-display.php:51
+#: admin/partials/auto-translate-admin-display.php:44
 msgid "Plugin links"
 msgstr "Collegamenti ai plugin"
 
-#: admin/partials/auto-translate-admin-display.php:52
+#: admin/partials/auto-translate-admin-display.php:46
 msgid "⭐️ Love this plugin? Give us 5 stars on WordPress.org :)"
 msgstr "⭐️ Ti piace questo plugin? Dateci 5 stelle su WordPress.org :)"
 
-#: admin/partials/auto-translate-admin-display.php:53
+#: admin/partials/auto-translate-admin-display.php:48
 msgid "⭐️ Need help? Visit the support forum. ⭐️"
 msgstr "⭐️ Hai bisogno di aiuto? Visita il forum di supporto. ⭐️"
 
-#: admin/partials/auto-translate-admin-display.php:62
+#: admin/partials/auto-translate-admin-display.php:58
 msgid "Visible to visitors"
 msgstr "Visibile ai visitatori"
 
-#: admin/partials/auto-translate-admin-display.php:62
+#: admin/partials/auto-translate-admin-display.php:58
 msgid "Not visible to visitors"
 msgstr "Non visibile ai visitatori"
 
-#: admin/partials/auto-translate-admin-display.php:73
-#: admin/partials/auto-translate-admin-display.php:75
-#: admin/partials/auto-translate-admin-display.php:76
-#, fuzzy
-msgid "Hide plugin status details"
-msgstr "Stato del plugin"
+#: admin/partials/auto-translate-admin-display.php:64
+#: admin/partials/auto-translate-admin-display.php:65
+msgid "Discard changes"
+msgstr "Scarta modifiche"
 
-#: admin/partials/auto-translate-admin-display.php:74
-#: admin/partials/auto-translate-admin-display.php:75
-#: admin/partials/auto-translate-admin-display.php:76
-#, fuzzy
-msgid "Show plugin status details"
-msgstr "Stato del plugin"
+#: admin/partials/auto-translate-admin-display.php:67
+msgid "Save"
+msgstr "Salva"
 
-#: admin/partials/auto-translate-admin-display.php:84
-msgid "Live"
-msgstr "Live"
+#: admin/partials/auto-translate-admin-display.php:67
+msgid "Save draft"
+msgstr "Salva bozza"
 
-#: admin/partials/auto-translate-admin-display.php:84
-msgid "Preview mode"
-msgstr "Modalità anteprima"
-
-#: admin/partials/auto-translate-admin-display.php:89
-msgid ""
-"Visitors can see and use Automatic Translator on the frontend wherever you "
-"place it."
-msgstr ""
-"I visitatori possono vedere e usare Automatic Translator nel frontend "
-"ovunque lo posizioni."
-
-#: admin/partials/auto-translate-admin-display.php:91
-msgid ""
-"Only administrators can see the translator. Visitors see nothing until you "
-"publish."
-msgstr ""
-"Solo gli amministratori possono vedere il traduttore. I visitatori non "
-"vedranno nulla finché non lo pubblichi."
-
-#: admin/partials/auto-translate-admin-display.php:97
+#: admin/partials/auto-translate-admin-display.php:68
 msgid "Preview site"
 msgstr "Anteprima del sito"
 
-#: admin/partials/auto-translate-admin-display.php:103
-msgid "Switch to preview"
-msgstr "Torna all'anteprima"
-
-#: admin/partials/auto-translate-admin-display.php:103
-msgid "Go Live"
-msgstr "Metti live"
-
-#: admin/partials/auto-translate-admin-display.php:120
-msgid "Setup checklist"
-msgstr "Checklist di configurazione"
-
-#: admin/partials/auto-translate-admin-display.php:121
-msgid "Review before going live"
-msgstr "Controlla prima di pubblicare"
-
-#: admin/partials/auto-translate-admin-display.php:130
-#: admin/partials/auto-translate-admin-display.php:132
-#: admin/partials/auto-translate-admin-display.php:133
+#: admin/partials/auto-translate-admin-display.php:75
 #, fuzzy
-msgid "Hide setup checklist"
-msgstr "Nascondi checklist di configurazione"
+msgid "Unpublish"
+msgstr "Inglese"
 
-#: admin/partials/auto-translate-admin-display.php:131
-#: admin/partials/auto-translate-admin-display.php:132
-#: admin/partials/auto-translate-admin-display.php:133
+#: admin/partials/auto-translate-admin-display.php:75
+#: admin/partials/auto-translate-admin-display.php:101
 #, fuzzy
-msgid "Show setup checklist"
-msgstr "Mostra checklist di configurazione"
+msgid "Publish"
+msgstr "Polacco"
 
-#: admin/partials/auto-translate-admin-display.php:144
-msgid "Complete"
-msgstr "Completo"
+#: admin/partials/auto-translate-admin-display.php:79
+msgid "Ready to publish?"
+msgstr "Pronto per la pubblicazione?"
 
-#: admin/partials/auto-translate-admin-display.php:144
-msgid "Incomplete"
-msgstr "Incompleto"
+#: admin/partials/auto-translate-admin-display.php:80
+msgid ""
+"Double-check these settings before making Automatic Translator visible to "
+"visitors."
+msgstr ""
+"Ricontrolla queste impostazioni prima di rendere Automatic Translator "
+"visibile ai visitatori."
 
-#: admin/partials/auto-translate-admin-display.php:154
-msgid "Go"
-msgstr "Vai"
+#: admin/partials/auto-translate-admin-display.php:81
+msgid "Publish readiness checks"
+msgstr "Controlli di preparazione alla pubblicazione"
 
-#: admin/partials/auto-translate-admin-display.php:167
-#: admin/partials/auto-translate-admin-display.php:174
+#: admin/class-auto-translate-admin.php:1334
+#: admin/partials/auto-translate-admin-display.php:83
+#: admin/partials/auto-translate-admin-display.php:113
+msgid "Languages"
+msgstr "Lingue"
+
+#: admin/class-auto-translate-admin.php:1335
+#: admin/partials/auto-translate-admin-display.php:88
+#: admin/partials/auto-translate-admin-display.php:114
+msgid "Placement"
+msgstr "Posizionamento"
+
+#: admin/class-auto-translate-admin.php:1333
+#: admin/partials/auto-translate-admin-display.php:93
+#: admin/partials/auto-translate-admin-display.php:112
+msgid "Styling"
+msgstr "Stile"
+
+#: admin/partials/auto-translate-admin-display.php:98
+msgid "Always show this reminder before publishing."
+msgstr "Mostra sempre questo promemoria prima di pubblicare."
+
+#: admin/partials/auto-translate-admin-display.php:100
+#, fuzzy
+msgid "Cancel"
+msgstr "Francia"
+
+#: admin/class-auto-translate-admin.php:1336
+#: admin/partials/auto-translate-admin-display.php:115
 msgid "Advanced"
 msgstr "Avanzato"
 
-#: admin/partials/auto-translate-admin-display.php:208
-msgid "Save changes"
-msgstr "Salva modifiche"
-
-#: admin/partials/auto-translate-admin-language-settings-display.php:33
+#: admin/partials/auto-translate-admin-language-settings-display.php:32
 msgid "Supported languages"
 msgstr "Lingue supportate"
 
-#: admin/partials/auto-translate-admin-language-settings-display.php:34
+#: admin/partials/auto-translate-admin-language-settings-display.php:33
 msgid "selected"
 msgstr "selezionato"
 
-#: admin/partials/auto-translate-admin-language-settings-display.php:47
+#: admin/partials/auto-translate-admin-language-settings-display.php:46
 msgid ""
 "For more than 10 languages, use the Searchable picker preset under 'Styling'."
 msgstr ""
 "Per più di 10 lingue, usa il predefinito Selettore con ricerca in « Stile »"
 
-#: admin/partials/auto-translate-admin-language-settings-display.php:51
+#: admin/partials/auto-translate-admin-language-settings-display.php:50
 msgid ""
 "Tip: this language list is sortable. Drag and drop languages to control "
 "selector order."
@@ -624,39 +532,43 @@ msgstr ""
 "Suggerimento: questo elenco di lingue è ordinabile. Trascina e rilascia le "
 "lingue per controllare l'ordine del selettore."
 
-#: admin/partials/auto-translate-admin-language-settings-display.php:55
+#: admin/partials/auto-translate-admin-language-settings-display.php:54
 msgid "Search languages..."
 msgstr "Cerca lingue..."
 
-#: admin/partials/auto-translate-admin-language-settings-display.php:56
+#: admin/partials/auto-translate-admin-language-settings-display.php:55
 msgid "Select all"
 msgstr "Seleziona tutto"
 
-#: admin/partials/auto-translate-admin-language-settings-display.php:57
+#: admin/partials/auto-translate-admin-language-settings-display.php:56
 msgid "Clear all"
 msgstr "Cancella tutto"
 
-#: admin/partials/auto-translate-admin-language-settings-display.php:64
+#: admin/partials/auto-translate-admin-language-settings-display.php:63
 msgid "All"
 msgstr "Tutto"
 
 #. translators: %s: language name.
-#: admin/partials/auto-translate-admin-language-settings-display.php:108
+#: admin/partials/auto-translate-admin-language-settings-display.php:107
 #, php-format
 msgid "%s flag variant"
 msgstr "Variante della bandiera %s"
 
 #. translators: %s: language name.
-#: admin/partials/auto-translate-admin-language-settings-display.php:122
+#: admin/partials/auto-translate-admin-language-settings-display.php:121
 #, php-format
 msgid "%s flag variants"
 msgstr "Varianti di flag %s"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:27
+#: admin/partials/auto-translate-admin-placement-settings-display.php:22
+msgid "Floating selector"
+msgstr "Selettore flottante"
+
+#: admin/partials/auto-translate-admin-placement-settings-display.php:26
 msgid "Show floating selector"
 msgstr "Mostra selettore flottante"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:28
+#: admin/partials/auto-translate-admin-placement-settings-display.php:27
 msgid ""
 "A persistent selector anchored to a viewport corner, visible on every page. "
 "Independent from menu or shortcode placements."
@@ -664,36 +576,56 @@ msgstr ""
 "Un selettore persistente ancorato ad un angolo del viewport, visibile su "
 "ogni pagina. Indipendente dal posizionamento del menu o dello shortcode."
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:40
+#: admin/partials/auto-translate-admin-placement-settings-display.php:39
 msgid "Position"
 msgstr "Posizione"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:41
+#: admin/partials/auto-translate-admin-placement-settings-display.php:40
 msgid "Which corner of the viewport to anchor the selector."
 msgstr "Quale angolo del viewport ancorare il selettore."
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:54
+#: admin/partials/auto-translate-admin-placement-settings-display.php:44
+msgid "Top left"
+msgstr "In alto a sinistra"
+
+#: admin/partials/auto-translate-admin-placement-settings-display.php:45
+msgid "Top right"
+msgstr "In alto a destra"
+
+#: admin/partials/auto-translate-admin-placement-settings-display.php:46
+msgid "Bottom right"
+msgstr "In basso a destra"
+
+#: admin/partials/auto-translate-admin-placement-settings-display.php:47
+msgid "Bottom left"
+msgstr "In basso a sinistra"
+
+#: admin/partials/auto-translate-admin-placement-settings-display.php:53
 msgid "Offset from edge"
 msgstr "Offset dal bordo"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:55
+#: admin/partials/auto-translate-admin-placement-settings-display.php:54
 msgid "Distance from the viewport edge and admin bar, in pixels."
 msgstr ""
 "Distanza dal bordo della finestra e dalla barra di amministrazione, in pixel."
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:59
+#: admin/partials/auto-translate-admin-placement-settings-display.php:58
 msgid "Horizontal"
 msgstr "Orizzontale"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:61
+#: admin/partials/auto-translate-admin-placement-settings-display.php:60
 msgid "Vertical"
 msgstr "Verticale"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:74
+#: admin/partials/auto-translate-admin-placement-settings-display.php:69
+msgid "Navigation menu"
+msgstr "Menù di navigazione"
+
+#: admin/partials/auto-translate-admin-placement-settings-display.php:73
 msgid "Menu placement"
 msgstr "Posizionamento del menù"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:75
+#: admin/partials/auto-translate-admin-placement-settings-display.php:74
 msgid ""
 "Inject the selector into a registered WordPress navigation menu or "
 "Navigation block. If your theme does not expose menus here, use a shortcode, "
@@ -703,39 +635,43 @@ msgstr ""
 "un blocco di navigazione. Se il tuo tema non espone i menu qui, utilizza uno "
 "shortcode, un widget o un blocco."
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:79
+#: admin/partials/auto-translate-admin-placement-settings-display.php:78
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:81
+#: admin/partials/auto-translate-admin-placement-settings-display.php:80
 msgid "Classic Menus"
 msgstr "Menù classici"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:89
+#: admin/partials/auto-translate-admin-placement-settings-display.php:88
 msgid "Navigation Blocks"
 msgstr "Blocchi di navigazione"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:101
+#: admin/partials/auto-translate-admin-placement-settings-display.php:100
 msgid "Position in menu"
 msgstr "Posizione nel menu"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:102
+#: admin/partials/auto-translate-admin-placement-settings-display.php:101
 msgid "Insert the selector at the start or end of the selected menu."
 msgstr "Inserire il selettore all'inizio o alla fine del menu selezionato."
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:108
+#: admin/partials/auto-translate-admin-placement-settings-display.php:107
 msgid "Start"
 msgstr "All’inizio"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:112
+#: admin/partials/auto-translate-admin-placement-settings-display.php:111
 msgid "End of menu"
 msgstr "Alla fine"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:125
+#: admin/partials/auto-translate-admin-placement-settings-display.php:120
+msgid "CSS injection"
+msgstr "Iniezione CSS"
+
+#: admin/partials/auto-translate-admin-placement-settings-display.php:124
 msgid "Wrapper CSS selector"
 msgstr "Selettore CSS wrapper"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:126
+#: admin/partials/auto-translate-admin-placement-settings-display.php:125
 msgid ""
 "Appends selector instances to matching elements on page load. Use a valid "
 "CSS selector, e.g. .site-header .language-slot"
@@ -744,31 +680,35 @@ msgstr ""
 "della pagina. Utilizza un selettore CSS valido, ad es. .site-"
 "header .language-slot"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:140
+#: admin/partials/auto-translate-admin-placement-settings-display.php:135
+msgid "Manual placement"
+msgstr "Posizionamento manuale"
+
+#: admin/partials/auto-translate-admin-placement-settings-display.php:139
 msgid "Method"
 msgstr "Metodo"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:141
+#: admin/partials/auto-translate-admin-placement-settings-display.php:140
 msgid "Best for"
 msgstr "Meglio per"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:142
+#: admin/partials/auto-translate-admin-placement-settings-display.php:141
 msgid "How to use"
 msgstr "Come usare"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:148
+#: admin/partials/auto-translate-admin-placement-settings-display.php:147
 msgid "Selector block"
 msgstr "Blocco selettore"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:149
+#: admin/partials/auto-translate-admin-placement-settings-display.php:148
 msgid "Block editor"
 msgstr "Editor di blocchi"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:151
+#: admin/partials/auto-translate-admin-placement-settings-display.php:150
 msgid "Block editor, Site Editor, template parts"
 msgstr "Editor di blocchi, editor del sito, parti del modello"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:154
+#: admin/partials/auto-translate-admin-placement-settings-display.php:153
 msgid ""
 "Search for \"Automatic Translator Selector\" in the block inserter and place "
 "it anywhere in your layout."
@@ -776,7 +716,7 @@ msgstr ""
 "Cerca \"Automatic Translator Selector\" nell’inseritore di blocchi e "
 "posizionalo ovunque nel layout."
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:156
+#: admin/partials/auto-translate-admin-placement-settings-display.php:155
 msgid ""
 "This WordPress install does not expose the required block APIs yet. Use the "
 "widget or shortcode placement methods instead."
@@ -785,19 +725,19 @@ msgstr ""
 "richieste. Utilizza invece i metodi di posizionamento del widget o dello "
 "shortcode."
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:162
+#: admin/partials/auto-translate-admin-placement-settings-display.php:161
 msgid "Widget"
 msgstr "widget"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:163
+#: admin/partials/auto-translate-admin-placement-settings-display.php:162
 msgid "Widget areas"
 msgstr "Aree widget"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:165
+#: admin/partials/auto-translate-admin-placement-settings-display.php:164
 msgid "Widget areas and sidebars"
 msgstr "Aree widget e barre laterali"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:166
+#: admin/partials/auto-translate-admin-placement-settings-display.php:165
 msgid ""
 "Go to <b>Appearance → Widgets</b> or the Site Editor, then add the Automatic "
 "Translator Button widget to any area."
@@ -805,35 +745,64 @@ msgstr ""
 "Vai su <b>Aspetto → Widget</b> o nell’Editor del sito, quindi aggiungi il "
 "Automatic Translator Button widget a qualsiasi area."
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:170
+#: admin/partials/auto-translate-admin-placement-settings-display.php:169
 msgid "Shortcode"
 msgstr "Shortcode"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:171
+#: admin/partials/auto-translate-admin-placement-settings-display.php:170
 msgid "Classic editor"
 msgstr "Editor classico"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:173
+#: admin/partials/auto-translate-admin-placement-settings-display.php:172
 msgid "Pages, builders, classic editor, templates"
 msgstr "Pagine, builder, editor classico, modelli"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:175
+#: admin/partials/auto-translate-admin-placement-settings-display.php:174
+#: admin/partials/auto-translate-admin-placement-settings-display.php:184
 #: admin/partials/auto-translate-admin-placement-settings-display.php:185
-#: admin/partials/auto-translate-admin-placement-settings-display.php:186
 msgid "Copy"
 msgstr "Copia"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:180
+#: admin/partials/auto-translate-admin-placement-settings-display.php:179
 msgid "Language link"
 msgstr "Link lingua"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:181
+#: admin/partials/auto-translate-admin-placement-settings-display.php:180
 msgid "Menus"
 msgstr "Menù"
 
-#: admin/partials/auto-translate-admin-placement-settings-display.php:183
+#: admin/partials/auto-translate-admin-placement-settings-display.php:182
 msgid "Menus and custom language switch links"
 msgstr "Menu e collegamenti personalizzati per il cambio di lingua"
+
+#: admin/partials/auto-translate-admin-preview-display.php:101
+#, fuzzy
+msgid "Live preview"
+msgstr "Anteprima"
+
+#: admin/partials/auto-translate-admin-preview-display.php:104
+msgid "Collapse live preview"
+msgstr "Comprimi anteprima dal vivo"
+
+#: admin/partials/auto-translate-admin-preview-display.php:116
+#, fuzzy
+msgid "Preview navigation menu"
+msgstr "Menù di navigazione"
+
+#: admin/partials/auto-translate-admin-preview-display.php:130
+#, fuzzy
+msgid "Language selector preview"
+msgstr "Anteprima di Translator"
+
+#: admin/partials/auto-translate-admin-preview-display.php:136
+msgid "No placement selected. Select one under “Placement” to see the preview."
+msgstr ""
+"Nessun posizionamento selezionato. Selezionane uno in «Posizionamento» per "
+"vedere l’anteprima."
+
+#: admin/partials/auto-translate-admin-preview-display.php:139
+msgid "Toggle preview colour scheme"
+msgstr "Alterna lo schema colori dell'anteprima"
 
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:11
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:17
@@ -844,18 +813,22 @@ msgstr "Aggiungi icona"
 msgid "Whether to add an icon to the button or not"
 msgstr "Se aggiungere o meno un'icona al pulsante"
 
+#: admin/partials/auto-translate-admin-visual-settings-classic-display.php:21
+msgid "Icon"
+msgstr "Icona"
+
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:22
 msgid "This is the icon used on the front-end button"
 msgstr "Questa è l'icona utilizzata sul pulsante front-end"
 
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:31
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:55
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:58
 msgid "Choose Icon"
 msgstr "Scegli icona"
 
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:39
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:174
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:137
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:140
 msgid "Font color"
 msgstr "Colore del carattere"
 
@@ -865,7 +838,7 @@ msgstr "Colore del carattere del pulsante"
 
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:46
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:181
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:175
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:178
 msgid "Font name"
 msgstr "Nome del carattere"
 
@@ -896,7 +869,7 @@ msgstr "L'ultimo colore del pulsante"
 
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:71
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:142
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:159
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:162
 msgid "Border thickness"
 msgstr "Spessore del bordo"
 
@@ -906,7 +879,7 @@ msgstr "Spessore del bordo dei pulsanti in pixel"
 
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:78
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:149
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:119
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:122
 msgid "Border color"
 msgstr "Colore del bordo"
 
@@ -979,7 +952,7 @@ msgid "Dropdown's border color"
 msgstr "Colore del bordo del menu a discesa"
 
 #: admin/partials/auto-translate-admin-visual-settings-classic-display.php:158
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:127
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:130
 msgid "Background color"
 msgstr "Colore di sfondo"
 
@@ -1019,159 +992,165 @@ msgstr "Colore del carattere selezionato"
 msgid "Dropdown's font color when selected"
 msgstr "Colore del carattere del menu a discesa quando selezionato"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:127
-msgid "Preview"
-msgstr "Anteprima"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:127
-msgid "Reflects your current styling"
-msgstr "Riflette il tuo stile attuale"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:130
-msgid "Toggle preview colour scheme"
-msgstr "Alterna lo schema colori dell'anteprima"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:182
-#, fuzzy
-msgid "Language selector preview"
-msgstr "Anteprima di Translator"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:192
+#: admin/partials/auto-translate-admin-visual-settings-display.php:117
 msgid "1. Choose a starting style"
 msgstr "1. Scegli uno stile iniziale"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:193
+#: admin/partials/auto-translate-admin-visual-settings-display.php:118
 #, fuzzy
 msgid "Starting style"
 msgstr "Impostazioni"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:197
-#, fuzzy
-msgid "Compact selector"
-msgstr "Selettore personalizzato"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:198
-msgid "A polished selector with optional search."
-msgstr "Un selettore curato con ricerca facoltativa."
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:203
-#, fuzzy
-msgid "Minimal selector"
-msgstr "Selettore flottante"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:204
-msgid "Lightweight flag, name, or code links."
-msgstr "Link leggeri con bandiere, nomi o codici."
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:209
-#, fuzzy
-msgid "Native dropdown"
-msgstr "Menu a discesa"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:210
-msgid "A familiar browser control."
-msgstr "Un controllo del browser familiare."
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:214
-msgid "2. Select a preset"
-msgstr "2. Seleziona un predefinito"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:217
-msgid "Quick switcher"
-msgstr "Selettore rapido"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:218
+#: admin/partials/auto-translate-admin-visual-settings-display.php:121
+#: admin/partials/auto-translate-admin-visual-settings-display.php:142
+#: admin/partials/auto-translate-admin-visual-settings-display.php:143
 #: includes/config.php:28 includes/config.php:139
 msgid "English"
 msgstr "Inglese"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:218
+#: admin/partials/auto-translate-admin-visual-settings-display.php:122
+msgid "Custom dropdown"
+msgstr "Menu a discesa personalizzato"
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:123
+msgid "A polished selector with optional search."
+msgstr "Un selettore curato con ricerca facoltativa."
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:128
+#, fuzzy
+msgid "Minimal selector"
+msgstr "Selettore flottante"
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:129
+msgid "Lightweight flag, name, or code links."
+msgstr "Link leggeri con bandiere, nomi o codici."
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:134
+#, fuzzy
+msgid "Native dropdown"
+msgstr "Menu a discesa"
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:135
+msgid "A familiar browser control."
+msgstr "Un controllo del browser familiare."
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:139
+msgid "2. Select a preset"
+msgstr "2. Seleziona un predefinito"
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:142
+msgid "Quick switcher"
+msgstr "Selettore rapido"
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:143
 msgid "Searchable picker"
 msgstr "Selettore con ricerca"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:219
-#: admin/partials/auto-translate-admin-visual-settings-display.php:223
+#: admin/partials/auto-translate-admin-visual-settings-display.php:144
+#: admin/partials/auto-translate-admin-visual-settings-display.php:148
 msgid "Code only"
 msgstr "Solo codice"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:220
-msgid "Emoji flags + name"
-msgstr "Bandiere emoji + nome"
-
-#: admin/partials/auto-translate-admin-visual-settings-display.php:222
+#: admin/partials/auto-translate-admin-visual-settings-display.php:145
+#: admin/partials/auto-translate-admin-visual-settings-display.php:147
 msgid "Flags + code"
 msgstr "Bandiere + codice"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:224
+#: admin/partials/auto-translate-admin-visual-settings-display.php:146
+msgid "Flags"
+msgstr "Bandiere"
+
+#: admin/partials/auto-translate-admin-visual-settings-display.php:149
 msgid "Names + divider"
 msgstr "Nomi + separatore"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:228
+#: admin/partials/auto-translate-admin-visual-settings-display.php:153
 msgid "3. Customize your preferences (optional)"
 msgstr "3. Personalizza le tue preferenze (facoltativo)"
 
-#: admin/partials/auto-translate-admin-visual-settings-display.php:230
+#: admin/partials/auto-translate-admin-visual-settings-display.php:155
 msgid "Customize"
 msgstr "Personalizza"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:20
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:19
 #, fuzzy
 msgid "Style your selector"
 msgstr "Selettore personalizzato"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:24
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:23
 msgid "Icon style"
 msgstr "Stile dell'icona"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:25
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:24
 msgid "How the language is visually represented in the selector button."
 msgstr ""
 "Come la lingua viene rappresentata visivamente nel pulsante di selezione."
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:62
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:34
+msgid "Emoji flags"
+msgstr "Bandiere emoji"
+
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:53
+msgid ""
+"Some flags may not be available as emojis. Check the preview to verify your "
+"languages."
+msgstr ""
+"Alcune bandiere potrebbero non essere disponibili come emoji. Verifica "
+"l’anteprima per le tue lingue."
+
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:65
 msgid "Label text"
 msgstr "Testo dell'etichetta"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:63
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:66
 msgid "What text appears alongside the icon in the button."
 msgstr "Quale testo appare accanto all'icona nel pulsante."
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:67
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:70
 msgid "Name"
 msgstr "Nome"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:68
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:71
 msgid "Code"
 msgstr "Codice"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:76
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:72
+msgid "Name + code"
+msgstr "Nome + codice"
+
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:73
+msgid "No text"
+msgstr "Nessun testo"
+
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:79
 msgid "Text divider"
 msgstr "Separatore di testo"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:77
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:80
 msgid "How text-only links are separated."
 msgstr "Come vengono separati i link di solo testo."
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:81
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:96
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:84
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:99
 msgid "None"
 msgstr "Nessuno"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:89
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:92
 #, fuzzy
 msgid "Chevron style"
 msgstr "Stile dell'icona"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:90
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:93
 msgid "Dropdown indicator shown next to the selector text."
-msgstr "Indicatore del menu a discesa visualizzato accanto al testo del selettore."
+msgstr ""
+"Indicatore del menu a discesa visualizzato accanto al testo del selettore."
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:102
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:105
 #, fuzzy
 msgid "Selector behavior"
 msgstr "Blocco selettore"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:103
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:106
 msgid ""
 "Standard dropdown works well for a few languages. Popup with search is "
 "better for 10+."
@@ -1179,43 +1158,51 @@ msgstr ""
 "Il menu a discesa standard funziona bene per poche lingue. La finestra con "
 "ricerca è migliore per più di 10."
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:116
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:110
+msgid "Dropdown"
+msgstr "Menu a discesa"
+
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:111
+msgid "Popup with search"
+msgstr "Popup con ricerca"
+
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:119
 msgid "Colors"
 msgstr "Colori"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:124
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:132
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:148
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:127
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:135
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:151
 msgid "Use color"
 msgstr "Usa il colore"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:143
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:146
 msgid "Hover background"
 msgstr "Sfondo al passaggio del mouse"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:153
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:156
 msgid "Font hover color"
 msgstr "Colore del carattere al passaggio del mouse"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:171
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:174
 msgid "Typography"
 msgstr "Tipografia"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:176
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:179
 msgid "Override the selector font. Leave blank to inherit from your theme."
 msgstr ""
 "Sostituisci il carattere del selettore. Lascia vuoto per ereditare dal tuo "
 "tema."
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:179
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:182
 msgid "e.g. Roboto, Open Sans"
 msgstr "ad es. Roboto, Open Sans"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:184
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:187
 msgid "Underline on hover"
 msgstr "Sottolinea al passaggio del mouse"
 
-#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:185
+#: admin/partials/auto-translate-admin-visual-settings-minimalist-display.php:188
 msgid "Underline the hovered dropdown item text."
 msgstr "Sottolinea il testo dell'elemento del menu a discesa visualizzato."
 
@@ -2283,50 +2270,66 @@ msgstr "Uzbekistan"
 msgid "Wales"
 msgstr "Galles"
 
-#: public/class-auto-translate-public.php:186
+#: public/class-auto-translate-public.php:304
 msgid "Translator preview"
 msgstr "Anteprima di Translator"
 
-#: public/class-auto-translate-public.php:190
+#: public/class-auto-translate-public.php:308
 msgid "Only admins can see Automatic Translator until you go live."
 msgstr ""
 "Solo gli amministratori possono vedere Automatic Translator finché non lo "
 "pubblichi."
 
-#: public/class-auto-translate-public.php:199
+#: public/class-auto-translate-public.php:317
 msgid "Visitors cannot see Automatic Translator yet."
 msgstr "I visitatori non possono ancora vedere Automatic Translator."
 
-#: public/class-auto-translate-public.php:208
+#: public/class-auto-translate-public.php:326
 msgid "Open Automatic Translator settings"
 msgstr "Apri le impostazioni di Automatic Translator"
 
-#: public/class-auto-translate-public.php:839
+#: public/class-auto-translate-public.php:957
 #: public/partials/auto-translate-public-header-display.php:68
 msgid "Switching language."
 msgstr "Cambio lingua in corso."
 
-#: public/class-auto-translate-public.php:840
+#: public/class-auto-translate-public.php:958
 #: public/partials/auto-translate-public-header-display.php:69
 msgid "Translation unavailable. Please try again."
 msgstr "Traduzione non disponibile. Riprova."
 
-#: public/partials/widgets/auto-translate-widget-minimalist.php:41
-#: public/partials/widgets/auto-translate-widget-minimalist.php:42
+#: public/partials/widgets/auto-translate-widget-minimalist.php:50
+#: public/partials/widgets/auto-translate-widget-minimalist.php:51
 #, fuzzy
 msgid "Select language"
 msgstr "Seleziona lingua"
 
-#: public/partials/widgets/auto-translate-widget-minimalist.php:144
+#: public/partials/widgets/auto-translate-widget-minimalist.php:153
 msgid "Search language"
 msgstr "Cerca lingua"
 
-#: public/partials/widgets/auto-translate-widget-minimalist.php:147
+#: public/partials/widgets/auto-translate-widget-minimalist.php:156
 msgid "Search"
 msgstr "Cerca"
 
-#~ msgid "Language settings"
-#~ msgstr "Impostazioni della lingua"
+#: admin/class-auto-translate-admin.php:241
+msgid "Publishing cancelled."
+msgstr "Pubblicazione annullata."
 
-#~ msgid "Each preset applies a complete selector style."
-#~ msgstr "Ogni preset applica uno stile completo per il selettore."
+#: admin/class-auto-translate-admin.php:242
+msgid "Publishing Automatic Translator."
+msgstr "Pubblicazione di Automatic Translator in corso."
+
+#: admin/class-auto-translate-admin.php:210
+msgid "Loading settings…"
+msgstr "Caricamento delle impostazioni…"
+
+#: admin/class-auto-translate-admin.php:211
+msgid "Could not load this settings tab. Refresh the page and try again."
+msgstr ""
+"Impossibile caricare questa scheda delle impostazioni. Ricarica la pagina e "
+"riprova."
+
+#: admin/class-auto-translate-admin.php:1155
+msgid "That settings tab is not available."
+msgstr "Questa scheda delle impostazioni non è disponibile."
